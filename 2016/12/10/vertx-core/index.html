@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="易世伟" />
+
+
+
+<meta name="description" content="Vert.x的核心是一组被我们称为Vert.x Core的Java APIsVert.x core提供了下面这些功能：
+
+编写TCP clients和servers
+编写HTTP clients和servers包括支持WebSockets
+Event bus
+Shared data - 本地的maps和分布式的集群式的maps
+周期性和延迟运行
+部署和卸载Verticles
+数据包套接字
+DNS客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vertx-core翻译">
+<meta property="og:url" content="http://weiyiysw.com/2016/12/10/vertx-core/index.html">
+<meta property="og:site_name" content="WEIYIYSW">
+<meta property="og:description" content="Vert.x的核心是一组被我们称为Vert.x Core的Java APIsVert.x core提供了下面这些功能：
+
+编写TCP clients和servers
+编写HTTP clients和servers包括支持WebSockets
+Event bus
+Shared data - 本地的maps和分布式的集群式的maps
+周期性和延迟运行
+部署和卸载Verticles
+数据包套接字
+DNS客">
+<meta property="og:updated_time" content="2016-12-15T11:54:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vertx-core翻译">
+<meta name="twitter:description" content="Vert.x的核心是一组被我们称为Vert.x Core的Java APIsVert.x core提供了下面这些功能：
+
+编写TCP clients和servers
+编写HTTP clients和servers包括支持WebSockets
+Event bus
+Shared data - 本地的maps和分布式的集群式的maps
+周期性和延迟运行
+部署和卸载Verticles
+数据包套接字
+DNS客">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="WEIYIYSW" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Vertx-core翻译 | WEIYIYSW</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">易世伟</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/weiyiysw37@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">别话</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">易世伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">易世伟</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/weiyiysw37@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-vertx-core" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/10/vertx-core/" class="article-date">
+      <time datetime="2016-12-10T13:55:52.000Z" itemprop="datePublished">2016-12-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vertx-core翻译
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/vertx/">vertx</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Vert-x的核心是一组被我们称为Vert-x-Core的Java-APIs"><a href="#Vert-x的核心是一组被我们称为Vert-x-Core的Java-APIs" class="headerlink" title="Vert.x的核心是一组被我们称为Vert.x Core的Java APIs"></a>Vert.x的核心是一组被我们称为Vert.x Core的Java APIs</h1><p>Vert.x core提供了下面这些功能：</p>
+<ul>
+<li>编写TCP clients和servers</li>
+<li>编写HTTP clients和servers包括支持WebSockets</li>
+<li>Event bus</li>
+<li>Shared data - 本地的maps和分布式的集群式的maps</li>
+<li>周期性和延迟运行</li>
+<li>部署和卸载Verticles</li>
+<li>数据包套接字</li>
+<li>DNS客户端</li>
+<li>访问文件系统</li>
+<li>高可用</li>
+<li>集群</li>
+</ul>
+<a id="more"></a>
+<p>Vert.x core里的功能是相当底层的，在这里你不会找到像数据库访问、权限验证或者高层web功能的东西。那些东西你可以在Vert.x ext里找到。</p>
+<p>Vert.x core很小并且很轻量级的。你可以仅使用你想要的那部分。它也可以完全的嵌入到你现在已经存在的应用。我们并不强迫你仅为了使用Vert.x而通过一种特殊的方式来架构你的应用。</p>
+<p>你可以通过Vert.x支持的任何语言来使用Vert.x core。这有点酷，在这里我们并不强迫你直接使用Java API，换言之JavaScript或者Ruby都可以。毕竟不同的语言有不同的惯例和语法。强迫Ruby开发者使用Java语法来开发这是很奇怪的（例如）。相反，我们会为每一种语言生成一个符合语言习惯的、等效于Java APIs的Vert.x core。</p>
+<p>从这开始，我们仅使用这个单词<strong>core</strong>代表Vert.x core。</p>
+<p>如果你使用Maven或Gradle，添加接下来的依赖到你的项目中<code>dependencies</code>部分，这样你就可以使用Vert.x core API：</p>
+<ul>
+<li><p>Maven（在<code>pom.xml</code>文件里）</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.vertx&lt;/groupI&gt;
+    &lt;artifactId&gt;vertx-core&lt;/artifactId&gt;
+    &lt;version&gt;3.3.3&lt;/version&gt;    
+&lt;/dependency&gt;
+</code></pre></li>
+<li><p>Gradle（在<code>build.gradle</code>文件里）</p>
+<pre><code>compile io.vertx:vertx-core:3.3.3
+</code></pre></li>
+</ul>
+<p>接下来，我们来讨论Vert.x core的不同的概念及特性。</p>
+<hr>
+<h3 id="从Vert-x开始"><a href="#从Vert-x开始" class="headerlink" title="从Vert.x开始"></a>从Vert.x开始</h3><hr>
+<blockquote>
+<p>注意：这里的大部分都是Java特有的 —— 换成其他语言时需要一些其他的特殊的部分</p>
+</blockquote>
+<p>在Vert.x的世界你几乎做不了什么，除非你可以和<code>Vertx</code>对象交流。</p>
+<p>Vertx对象是Vert.x的控制中心，通过它，你几乎可以做任何事情，包括创建客户端及服务器、获取事件总线（event bus）的引用、设置定时器等及很多其他的东西。</p>
+<p>因此，怎么来获取到一个实例呢？</p>
+<p>如果你正在嵌入Vert.x，你可以简单的创建一个实例就像接下来这样：</p>
+<pre><code>Vertx vertx = Vertx.vertx();
+</code></pre><p>如果你要使用Verticles</p>
+<blockquote>
+<p>大多数的应用仅需要一个简单的Vert.x实例，但是如果你需要，创建多个Vert.x实例是可以的。例如，事件总线的隔离或不同组的服务器和客户端的隔离。</p>
+</blockquote>
+<h4 id="创建一个指定选项的Vertx对象"><a href="#创建一个指定选项的Vertx对象" class="headerlink" title="创建一个指定选项的Vertx对象"></a>创建一个指定选项的Vertx对象</h4><p>当创建一个Vertx对象时，如果默认的不适合，你可以指定一个选项。</p>
+<pre><code>Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
+</code></pre><p><code>VertxOptions</code>对象有很多设置并且允许你配置它，如：集群、高可用、池大小及其他大量的设置。Javadoc文档详细的描述了全部的设置。</p>
+<h4 id="创建一个集群式的Vert-x对象"><a href="#创建一个集群式的Vert-x对象" class="headerlink" title="创建一个集群式的Vert.x对象"></a>创建一个集群式的Vert.x对象</h4><p>如果你要创建一个集群的Vert.x（在event bus小节查看更多的关于集群event bus信息），通常你将使用异步的方式创建这个对象。</p>
+<p>这是因为这通常会花费一些时间（可能几秒钟），在一个集群里将不同的Vert.x实例编组。在这段时间，我们并不希望阻塞调用线程，因此，我们把结果以异步的方式给你。</p>
+<hr>
+<h3 id="你用流式API编程吗？"><a href="#你用流式API编程吗？" class="headerlink" title="你用流式API编程吗？"></a>你用流式API编程吗？</h3><hr>
+<p>你可能已经注意到了，前面的例子中都使用了流式API。</p>
+<p>流式API是多个方法调用组成的链。例如：</p>
+<pre><code>request.response().putHeader(&quot;Content-Type&quot;, &quot;text/plain&quot;).write(&quot;some text&quot;).end();
+</code></pre><p>流式的代码风格贯穿了整个Vert.x API。所以，你需要适应它。</p>
+<p>链式的调用会让你写的代码紧凑些。当然，如果你不喜欢流式的方式，我们并不强迫你。你可以不管它，并按照你喜欢的方式写。你可能会这样写：</p>
+<pre><code>HttpServerResponse response = request.response();
+response.putHeader(&quot;Content-Type&quot;, &quot;text/plain&quot;);
+response.write(&quot;some text&quot;);
+response.end();
+</code></pre><hr>
+<h3 id="别调用我们，我们会通知你的"><a href="#别调用我们，我们会通知你的" class="headerlink" title="别调用我们，我们会通知你的"></a>别调用我们，我们会通知你的</h3><hr>
+<p>Vert.x APIs大部分都是事件驱动的。这意味着，当Vert.x里发生了你感兴趣的事情时，Vert.x会通过回调的方式给你发送事件。</p>
+<p>一些示例的事件如下:</p>
+<ul>
+<li>激活计时器</li>
+<li>数据到达了socket</li>
+<li>从磁盘中读取数据</li>
+<li>发生了一个异常</li>
+<li>Http server接收到了一个请求</li>
+</ul>
+<p>通过Vert.x APIs提供的<strong>handlers</strong>处理事件。例如：接收一个定时器事件，每一秒钟你都这样做：</p>
+<pre><code>vertx.setPeriodic(1000, id -&gt; {
+    // This handler will get called every second
+    System.out.println(&quot;timer fired!&quot;);
+});
+</code></pre><p>或者接收一个Http请求：</p>
+<pre><code>server.requestHandler(request -&gt; {
+    // This handler will be called every time an Http request is received at the server
+    request.response.end(&quot;Hello World!&quot;)
+});
+</code></pre><p>在过了一些时间之后，Vert.x有一个事件并将其传入到handler里，这在Vert.x里被称为异步性。</p>
+<p>这为我们引导了Vert.x的一些重要的概念：</p>
+<hr>
+<h3 id="别阻塞我"><a href="#别阻塞我" class="headerlink" title="别阻塞我"></a>别阻塞我</h3><hr>
+<p>除了很少的一些异常（例如：一些结尾为‘Sync’的文件系统的操作），在Vert.x里没有任何的APIs调用时会被阻塞。</p>
+<p>如果一个结果可以马上提供，那么将会立刻把这个结果返回。要不然，你需要提供一个handler在一段时间之后来接收事件。</p>
+<p>因为Vert.x APIs不会阻塞任何线程，这意味着你可以使用Vert.x来处理小数量线程的大量并发使用。</p>
+<p>一个常规的阻塞API在调用时可能会以下这些情况阻塞：</p>
+<ul>
+<li>从一个socket读取数据</li>
+<li>写数据到磁盘</li>
+<li>发送一个消息给接收者并等待回复</li>
+<li>其他很多的情况</li>
+</ul>
+<p>在所有上述的例子中，当你的线程正在等待一个结果时，这个线程其他什么都不能做，这实在是没有用的。</p>
+<p>这意味着，当你需要大量的并发并且使用阻塞API时，你需要大量的线程来防止你的程序完全停止。</p>
+<p>线程在它们所需要的内存（例如栈）和上下文切换时是有开销的。</p>
+<p>对于现代应用的需要的并发水平，阻塞的方法并不适合扩展。</p>
+<hr>
+<h3 id="Reactor和Multi-Reactor"><a href="#Reactor和Multi-Reactor" class="headerlink" title="Reactor和Multi-Reactor"></a>Reactor和Multi-Reactor</h3><hr>
+<p>我们前面提到了Vert.x APIs是事件驱动的，Vert.x传递事件到handlers当事件是可用的。</p>
+<p>在大多数的例子中，Vert.x通过一个名为event loop的线程调用你的handler。</p>
+<p>在Vert.x或你的应用中如果没有任何阻塞，这个event loop可以很愉快的运行，当事件到达的时候，可以成功的分发事件到不同的handlers。</p>
+<p>因为没有任何阻塞，一个event loop可以在短时间内分发大量的时间。例如，一个单一的event loop可以很快的处理几千个HTTP请求。</p>
+<p>我们把这个称为反应器模式。</p>
+<p>你之前可能就听过这个，例如，Node.js就已经实现了这个模式。</p>
+<p>在一个标准的反应堆模式的实现里，只有一个单一的event loop线程循环的运行并分发所有的事件到其对应的handlers里，当事件到达的时候。</p>
+<p>使用一个单一的线程的麻烦在于这个线程同一事件只能运行在一个单一的核上，所以如果你想让你的单一线程的反应堆应用（例如你的Node.js应用）拓展到你的多核的服务器上，你不得不启动和管理很多不同的进程。</p>
+<p>Vert.x的处理是不一样的。不同于一个单一的event loop，每个Vertx示例包含了多个event loop。默认的我们选择的数量是基于机器上可用的核心数量，但是这可以被覆盖。</p>
+<p>这意味着一个单一的Vertx进程可以在整个服务器上扩展，不像Node.js需要多个进程。</p>
+<p>我们将这种模式成为多核反应堆模式，用来区分单一线程的反应堆模式。</p>
+<blockquote>
+<p>即使一个Vertx实例包含了多个event loop，任何特别的handler将不会被并发执行，在大多数的例子中（除了worker verticles），他们总是会被完全相同的event loop调用。</p>
+</blockquote>
+<hr>
+<h3 id="黄金法则——不要阻塞event-loop"><a href="#黄金法则——不要阻塞event-loop" class="headerlink" title="黄金法则——不要阻塞event loop"></a>黄金法则——不要阻塞event loop</h3><hr>
+<p>我们已经知道Vert.x APIs是无阻塞的，也不会阻塞event loop，但是这并没有太多用如果你自己在你的handler里阻塞event loop。</p>
+<p>如果你这样做了，event loop将不能做任何其他的事当它被阻塞了。如果你阻塞了Vertx实例所有的event loop，那么你的应用将会完全停止。</p>
+<p>所以，不要去阻塞它！你已经被警告了。</p>
+<p>阻塞的例子包括：</p>
+<ul>
+<li>Thread.sleep()</li>
+<li>等待一个锁</li>
+<li>等待互斥或监视器（如：同步代码）</li>
+<li>做一个长时间数据库操作并且等待一个结果</li>
+<li>做一个复杂的计算，会占用一些重要的时间</li>
+<li>死循环</li>
+</ul>
+<p>如果上面提到的任何一个使event loop停止了做任何其他的事情并且大量时间，然后你应该马上到下一步(naughty step)，并且等待下一步指示。</p>
+<p>所以…这个大量的时间具体多长呢？</p>
+<p>一个string花多长时间呢？它真实的依赖于你的应用和你需要的并发量。</p>
+<p>如果你有一个单一的event loop，你还想每秒处理10000个http请求，这是很明确的每个请求执行的时间最多不能超过0.1ms，因此，你的阻塞时间不能超过这个。</p>
+<p>这个数学计算并不难，应该作为联系留给读者。</p>
+<p>如果你的应用不响应，很可能你在某个地方阻塞了event loop。为了帮助你诊断这些问题，Vert.x会自动记录警告如果检测到一个event loop在一些时间内没有返回。如果你在日志中看到像这样的警告，你应该去检查你的代码了。</p>
+<pre><code>Thread vertx-eventloop-thread-3 has been blocked for 20458ms
+</code></pre><p>Vert.x还会提供堆栈跟踪来准确的定位阻塞发生的地方。</p>
+<p>如果你想关闭这些警告或者修改设置，你可以在创建Vertx对象前，设置<code>VertxOptions</code>对象。</p>
+<hr>
+<h3 id="运行阻塞的代码"><a href="#运行阻塞的代码" class="headerlink" title="运行阻塞的代码"></a>运行阻塞的代码</h3><hr>
+<p>在一个完美的世界中，那是没有战争或饥饿的。所有的API都是用异步的方式写的，阳光明媚，绿色的草地有跳来跳去的兔子和手牵手的小羊羔。</p>
+<p>但是，真实的世界并不是这样子的。</p>
+<p>事实上，大多数的库尤其是JVM的生态系统都是有同步的API，很多方法都有可能阻塞。一个很好的例子就是JDBC API，它本质上就是同步的，无论再怎么努力尝试，Vert.x即使使用魔法也不可能把它变成异步的。</p>
+<p>我们不可能一晚上就将所有的同步API重写为异步的，所以我们需要提供一种方法让你能够在Vert.x应用中安全的使用使用传统的阻塞API。</p>
+<p>就像前面讨论的，从一个event loop中你不能直接的调用一个阻塞的操作，如果那样做了，将会阻止event loop做其他有效的工作。那么，你该怎么做呢？</p>
+<p>通过调用<code>executeBlocking</code>来完成，具体来说，将阻塞的代码放到此方法中执行，当阻塞代码执行结束后，通过异步的回调handler返回结果。</p>
+<pre><code>vertx.executeBlocking(future -&gt; {
+    // call some blocking api that takes a significant amount of time to return
+    String result = someAPI.blockingMethod(&quot;Hello&quot;);
+    future.complete(result);
+}, res -&gt; {
+    System.out.println(&quot;The result is: &quot; + res.result());
+});
+</code></pre><p>默认地，如果executeBlocking从相同的上下文里被调用多次（例如，相同的verticle实例），然后不同的executeBlocking是按序列执行的（一个按一个执行）。</p>
+<p>如果你不关心你能调用的executeBlocking的执行顺序，指定<code>ordered</code>参数为<code>false</code>。这种情况下，任何一个executeBlocking可以在工作池上并行执行。</p>
+<p>一个运行blocking代码可替换的方法是使用一个worker verticle。</p>
+<p>默认地，阻塞代码被执行会阻塞Vert.x代码池，配置<code>setWorkerPoolSize</code>。</p>
+<p>传统的池可以为了不同的目的而被创建：</p>
+<pre><code>WorkerExecutor executor = vertx.createSharedWorkerExecutor(&quot;my-worker-pool&quot;);
+executor.executeBlocking(future -&gt; {
+// Call some blocking API that takes a significant amount of time to return
+String result = someAPI.blockingMethod(&quot;hello&quot;);
+future.complete(result);
+}, res -&gt; {
+System.out.println(&quot;The result is: &quot; + res.result());
+});
+</code></pre><p>工作执行必须被关闭，当它不再需要的时候：</p>
+<pre><code>executor.close();
+</code></pre><p>当多个工作者用相同的名字被创建后，它们将分享相同的池。这个工作池会被摧毁，当全部的工作执行者使用它被关闭后。</p>
+<p>当一个执行者在Verticle里被创建后，Vert.x将会自动的为你关闭它，当Verticle卸载的时候。</p>
+<p>工作执行者在被创建的时候可以被配置：</p>
+<pre><code>int poolSize = 10;
+
+// 2 minutes
+long maxExecuteTime = 120000;
+
+WorkerExecutor executor =     vertx.createSharedWorkerExecutor(&quot;my-worker-pool&quot;, poolSize, maxExecuteTime);
+</code></pre><blockquote>
+<p>当工作池被创建的时候配置文件就已经设置了。</p>
+</blockquote>
+<hr>
+<h3 id="异步协调"><a href="#异步协调" class="headerlink" title="异步协调"></a>异步协调</h3><hr>
+<p>协调多个异步的结果是可以通过Vert.x的<code>futures</code>来实现。它支持并行架构（并行运行多个异步的操作）和序列架构（异步链式操作）。</p>
+<h4 id="并发架构"><a href="#并发架构" class="headerlink" title="并发架构"></a>并发架构</h4><p><code>CompositeFuture.all</code>携带了多个future参数（最多6个）并且返回一个future对象。如果返回的future成功了，那么所有的携带的所有future都成功了，如果返回的future失败了，那么至少是有一个携带的future失败了：</p>
+<pre><code>Future&lt;HttpServer&gt; httpServerFuture = Future.future();
+httpServer.listen(httpServerFuture.completer());
+
+Future&lt;NetServer&gt; netServerFuture = Future.future();
+netServer.listen(netServerFuture.completer());
+
+CompositeFuture.all(httpServerFuture, netServerFuture).setHandler(ar -&gt; {
+    if (ar.succeeded()) {
+    // All servers started
+    } else {
+    // At least one server failed
+    }
+});
+</code></pre><p>这些操作并发的运行，与返回的future对象关联的<code>handler</code>在上面的那些架构全部完成之后被调用。当一个操作失败了（传入的一个future被标记为失败），这个结果future也会被标记为失败。当全部的操作完成后，这个结果future成功的完成了。</p>
+<p>或者，你可以传入一个future的List集合：</p>
+<pre><code>CompositeFuture.all(Arrays.asList(future1, future2, future3));
+</code></pre><p><code>all</code>构成方法等待知道所有的future对象都成功（或者一个失败），<code>any</code>构成方法等待第一个成功的future。<code>CompositeFuture.any</code>方法携带多个future参数（最多6个），返回一个future对象，当携带的多个future对象中有一个成功了则返回成功，如果携带的多个都失败了那么返回失败：</p>
+<pre><code>CompositeFuture.any(future1, future2).setHandler(ar -&gt; {
+    if (ar.succeeded()) {
+        // At least one is succeeded
+    } else {
+        // All failed！
+    }
+});
+</code></pre><p>也可以使用future的List集合：</p>
+<pre><code>CompositeFuture.any(Arrays.asList(f1, f2, f3));
+</code></pre><p><code>join</code>架构会等待直到所有的future都完成了，无论携带的future成功还是失败。<code>CompositeFuture.join</code>携带多个future参数（最多6个），返回一个future，当所有携带的future成功返回成功，当所有的future都已经执行完成并且至少有一个失败了返回失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CompositeFuture.join(future1, future2, future3).setHandler(ar -&gt; &#123;</div><div class="line">  if (ar.succeeded()) &#123;</div><div class="line">    // All succeeded</div><div class="line">  &#125; else &#123;</div><div class="line">    // All completed and at least one failed</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>也可以使用future的List集合：</p>
+<pre><code>CompositeFuture.join(Arrays.asList(future1, future2, future3));
+</code></pre><h4 id="序列架构"><a href="#序列架构" class="headerlink" title="序列架构"></a>序列架构</h4><p>当<code>all</code>和<code>any</code>是并发架构的实现，<code>compose</code>可以被用作为链式的future（序列架构）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">FileSystem fs = vertx.fileSystem();</div><div class="line">Future&lt;Void&gt; startFuture = Future.future();</div><div class="line"></div><div class="line">Future&lt;Void&gt; fut1 = Future.future();</div><div class="line">fs.createFile(&quot;/foo&quot;, fut1.completer());</div><div class="line"></div><div class="line">fut1.compose(v -&gt; &#123;</div><div class="line">  // When the file is created (fut1), execute this:</div><div class="line">  Future&lt;Void&gt; fut2 = Future.future();</div><div class="line">  fs.writeFile(&quot;/foo&quot;, Buffer.buffer(), fut2.completer());</div><div class="line">  return fut2;</div><div class="line">&#125;).compose(v -&gt; &#123;</div><div class="line">          // When the file is written (fut2), execute this:</div><div class="line">          Future&lt;Void&gt; fut3 = Future.future();</div><div class="line">          fs.move(&quot;/foo&quot;, &quot;/bar&quot;, fut3.completer());</div><div class="line">        &#125;,</div><div class="line">        // mark the start future as completed when all the chain has been completed,</div><div class="line">        // or mark it as failed if any step fails.</div><div class="line">        startFuture);</div></pre></td></tr></table></figure>
+<p>在这个例子中，三个操作是链式的：</p>
+<ol>
+<li>一个文件被创建了（<code>fut1</code>）</li>
+<li>写入某些东西到文件中（<code>fut2</code>）</li>
+<li>移动这个文件（<code>fut3</code>）</li>
+</ol>
+<p>当这三步都成功了，这个最后的future(<code>startFuture</code>)将会完成并返回成功的结果。然而，如果其中一步失败了，这个最终的future也将会完成但返回失败的结果。</p>
+<p>这个例子使用了：</p>
+<ul>
+<li><code>compose</code>：当当前的future完成了，运行提供的函数，然后返回一个future。当这个返回的future执行完成了，就表示这个架构执行完成了。</li>
+<li><code>compose</code>：当当前的future完成了，运行提供的handler完成当前提供的<code>future</code>（下一个）。</li>
+</ul>
+<p>在第二个情形下，这个<code>Handler</code>应该执行完成，由<code>next</code>future报告是handler是否执行成功或失败。</p>
+<p>你可以使用<code>completer</code>来完成一个future的操作结果或失败。这样避免了不得不像传统的那样写：<code>如果成功，然后这个future完成了或者这个future失败了</code>。</p>
+<hr>
+<h3 id="Verticles"><a href="#Verticles" class="headerlink" title="Verticles"></a>Verticles</h3><hr>
+<p>Vert.x附带了一个简单，可扩展，类actor的部署和并发模型，你可以用它来保存你自己写的。</p>
+<p>这个模型完全是可选的，Vert.x并不强迫你用这种方式创建你的应用，如果你不想的话。</p>
+<p>该模型并不声称是严格的actor模型实现，但它确实具有相似之处，特别是在并发，扩展和部署方面。</p>
+<p>为了使用这个模型，你把你的代码写成一些verticles。</p>
+<p>Verticles是一大块的代码，需要通过Vert.x来部署。一个Vert.x实例默认包含N个event loop线程（N默认是CPU核心数*2）。可以用Vert.x支持的任何语言来写Verticles，一个单一的应用可以包含用多种语言写的verticles。</p>
+<p>你可以认为一个verticle就像是一个<code>Actor Model</code>中的一个actor。</p>
+<p>一个典型的应用将会由多个verticle实例组成，这些实例在同一时间运行在相同的Vert.x实例上。不同的verticle实例通过将消息发送到event bus上交流。</p>
+<h4 id="写Verticles"><a href="#写Verticles" class="headerlink" title="写Verticles"></a>写Verticles</h4><p>一个Verticle类必须实现<code>Verticle</code>接口。</p>
+<p>如果你想的话，你可以直接实现这个接口。但是，通常来说拓展抽象类<code>AbstractVerticle</code>是更加简单的。</p>
+<p>下面就是一个verticle的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class MyVerticle extends AbstractVerticle &#123;</div><div class="line"></div><div class="line">  // Called when verticle is deployed</div><div class="line">  public void start() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // Optional - called when verticle is undeployed</div><div class="line">  public void stop() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通常的，你想上面例子这样的重载这个开始方法就可以了。</p>
+<p>当Vert.x部署verticle的时候，会调用它的start方法，当这个方法执行完成了，verticle将会被认为部署完成。</p>
+<p>你也可以选择覆盖这个stop方法。这个方法在verticle卸载时会被Vert.x调用。当这个方法完成了，这个verticle会被认为卸载完成。</p>
+<h4 id="异步的Verticle启动和停止"><a href="#异步的Verticle启动和停止" class="headerlink" title="异步的Verticle启动和停止"></a>异步的Verticle启动和停止</h4><p>某些时候，你想要在你的verticle启动的时候做一些事情，单着会花费一些时间，但是你并不想等这个verticle直到被认为部署好了。举个例子，你可能想要在开始方法中部署另外其他的verticles。</p>
+<p>在start方法中，你不能阻塞并等待其他的verticle部署，因为那样将会打破Vert.x的黄金规则（永远不要阻塞它）。</p>
+<p>那么，你该怎么做呢？</p>
+<p>这个解决方式是通过实现一个异步的start方法。在这个版本里，这个异步的start方法带有了一个Future参数。当这个方法返回的时候，这个verticle并不会认为已经部署好了。</p>
+<p>在一些时间之后，在你做完了你需要做的所有事情之后（例如：启动其他的verticles），你可以调用Future的complete方法（或fail方法）来通知你已经完成了。</p>
+<p>下面是这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class MyVerticle extends AbstractVerticle &#123;</div><div class="line"></div><div class="line">  public void start(Future&lt;Void&gt; startFuture) &#123;</div><div class="line">    // Now deploy some other verticle:</div><div class="line"></div><div class="line">    vertx.deployVerticle(&quot;com.foo.OtherVerticle&quot;, res -&gt; &#123;</div><div class="line">      if (res.succeeded()) &#123;</div><div class="line">        startFuture.complete();</div><div class="line">      &#125; else &#123;</div><div class="line">        startFuture.fail(res.cause());</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>相似的，这也有一个异步的stop方法。当你在verticle清除时需要占用一些时间时，你可以使用这个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MyVerticle extends AbstractVerticle &#123;</div><div class="line"></div><div class="line">  public void start() &#123;</div><div class="line">    // Do something</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public void stop(Future&lt;Void&gt; stopFuture) &#123;</div><div class="line">    obj.doSomethingThatTakesTime(res -&gt; &#123;</div><div class="line">      if (res.succeeded()) &#123;</div><div class="line">        stopFuture.complete();</div><div class="line">      &#125; else &#123;</div><div class="line">        stopFuture.fail();</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>INFO：你没有必要在verticle的stop方法中去说明卸载通过这个verticle启动的子verticle。Vert.x会自动的卸载所有的子verticle，当父verticle被卸载的时候。</p>
+<h4 id="Verticle类型"><a href="#Verticle类型" class="headerlink" title="Verticle类型"></a>Verticle类型</h4><p>有三种不同类型的verticles：</p>
+<p><strong>标准的verticles</strong></p>
+<p>这是最普遍和有用的类型-这种类型的verticle执行时总是使用一个event loop线程。我们会在下一小节详细讨论。</p>
+<p><strong>工作者verticles</strong></p>
+<p>这种verticle从工作者池中获取一个线程来运行。一个实例从不会通过超过一个的线程并发执行。</p>
+<p><strong>多线程的工作者Verticles</strong></p>
+<p>这种Verticle从工作者池中获取一个线程来运行。一个实例可以被多个线程并发执行。</p>
+<h4 id="标准的verticles"><a href="#标准的verticles" class="headerlink" title="标准的verticles"></a>标准的verticles</h4><p>标准的verticles被分配到一个event loop线程上，当它们被创建的时候这个start方法就被event loop调用了。当你从一个event loop上调用任何其他的Vert.x core API方法时，需要携带一个handler。然后Vert.x会保证这些handler会被调用，当被相同的event loop执行的时候。</p>
+<p>这意味着，我们可以保证在你的verticle中的所有代码总是被同一个event loop执行（只要你不创建你自己的线程来调用它）。</p>
+<p>这意味着你可以把你应用的所有代码写到一个单一的线程里，让Vert.x去操心线程及规模。不再需要担心同步和变化了，并且还可以避免许多其他情况下的竞态条件和死锁，防止普遍的手工处理的“传统”多线程应用程序开发。</p>
+<h4 id="工作者verticles"><a href="#工作者verticles" class="headerlink" title="工作者verticles"></a>工作者verticles</h4><p>一个工作者verticle就像一个标准的verticle，但是它并不是由一个event loop执行的，它是通过在Vert.x工作者线程池中获取一个线程来执行。</p>
+<p>工作者verticles为调用阻塞代码而设计的，因此他们并不会阻塞任何event loop。</p>
+<p>如果你想要使用一个工作者verticle来运行阻塞代码，你也可以在event loop中通过executeBlocking来运行阻塞代码。</p>
+<p>如果你想要部署一个工作者verticle，你需要设置<code>setWorker</code>为<code>true</code>。</p>
+<pre><code>DeploymentOptions options = new DeploymentOptions().setWorker(true);
+vertx.deployVerticle(&quot;com.mycompany.MyOrderProcessorVerticle&quot;, options);
+</code></pre><p>工作者verticle实例从不会被Vert.x用超过一个的线程来并发执行，但是可以被多个线程在不同的时间执行。</p>
+<h4 id="多线程工作者Verticles"><a href="#多线程工作者Verticles" class="headerlink" title="多线程工作者Verticles"></a>多线程工作者Verticles</h4><p>一个多线程工作者verticles就像一个普通的工作者线程verticle，但是它可以被不同的线程并发的执行。</p>
+<blockquote>
+<p>警告：多线程工作者Vertices是一个高级特性，大多数的应用并不需要这个。因为这些vertices里的并发性，你不得不非常的小心用标准的Java多线程编程技术来保持verticle状态的一致。</p>
+</blockquote>
+<h4 id="程序化部署verticles"><a href="#程序化部署verticles" class="headerlink" title="程序化部署verticles"></a>程序化部署verticles</h4><p>你可以使用一个<code>deployVerticle</code>方法来部署一个verticle，指定一个verticle名字或者你可以传入一个你自己的创建好的verticle实例。</p>
+<blockquote>
+<p>部署Verticle实例是Java独有的</p>
+</blockquote>
+<pre><code>Verticle myVerticle = new MyVerticle();
+vertx.deployVerticle(myVerticle);
+</code></pre><p>你也可以通过指定verticle的名字来部署verticles。</p>
+<p>这个verticle名字用来查找特定的<code>VerticleFactory</code>——用来实例化真实的verticle实例。</p>
+<p>不同的verticle工厂都可以用不同的语言来实例化verticles。由于众多其他的原因，例如加载服务或者从maven的运行时获取到verticles。</p>
+<p>这允许你用采用任何Vert.x支持的语言来部署verticles，而不用关心这些verticles是用Vert.x支持的任何语言写的。</p>
+<p>下面是一个示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vertx.deployVerticle(&quot;com.mycompany.MyOrderProcessorVerticle&quot;);</div><div class="line"></div><div class="line">// Deploy a JavaScript verticle</div><div class="line">vertx.deployVerticle(&quot;verticles/myverticle.js&quot;);</div><div class="line"></div><div class="line">// Deploy a Ruby verticle verticle</div><div class="line">vertx.deployVerticle(&quot;verticles/my_verticle.rb&quot;);</div></pre></td></tr></table></figure>
+<h4 id="映射verticle名字到verticle工厂的规则"><a href="#映射verticle名字到verticle工厂的规则" class="headerlink" title="映射verticle名字到verticle工厂的规则"></a>映射verticle名字到verticle工厂的规则</h4><p>当使用名字的方式部署verticles时，这个名字用来选择实际的verticle工厂实例化verticle。</p>
+<p>verticle的名字可以有一个前缀——是一个字符串后跟着冒号，如果存在，那么久可以用来查找工厂。例如：</p>
+<p>js:foo.js<br>groovy:com.mycompany.SomeGroovyCompiledVerticle // Use the Groovy verticle factory<br>service:com.mycompany:myorderservice // Uses the service verticle factory</p>
+<p>如果没有前缀存在，Vert.x将会找一个后缀并用这个后缀来找队友的工厂。</p>
+<p>foo.js // Will also use the JavaScript verticle factory<br>SomeScript.groovy // Will use the Groovy verticle factory</p>
+<p>如果前缀和后缀都不存在，Vert.x将会假定它是一个Java的完全有资格的类名（FQCN），并尝试实例化它。</p>
+<h4 id="Verticle工厂在哪"><a href="#Verticle工厂在哪" class="headerlink" title="Verticle工厂在哪"></a>Verticle工厂在哪</h4><p>大多数的Verticles工厂在Vert.x启动的时候从classpath加载。</p>
+<p>如果你想的话，你可以使用<code>registerVerticleFactory</code>和<code>unregisterVerticleFactory</code>，程序化注册和取消注册一个verticle工厂。</p>
+<h4 id="等待部署完成"><a href="#等待部署完成" class="headerlink" title="等待部署完成"></a>等待部署完成</h4><p>Verticle的部署是异步的并可能在调用部署返回之后的一段时间后完成。</p>
+<p>如果你想要收到通知当部署完成的时候，你可以在部署时知道一个完成的handler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vertx.deployVerticle(&quot;com.mycompany.MyOrderProcessorVerticle&quot;, res -&gt; &#123;</div><div class="line">  if (res.succeeded()) &#123;</div><div class="line">    System.out.println(&quot;Deployment id is: &quot; + res.result());</div><div class="line">  &#125; else &#123;</div><div class="line">    System.out.println(&quot;Deployment failed!&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这个完成的handler将会被传入一个包含了部署ID字符串的结果，如果部署成功了的话。</p>
+<p>这个部署ID可以被在之后被使用，如果你想要卸载这次部署。</p>
+<h4 id="卸载部署了的verticle"><a href="#卸载部署了的verticle" class="headerlink" title="卸载部署了的verticle"></a>卸载部署了的verticle</h4><p>部署是可以通过<code>undeploy</code>卸载的。</p>
+<p>卸载对它自己来说是异步的，所以如果你想要被通知当卸载完成的时候，你可以部署一个指定完成的handler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vertx.undeploy(deploymentID, res -&gt; &#123;</div><div class="line">  if (res.succeeded()) &#123;</div><div class="line">    System.out.println(&quot;Undeployed ok&quot;);</div><div class="line">  &#125; else &#123;</div><div class="line">    System.out.println(&quot;Undeploy failed!&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="指定verticle实例的数量"><a href="#指定verticle实例的数量" class="headerlink" title="指定verticle实例的数量"></a>指定verticle实例的数量</h4><p>当你使用一个verticle名字部署一个verticle时，你可以指定你想要部署verticle实例的数量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DeploymentOptions options = new DeploymentOptions().setInstances(16);</div><div class="line">vertx.deployVerticle(&quot;com.mycompany.MyOrderProcessorVerticle&quot;, options);</div></pre></td></tr></table></figure>
+<p>这对拓展到多核上是有用的。例如，你科恩个有一个web服务的verticle需要部署并且你的机器是是多核CPU，因此，你想部署多个实例以便充分使用上全部的核心数。</p>
+<h4 id="给一个verticle传入配置文件"><a href="#给一个verticle传入配置文件" class="headerlink" title="给一个verticle传入配置文件"></a>给一个verticle传入配置文件</h4><p>配置使用JSON的格式可以传入到一个verticle里在部署的时候：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JsonObject config = new JsonObject().put(&quot;name&quot;, &quot;tim&quot;).put(&quot;directory&quot;, &quot;/blah&quot;);</div><div class="line">DeploymentOptions options = new DeploymentOptions().setConfig(config);</div><div class="line">vertx.deployVerticle(&quot;com.mycompany.MyOrderProcessorVerticle&quot;, options);</div></pre></td></tr></table></figure>
+<p>这个配置可以通过<code>Context</code>对象或者直接使用<code>config</code>方法调用。</p>
+<p>这个配置反悔了一个JSON格式的对象，所以你可以获取数据就像下面这样：</p>
+<pre><code>System.out.println(&quot;Configuration: &quot; + config().getString(&quot;name&quot;));
+</code></pre><h4 id="在verticle里访问环境变量"><a href="#在verticle里访问环境变量" class="headerlink" title="在verticle里访问环境变量"></a>在verticle里访问环境变量</h4><p>环境变量和系统属性是可以使用JAVA API来访问的。</p>
+<pre><code>System.getProperty(&quot;prop&quot;);
+System.getenv(&quot;HOME&quot;);
+</code></pre><h4 id="verticle组隔离"><a href="#verticle组隔离" class="headerlink" title="verticle组隔离"></a>verticle组隔离</h4><p>默认地，Vert.x有一个平行的classpath。例如：当Vert.x部署verticles时，它是使用当前的classloader来做的，它并不创建一个新的。在大多数例子中，这是最简单、最清晰和最干净的事情。</p>
+<p>然而，在一些例子中，你可能想在你的应用中部署一个verticle，它的类和其他的是隔离的。</p>
+<p>这可能是个例子，例如，如果你想要在一个Vert.x实例中部署有着相同类名字两个不同版本的verticle，或者你想要两个不同的verticles使用不同的jar库版本。</p>
+<p>当使用一个隔离组时，你需要提供一个你想要隔离的类名字的集合，将它放到<code>setIsolatedClasses</code>中。这可以是进入到一个全的类名，如<code>com.mycompany.myproject.engine.MyClass</code>，也可以是通配符的方式，可以匹配包或子包里的多个类，如：<code>com.mycompany.myproject.*</code>将会匹配在包<code>com.mycompany.myproject</code>下的任何类或任何子包。</p>
+<p>请记住只有这个匹配的类会被隔离，任何其他的类都会通过当前的classloader加载。</p>
+<p>额外的classpath也可以通过<code>setExtraClasspath</code>来设置，如果你想要加载的类或资源不在当前主classpath里。</p>
+<blockquote>
+<p>警告 使用这个特性时需要小心。Class-loaders可能会导致bug，并且会让调试变得困难，除其他外。</p>
+</blockquote>
+<p>下面是一个使用隔离组隔离verticle部署的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DeploymentOptions options = new DeploymentOptions().setIsolationGroup(&quot;mygroup&quot;);</div><div class="line">options.setIsolatedClasses(Arrays.asList(&quot;com.mycompany.myverticle.*&quot;,</div><div class="line">                   &quot;com.mycompany.somepkg.SomeClass&quot;, &quot;org.somelibrary.*&quot;));</div><div class="line">vertx.deployVerticle(&quot;com.mycompany.myverticle.VerticleClass&quot;, options);</div></pre></td></tr></table></figure>
+<h4 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h4><p>Verticles在部署的时候可以是高可用生效。在这个的内容中，当一个verticle部署在vert.x实力上后突然的死掉了，这个verticle会被集群里其他的vert.x实例重新部署。</p>
+<p>为了运行一个启用高可用的verticle，只需要添加上<code>-ha</code>即可：</p>
+<pre><code>vertx run my-verticle.js -ha
+</code></pre><p>当启用了高可用是，不在需要添加<code>-cluster</code>。</p>
+<p>关于高可用特性和配置的更多详细的信息在<a href="High Availability and Fail-Over">High Availability and Fail-Over</a>小节中。</p>
+<h4 id="从命令行运行verticles"><a href="#从命令行运行verticles" class="headerlink" title="从命令行运行verticles"></a>从命令行运行verticles</h4><p>你可以在你的Maven或Gradle项目中通过添加Vert.x core库的dependency这个支持的方式直接使用Vert.x。</p>
+<p>如果你原意，你可以可以直接在命令行这里执行Vert.x verticles。</p>
+<p>为了这样做，你需要下载并按照整个Vert.x发行版，并且将<code>bin</code>目录添加到<code>PATH</code>环境变量里。也要确定环境变量中你有Java 8JDK。</p>
+<blockquote>
+<p>JDK是被需要来支持即时编译Java代码</p>
+</blockquote>
+<p>现在你就可以使用<code>vertx run</code>命令运行你的verticles。下面这就是例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Run a JavaScript verticle</div><div class="line">vertx run my_verticle.js</div><div class="line"></div><div class="line"># Run a Ruby verticle</div><div class="line">vertx run a_n_other_verticle.rb</div><div class="line"></div><div class="line"># Run a Groovy script verticle, clustered</div><div class="line">vertx run FooVerticle.groovy -cluster</div></pre></td></tr></table></figure>
+<p>你甚至可以运行Java源代码而不用先编译。</p>
+<pre><code>vertx run SomeJavaSource.java
+</code></pre><p>Vert.x在运行前将会即时编译Java源码文件。这是真正有益于快速原型verticles和很好的演示。在执行的时候不再需要先设置Maven或Gradle环境。</p>
+<p>当在命令行里执行vertx，为获取全部的信息有大量的选项可用，在命令行里输入<code>vertx</code>即可。</p>
+<h4 id="Vert-x退出原因"><a href="#Vert-x退出原因" class="headerlink" title="Vert.x退出原因"></a>Vert.x退出原因</h4><p>Vert.x实例维护的线程并不是一个后台线程，所以他们将防止JVM退出。</p>
+<p>如果你正在嵌入Vert.x并且你已经完成了它，你需要调用<code>close</code>方法结束它。</p>
+<p>这将会关掉所有里面的线程池及关闭其他资源，并允许JVM退出。</p>
+<h4 id="Context对象"><a href="#Context对象" class="headerlink" title="Context对象"></a>Context对象</h4><p>当Vert.x提供了一个时间给handler或调用Verticle的start或stop方法时，这个执行就已经被关联到了一个<code>Context</code>。通常的一个context是一个event-loop context并捆绑给一个特定的event loop线程。所以，content的执行总是会出现在完全相同的event loop线程上。在工作者verticle的例子中，运行阻塞代码，一个工作者context将会被关联到从工作者线程池获取到的执行的这个线程。</p>
+<p>为获取这个context，使用<code>getOrCreateContext</code>方法：</p>
+<pre><code>Context context = vertx.getOrCreateContext();
+</code></pre><p>如果当前线程有一个context对象关联到它了，它会复用这个context对象。如果没有一个新的context实例被创建。你可以测试你获取到的这个context的类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Context context = vertx.getOrCreateContext();</div><div class="line">if (context.isEventLoopContext()) &#123;</div><div class="line">  System.out.println(&quot;Context attached to Event Loop&quot;);</div><div class="line">&#125; else if (context.isWorkerContext()) &#123;</div><div class="line">  System.out.println(&quot;Context attached to Worker Thread&quot;);</div><div class="line">&#125; else if (context.isMultiThreadedWorkerContext()) &#123;</div><div class="line">  System.out.println(&quot;Context attached to Worker Thread - multi threaded worker&quot;);</div><div class="line">&#125; else if (! Context.isOnVertxThread()) &#123;</div><div class="line">  System.out.println(&quot;Context not attached to a thread managed by vert.x&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当你获取到一个context对象，你可以在这个context上一步的运行代码。换言之，你提交了一个任务，之后最终将会被同一个context运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vertx.getOrCreateContext().runOnContext( (v) -&gt; &#123;</div><div class="line">  System.out.println(&quot;This will be executed asynchronously in the same context&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>当有多个handler运行在同一个context里时，他们可能想要更新数据。这个context对象提供了方法来存储和获取共享在这个context里的数据。例如，运行<code>runOnContext</code>可以让你传入数据到某个特定的动作上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">final Context context = vertx.getOrCreateContext();</div><div class="line">context.put(&quot;data&quot;, &quot;hello&quot;);</div><div class="line">context.runOnContext((v) -&gt; &#123;</div><div class="line">  String hello = context.get(&quot;data&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>context对象允许你使用<code>config</code>方法访问verticle配置。检查传入配置到verticle小节获取配置更详细的信息。</p>
+<h4 id="执行周期动作和延时动作"><a href="#执行周期动作和延时动作" class="headerlink" title="执行周期动作和延时动作"></a>执行周期动作和延时动作</h4><p>这是很普遍的，在Vert.x里想要获取一个延时或周期性的动作。</p>
+<p>在标准的verticles里你不能简单的使用线程休眠来达到演示的效果，因为这将会阻塞event loop线程。</p>
+<p>你需要使用Vert.x timers来代替。Timers可以被设置为一次性或周期性。两者我们都将会讨论。</p>
+<p><strong>一次性的Timers</strong></p>
+<p>在一个确定好的延迟时间后一次调用事件handler，延迟时间以微妙表示。</p>
+<p>激活一个定时器一次，使用<code>setTimer</code>方法，传入一个延迟时间和一个handler即可。</p>
+<pre><code>long timerID = vertx.setTimer(1000, id -&gt; {
+    System.out.println(&quot;And one second later this is printed&quot;);
+});
+
+System.out.println(&quot;First this is printed&quot;);
+</code></pre><p>这个返回值是一个独特的timer id，在之后可以用来取消这个timer。这个handler也传入了这个timer id。</p>
+<p><strong>周期性的Timers</strong></p>
+<p>你可以使用<code>setPeriodic</code>方法设置一个周期性触发的定时器。</p>
+<p>将有一个等于该周期的首次延迟。</p>
+<p><code>setPeriodic</code>有一个独特的timer id返回值。可以在之后用来取消这个周期性定时器。</p>
+<p>这个参数也传入到了定时器时间handler里：</p>
+<p>记住这个定时器会在一个基本的周期后触发。如果你的周期性处理占据了一个大量的时间来执行，你的定时器时间可以连续执行或者更糟：堆一起运行。</p>
+<p>在这种情形下，你可以考虑使用<code>setTimer</code>来代替。一旦你的处理完成了，你可以设置下一个定时器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">long timerID = vertx.setPeriodic(1000, id -&gt; &#123;</div><div class="line">  System.out.println(&quot;And every second this is printed&quot;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">System.out.println(&quot;First this is printed&quot;);</div></pre></td></tr></table></figure>
+<p><strong>取消定时器</strong></p>
+<p>要取消一个周期性的定时器，调用<code>cancelTimer</code>方法并制定一个timer id即可。例如：</p>
+<pre><code>vertx.cancelTimer(timerID);
+</code></pre><p><strong>在verticles里自动清除</strong></p>
+<p>如果你在一个verticles里创建了一个定时器，那么这个定时器将会被自动关闭当这个verticle被卸载的时候。</p>
+<h4 id="Verticle工作池"><a href="#Verticle工作池" class="headerlink" title="Verticle工作池"></a>Verticle工作池</h4><p>verticle使用Vert.x工作者池来执行阻塞动作，如：<code>executeBlocking</code>或工作者verticle。</p>
+<p>一个不同的工作者池可以在部署的选项里指定：</p>
+<pre><code>vertx.deployVerticle(&quot;the-verticle&quot;, new DeploymentOptions().setWorkPoolName(&quot;the-specific-pool&quot;));
+</code></pre><hr>
+<h3 id="The-Event-Bus"><a href="#The-Event-Bus" class="headerlink" title="The Event Bus"></a>The Event Bus</h3><hr>
+<p>event bus是Vert.x的神经系统。</p>
+<p>每个Vert.x实例都有一个单一的event bus实例，通过<code>eventBus</code>方法获取到它。</p>
+<p>event bus允许你的应用中不同的部分之间通信，不用在乎这些部分使用什么语言写的、是否是在同一个vert.x实例中或者在不同的vert.x实例。</p>
+<p>它甚至可以被桥接以允许运行在客户端的JavaScript在同一事件总线上通信。</p>
+<p>event bus形成跨越多个服务器节点和多个浏览器的分布式对等消息传递系统。</p>
+<p>event bus支持发布和订阅、点对点、请求和回复消息传递。</p>
+<p>event bus API是很简单的。基本的调用时注册一个handler、取消注册一个handler、发送和发布消息。</p>
+<p>首先从一些理论开始：</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p><strong>地址</strong></p>
+<p>event bus发送消息到一个地址上。</p>
+<p>Vert.x没有花哨的寻址方案。在Vert.x里一个地址就是一个简单的字符串。任何字符串都是有效的。然而，使用某种方案是明智的。例如，使用英文句号来划分命名空间。</p>
+<p>一些有效的地址的例子：europe.news.feed1，acme.games.pacman，sausages，and X。</p>
+<p><strong>Handlers</strong></p>
+<p>消息是在handler里接收的。你可以在地址上注册一个handler。</p>
+<p>大多数不同的handlers可以被注册到相同的地址上。</p>
+<p>一个单一的handler可以注册在多个不同的地址上。</p>
+<p><strong>发布和订阅消息</strong></p>
+<p>event bus支持发布消息。</p>
+<h4 id="Event-Bus-API"><a href="#Event-Bus-API" class="headerlink" title="Event Bus API"></a>Event Bus API</h4><h4 id="在verticles里自动清除"><a href="#在verticles里自动清除" class="headerlink" title="在verticles里自动清除"></a>在verticles里自动清除</h4><hr>
+<h3 id="配置event-bus"><a href="#配置event-bus" class="headerlink" title="配置event bus"></a>配置event bus</h3><hr>
+<h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><h4 id="JSON对象"><a href="#JSON对象" class="headerlink" title="JSON对象"></a>JSON对象</h4><h4 id="JSON数组"><a href="#JSON数组" class="headerlink" title="JSON数组"></a>JSON数组</h4><hr>
+<h3 id="Buffers"><a href="#Buffers" class="headerlink" title="Buffers"></a>Buffers</h3><hr>
+<h4 id="创建Buffers"><a href="#创建Buffers" class="headerlink" title="创建Buffers"></a>创建Buffers</h4><h4 id="写入到一个Buffer"><a href="#写入到一个Buffer" class="headerlink" title="写入到一个Buffer"></a>写入到一个Buffer</h4><h4 id="从Buffer中读取内容"><a href="#从Buffer中读取内容" class="headerlink" title="从Buffer中读取内容"></a>从Buffer中读取内容</h4><h4 id="使用无符号数"><a href="#使用无符号数" class="headerlink" title="使用无符号数"></a>使用无符号数</h4><h4 id="Buffer长度"><a href="#Buffer长度" class="headerlink" title="Buffer长度"></a>Buffer长度</h4><h4 id="复制Buffer"><a href="#复制Buffer" class="headerlink" title="复制Buffer"></a>复制Buffer</h4><h4 id="分片buffer（Slicing-buffer）"><a href="#分片buffer（Slicing-buffer）" class="headerlink" title="分片buffer（Slicing buffer）"></a>分片buffer（Slicing buffer）</h4><h4 id="buffer复用"><a href="#buffer复用" class="headerlink" title="buffer复用"></a>buffer复用</h4><hr>
+<h3 id="写TCP服务器和客户端"><a href="#写TCP服务器和客户端" class="headerlink" title="写TCP服务器和客户端"></a>写TCP服务器和客户端</h3><hr>
+<h4 id="创建一个TCP服务器"><a href="#创建一个TCP服务器" class="headerlink" title="创建一个TCP服务器"></a>创建一个TCP服务器</h4><h4 id="配置一个TCP服务器"><a href="#配置一个TCP服务器" class="headerlink" title="配置一个TCP服务器"></a>配置一个TCP服务器</h4><h4 id="服务器开始监听"><a href="#服务器开始监听" class="headerlink" title="服务器开始监听"></a>服务器开始监听</h4><h4 id="监听一个随机端口"><a href="#监听一个随机端口" class="headerlink" title="监听一个随机端口"></a>监听一个随机端口</h4><h4 id="有连接到达时获取到通知"><a href="#有连接到达时获取到通知" class="headerlink" title="有连接到达时获取到通知"></a>有连接到达时获取到通知</h4><h4 id="从socket读取数据"><a href="#从socket读取数据" class="headerlink" title="从socket读取数据"></a>从socket读取数据</h4><h4 id="写数据到一个socket"><a href="#写数据到一个socket" class="headerlink" title="写数据到一个socket"></a>写数据到一个socket</h4><h4 id="关闭handler"><a href="#关闭handler" class="headerlink" title="关闭handler"></a>关闭handler</h4><h4 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h4><h4 id="event-bus写handler"><a href="#event-bus写handler" class="headerlink" title="event bus写handler"></a>event bus写handler</h4><h4 id="本地和远程地址"><a href="#本地和远程地址" class="headerlink" title="本地和远程地址"></a>本地和远程地址</h4><h4 id="从classpath发送文件或资源"><a href="#从classpath发送文件或资源" class="headerlink" title="从classpath发送文件或资源"></a>从classpath发送文件或资源</h4><h4 id="流socket"><a href="#流socket" class="headerlink" title="流socket"></a>流socket</h4><h4 id="升级连接到SSL-TLS"><a href="#升级连接到SSL-TLS" class="headerlink" title="升级连接到SSL/TLS"></a>升级连接到SSL/TLS</h4><h4 id="关闭一个TCP服务器"><a href="#关闭一个TCP服务器" class="headerlink" title="关闭一个TCP服务器"></a>关闭一个TCP服务器</h4><h4 id="在verticles自动清除"><a href="#在verticles自动清除" class="headerlink" title="在verticles自动清除"></a>在verticles自动清除</h4><h4 id="扩展和分享TCP服务器"><a href="#扩展和分享TCP服务器" class="headerlink" title="扩展和分享TCP服务器"></a>扩展和分享TCP服务器</h4><h4 id="创建一个TCP客户端"><a href="#创建一个TCP客户端" class="headerlink" title="创建一个TCP客户端"></a>创建一个TCP客户端</h4><h4 id="配置TCP客户端"><a href="#配置TCP客户端" class="headerlink" title="配置TCP客户端"></a>配置TCP客户端</h4><h4 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h4><h4 id="尝试配置连接"><a href="#尝试配置连接" class="headerlink" title="尝试配置连接"></a>尝试配置连接</h4><h4 id="记录网络活动"><a href="#记录网络活动" class="headerlink" title="记录网络活动"></a>记录网络活动</h4><h4 id="配置服务器和客户端使用SSL-TLS"><a href="#配置服务器和客户端使用SSL-TLS" class="headerlink" title="配置服务器和客户端使用SSL/TLS"></a>配置服务器和客户端使用SSL/TLS</h4><h4 id="客户端使用代理"><a href="#客户端使用代理" class="headerlink" title="客户端使用代理"></a>客户端使用代理</h4><hr>
+<h3 id="编写HTTP服务器和客户端"><a href="#编写HTTP服务器和客户端" class="headerlink" title="编写HTTP服务器和客户端"></a>编写HTTP服务器和客户端</h3><hr>
+<h4 id="创建HTTP服务器"><a href="#创建HTTP服务器" class="headerlink" title="创建HTTP服务器"></a>创建HTTP服务器</h4><h4 id="配置HTTP服务器"><a href="#配置HTTP服务器" class="headerlink" title="配置HTTP服务器"></a>配置HTTP服务器</h4><h4 id="配置HTTP-2服务器"><a href="#配置HTTP-2服务器" class="headerlink" title="配置HTTP/2服务器"></a>配置HTTP/2服务器</h4><h4 id="记录服务器网络活动"><a href="#记录服务器网络活动" class="headerlink" title="记录服务器网络活动"></a>记录服务器网络活动</h4><h4 id="请求到了后获取到通知"><a href="#请求到了后获取到通知" class="headerlink" title="请求到了后获取到通知"></a>请求到了后获取到通知</h4><h4 id="处理请求"><a href="#处理请求" class="headerlink" title="处理请求"></a>处理请求</h4><h4 id="返回responses"><a href="#返回responses" class="headerlink" title="返回responses"></a>返回responses</h4><h4 id="HTTP压缩"><a href="#HTTP压缩" class="headerlink" title="HTTP压缩"></a>HTTP压缩</h4><h4 id="创建HTTP客户端"><a href="#创建HTTP客户端" class="headerlink" title="创建HTTP客户端"></a>创建HTTP客户端</h4><h4 id="记录客户端网络活动"><a href="#记录客户端网络活动" class="headerlink" title="记录客户端网络活动"></a>记录客户端网络活动</h4><h4 id="发出请求"><a href="#发出请求" class="headerlink" title="发出请求"></a>发出请求</h4><h4 id="处理http-response"><a href="#处理http-response" class="headerlink" title="处理http response"></a>处理http response</h4><h4 id="允许客户端压缩"><a href="#允许客户端压缩" class="headerlink" title="允许客户端压缩"></a>允许客户端压缩</h4><h4 id="HTTP-1-x池和keep-alive"><a href="#HTTP-1-x池和keep-alive" class="headerlink" title="HTTP/1.x池和keep alive"></a>HTTP/1.x池和keep alive</h4><h4 id="HTTP-1-1-pipe-lining"><a href="#HTTP-1-1-pipe-lining" class="headerlink" title="HTTP/1.1 pipe-lining"></a>HTTP/1.1 pipe-lining</h4><h4 id="HTTP-2-multiplexing"><a href="#HTTP-2-multiplexing" class="headerlink" title="HTTP/2 multiplexing"></a>HTTP/2 multiplexing</h4><h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><h4 id="HTTPClient用法"><a href="#HTTPClient用法" class="headerlink" title="HTTPClient用法"></a>HTTPClient用法</h4><h4 id="服务器分享"><a href="#服务器分享" class="headerlink" title="服务器分享"></a>服务器分享</h4><h4 id="通过Vert-x使用HTTPS"><a href="#通过Vert-x使用HTTPS" class="headerlink" title="通过Vert.x使用HTTPS"></a>通过Vert.x使用HTTPS</h4><h4 id="websockets"><a href="#websockets" class="headerlink" title="websockets"></a>websockets</h4><h4 id="为HTTP-HTTPS连接使用代理"><a href="#为HTTP-HTTPS连接使用代理" class="headerlink" title="为HTTP/HTTPS连接使用代理"></a>为HTTP/HTTPS连接使用代理</h4><h4 id="在verticles里自动清除-1"><a href="#在verticles里自动清除-1" class="headerlink" title="在verticles里自动清除"></a>在verticles里自动清除</h4><hr>
+<h3 id="在Vert-x里使用Shared-Data"><a href="#在Vert-x里使用Shared-Data" class="headerlink" title="在Vert.x里使用Shared Data"></a>在Vert.x里使用Shared Data</h3><hr>
+<h4 id="Local-shared-maps"><a href="#Local-shared-maps" class="headerlink" title="Local shared maps"></a>Local shared maps</h4><h4 id="Cluster-wide-asynchronous-maps"><a href="#Cluster-wide-asynchronous-maps" class="headerlink" title="Cluster-wide asynchronous maps"></a>Cluster-wide asynchronous maps</h4><h4 id="Cluster-wide-locks"><a href="#Cluster-wide-locks" class="headerlink" title="Cluster-wide locks"></a>Cluster-wide locks</h4><h4 id="Cluster-wide-counters"><a href="#Cluster-wide-counters" class="headerlink" title="Cluster-wide counters"></a>Cluster-wide counters</h4><hr>
+<h3 id="通过Vert-x使用文件系统"><a href="#通过Vert-x使用文件系统" class="headerlink" title="通过Vert.x使用文件系统"></a>通过Vert.x使用文件系统</h3><hr>
+<h4 id="异步文件"><a href="#异步文件" class="headerlink" title="异步文件"></a>异步文件</h4><hr>
+<h3 id="数据报socket（UDP）"><a href="#数据报socket（UDP）" class="headerlink" title="数据报socket（UDP）"></a>数据报socket（UDP）</h3><hr>
+<h4 id="创建一个DatagramSocket"><a href="#创建一个DatagramSocket" class="headerlink" title="创建一个DatagramSocket"></a>创建一个DatagramSocket</h4><h4 id="发送一个Datagram-packets"><a href="#发送一个Datagram-packets" class="headerlink" title="发送一个Datagram packets"></a>发送一个Datagram packets</h4><h4 id="接收一个Datagram-packets"><a href="#接收一个Datagram-packets" class="headerlink" title="接收一个Datagram packets"></a>接收一个Datagram packets</h4><h4 id="多播"><a href="#多播" class="headerlink" title="多播"></a>多播</h4><hr>
+<h3 id="DNS客户端"><a href="#DNS客户端" class="headerlink" title="DNS客户端"></a>DNS客户端</h3><hr>
+<h4 id="lookup"><a href="#lookup" class="headerlink" title="lookup"></a>lookup</h4><h4 id="lookup4"><a href="#lookup4" class="headerlink" title="lookup4"></a>lookup4</h4><h4 id="lookup6"><a href="#lookup6" class="headerlink" title="lookup6"></a>lookup6</h4><h4 id="resolveA"><a href="#resolveA" class="headerlink" title="resolveA"></a>resolveA</h4><h4 id="resolveAAAA"><a href="#resolveAAAA" class="headerlink" title="resolveAAAA"></a>resolveAAAA</h4><h4 id="resolveCNAME"><a href="#resolveCNAME" class="headerlink" title="resolveCNAME"></a>resolveCNAME</h4><h4 id="resolveMX"><a href="#resolveMX" class="headerlink" title="resolveMX"></a>resolveMX</h4><h4 id="resolveTXT"><a href="#resolveTXT" class="headerlink" title="resolveTXT"></a>resolveTXT</h4><h4 id="resolveNS"><a href="#resolveNS" class="headerlink" title="resolveNS"></a>resolveNS</h4><h4 id="resolveSRV"><a href="#resolveSRV" class="headerlink" title="resolveSRV"></a>resolveSRV</h4><h4 id="resolvePTR"><a href="#resolvePTR" class="headerlink" title="resolvePTR"></a>resolvePTR</h4><h4 id="reverseLookup"><a href="#reverseLookup" class="headerlink" title="reverseLookup"></a>reverseLookup</h4><h4 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h4><hr>
+<h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><hr>
+<h4 id="ReadStream"><a href="#ReadStream" class="headerlink" title="ReadStream"></a>ReadStream</h4><h4 id="WriteStream"><a href="#WriteStream" class="headerlink" title="WriteStream"></a>WriteStream</h4><h4 id="Pump"><a href="#Pump" class="headerlink" title="Pump"></a>Pump</h4><hr>
+<h3 id="记录解析"><a href="#记录解析" class="headerlink" title="记录解析"></a>记录解析</h3><hr>
+<hr>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><hr>
+<hr>
+<h3 id="Metrics-SPI"><a href="#Metrics-SPI" class="headerlink" title="Metrics SPI"></a>Metrics SPI</h3><hr>
+<hr>
+<h3 id="OSGi"><a href="#OSGi" class="headerlink" title="OSGi"></a>OSGi</h3><hr>
+<hr>
+<h3 id="vertx命令行"><a href="#vertx命令行" class="headerlink" title="vertx命令行"></a>vertx命令行</h3><hr>
+<h4 id="运行verticles"><a href="#运行verticles" class="headerlink" title="运行verticles"></a>运行verticles</h4><h4 id="将一个Vert-x应用打包为一个jar包执行"><a href="#将一个Vert-x应用打包为一个jar包执行" class="headerlink" title="将一个Vert.x应用打包为一个jar包执行"></a>将一个Vert.x应用打包为一个jar包执行</h4><h4 id="显示Vert-x版本"><a href="#显示Vert-x版本" class="headerlink" title="显示Vert.x版本"></a>显示Vert.x版本</h4><h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><h4 id="Live-Redeploy"><a href="#Live-Redeploy" class="headerlink" title="Live Redeploy"></a>Live Redeploy</h4><hr>
+<h3 id="集群管理"><a href="#集群管理" class="headerlink" title="集群管理"></a>集群管理</h3><hr>
+<hr>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><hr>
+<h4 id="配置JUL日志"><a href="#配置JUL日志" class="headerlink" title="配置JUL日志"></a>配置JUL日志</h4><h4 id="使用另一个日志框架"><a href="#使用另一个日志框架" class="headerlink" title="使用另一个日志框架"></a>使用另一个日志框架</h4><h4 id="记录你的应用"><a href="#记录你的应用" class="headerlink" title="记录你的应用"></a>记录你的应用</h4><hr>
+<h3 id="主机名解决方案"><a href="#主机名解决方案" class="headerlink" title="主机名解决方案"></a>主机名解决方案</h3><hr>
+<hr>
+<h3 id="高可用和fail-over"><a href="#高可用和fail-over" class="headerlink" title="高可用和fail-over"></a>高可用和fail-over</h3><hr>
+<h4 id="自动failover"><a href="#自动failover" class="headerlink" title="自动failover"></a>自动failover</h4><h4 id="HA组"><a href="#HA组" class="headerlink" title="HA组"></a>HA组</h4><h4 id="处理网络部分-Quora"><a href="#处理网络部分-Quora" class="headerlink" title="处理网络部分-Quora"></a>处理网络部分-Quora</h4><hr>
+<h3 id="安全记录"><a href="#安全记录" class="headerlink" title="安全记录"></a>安全记录</h3><hr>
+<h4 id="web应用"><a href="#web应用" class="headerlink" title="web应用"></a>web应用</h4><h4 id="集群event-bus交通"><a href="#集群event-bus交通" class="headerlink" title="集群event bus交通"></a>集群event bus交通</h4><h4 id="标准安全的最佳实践"><a href="#标准安全的最佳实践" class="headerlink" title="标准安全的最佳实践"></a>标准安全的最佳实践</h4><hr>
+<h3 id="Vert-x命令行接口API"><a href="#Vert-x命令行接口API" class="headerlink" title="Vert.x命令行接口API"></a>Vert.x命令行接口API</h3><hr>
+<h4 id="定义舞台"><a href="#定义舞台" class="headerlink" title="定义舞台"></a>定义舞台</h4><h4 id="解析舞台"><a href="#解析舞台" class="headerlink" title="解析舞台"></a>解析舞台</h4><h4 id="查询-审计舞台"><a href="#查询-审计舞台" class="headerlink" title="查询/审计舞台"></a>查询/审计舞台</h4><h4 id="类型选项和参数"><a href="#类型选项和参数" class="headerlink" title="类型选项和参数"></a>类型选项和参数</h4><h4 id="使用通知"><a href="#使用通知" class="headerlink" title="使用通知"></a>使用通知</h4><hr>
+<h3 id="Vert-x启动器"><a href="#Vert-x启动器" class="headerlink" title="Vert.x启动器"></a>Vert.x启动器</h3><hr>
+<h4 id="拓展vert-x启动器"><a href="#拓展vert-x启动器" class="headerlink" title="拓展vert.x启动器"></a>拓展vert.x启动器</h4><h4 id="在jar里使用启动器"><a href="#在jar里使用启动器" class="headerlink" title="在jar里使用启动器"></a>在jar里使用启动器</h4><h4 id="启动子类"><a href="#启动子类" class="headerlink" title="启动子类"></a>启动子类</h4><h4 id="启动器退出代码"><a href="#启动器退出代码" class="headerlink" title="启动器退出代码"></a>启动器退出代码</h4><hr>
+<h3 id="配置Vert-x缓存"><a href="#配置Vert-x缓存" class="headerlink" title="配置Vert.x缓存"></a>配置Vert.x缓存</h3><hr>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/10/vertx-core/">Vertx-core翻译</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
+        <p><span>发布时间:</span>2016-12-10, 21:55:52</p>
+        <p><span>最后更新:</span>2016-12-15, 19:54:16</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/10/vertx-core/" title="Vertx-core翻译">http://weiyiysw.com/2016/12/10/vertx-core/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/10/vertx-core/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vert-x的核心是一组被我们称为Vert-x-Core的Java-APIs"><span class="toc-number">1.</span> <span class="toc-text">Vert.x的核心是一组被我们称为Vert.x Core的Java APIs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#从Vert-x开始"><span class="toc-number">1.0.1.</span> <span class="toc-text">从Vert.x开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个指定选项的Vertx对象"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">创建一个指定选项的Vertx对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个集群式的Vert-x对象"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">创建一个集群式的Vert.x对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#你用流式API编程吗？"><span class="toc-number">1.0.2.</span> <span class="toc-text">你用流式API编程吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#别调用我们，我们会通知你的"><span class="toc-number">1.0.3.</span> <span class="toc-text">别调用我们，我们会通知你的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#别阻塞我"><span class="toc-number">1.0.4.</span> <span class="toc-text">别阻塞我</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reactor和Multi-Reactor"><span class="toc-number">1.0.5.</span> <span class="toc-text">Reactor和Multi-Reactor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#黄金法则——不要阻塞event-loop"><span class="toc-number">1.0.6.</span> <span class="toc-text">黄金法则——不要阻塞event loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行阻塞的代码"><span class="toc-number">1.0.7.</span> <span class="toc-text">运行阻塞的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步协调"><span class="toc-number">1.0.8.</span> <span class="toc-text">异步协调</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并发架构"><span class="toc-number">1.0.8.1.</span> <span class="toc-text">并发架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列架构"><span class="toc-number">1.0.8.2.</span> <span class="toc-text">序列架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verticles"><span class="toc-number">1.0.9.</span> <span class="toc-text">Verticles</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#写Verticles"><span class="toc-number">1.0.9.1.</span> <span class="toc-text">写Verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异步的Verticle启动和停止"><span class="toc-number">1.0.9.2.</span> <span class="toc-text">异步的Verticle启动和停止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Verticle类型"><span class="toc-number">1.0.9.3.</span> <span class="toc-text">Verticle类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准的verticles"><span class="toc-number">1.0.9.4.</span> <span class="toc-text">标准的verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作者verticles"><span class="toc-number">1.0.9.5.</span> <span class="toc-text">工作者verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多线程工作者Verticles"><span class="toc-number">1.0.9.6.</span> <span class="toc-text">多线程工作者Verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#程序化部署verticles"><span class="toc-number">1.0.9.7.</span> <span class="toc-text">程序化部署verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#映射verticle名字到verticle工厂的规则"><span class="toc-number">1.0.9.8.</span> <span class="toc-text">映射verticle名字到verticle工厂的规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Verticle工厂在哪"><span class="toc-number">1.0.9.9.</span> <span class="toc-text">Verticle工厂在哪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#等待部署完成"><span class="toc-number">1.0.9.10.</span> <span class="toc-text">等待部署完成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#卸载部署了的verticle"><span class="toc-number">1.0.9.11.</span> <span class="toc-text">卸载部署了的verticle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指定verticle实例的数量"><span class="toc-number">1.0.9.12.</span> <span class="toc-text">指定verticle实例的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给一个verticle传入配置文件"><span class="toc-number">1.0.9.13.</span> <span class="toc-text">给一个verticle传入配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在verticle里访问环境变量"><span class="toc-number">1.0.9.14.</span> <span class="toc-text">在verticle里访问环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#verticle组隔离"><span class="toc-number">1.0.9.15.</span> <span class="toc-text">verticle组隔离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高可用"><span class="toc-number">1.0.9.16.</span> <span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从命令行运行verticles"><span class="toc-number">1.0.9.17.</span> <span class="toc-text">从命令行运行verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vert-x退出原因"><span class="toc-number">1.0.9.18.</span> <span class="toc-text">Vert.x退出原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Context对象"><span class="toc-number">1.0.9.19.</span> <span class="toc-text">Context对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行周期动作和延时动作"><span class="toc-number">1.0.9.20.</span> <span class="toc-text">执行周期动作和延时动作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Verticle工作池"><span class="toc-number">1.0.9.21.</span> <span class="toc-text">Verticle工作池</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Event-Bus"><span class="toc-number">1.0.10.</span> <span class="toc-text">The Event Bus</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理"><span class="toc-number">1.0.10.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-Bus-API"><span class="toc-number">1.0.10.2.</span> <span class="toc-text">Event Bus API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在verticles里自动清除"><span class="toc-number">1.0.10.3.</span> <span class="toc-text">在verticles里自动清除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置event-bus"><span class="toc-number">1.0.11.</span> <span class="toc-text">配置event bus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON"><span class="toc-number">1.0.12.</span> <span class="toc-text">JSON</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JSON对象"><span class="toc-number">1.0.12.1.</span> <span class="toc-text">JSON对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSON数组"><span class="toc-number">1.0.12.2.</span> <span class="toc-text">JSON数组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffers"><span class="toc-number">1.0.13.</span> <span class="toc-text">Buffers</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建Buffers"><span class="toc-number">1.0.13.1.</span> <span class="toc-text">创建Buffers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入到一个Buffer"><span class="toc-number">1.0.13.2.</span> <span class="toc-text">写入到一个Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从Buffer中读取内容"><span class="toc-number">1.0.13.3.</span> <span class="toc-text">从Buffer中读取内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用无符号数"><span class="toc-number">1.0.13.4.</span> <span class="toc-text">使用无符号数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer长度"><span class="toc-number">1.0.13.5.</span> <span class="toc-text">Buffer长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制Buffer"><span class="toc-number">1.0.13.6.</span> <span class="toc-text">复制Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分片buffer（Slicing-buffer）"><span class="toc-number">1.0.13.7.</span> <span class="toc-text">分片buffer（Slicing buffer）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#buffer复用"><span class="toc-number">1.0.13.8.</span> <span class="toc-text">buffer复用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写TCP服务器和客户端"><span class="toc-number">1.0.14.</span> <span class="toc-text">写TCP服务器和客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个TCP服务器"><span class="toc-number">1.0.14.1.</span> <span class="toc-text">创建一个TCP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置一个TCP服务器"><span class="toc-number">1.0.14.2.</span> <span class="toc-text">配置一个TCP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器开始监听"><span class="toc-number">1.0.14.3.</span> <span class="toc-text">服务器开始监听</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#监听一个随机端口"><span class="toc-number">1.0.14.4.</span> <span class="toc-text">监听一个随机端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有连接到达时获取到通知"><span class="toc-number">1.0.14.5.</span> <span class="toc-text">有连接到达时获取到通知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从socket读取数据"><span class="toc-number">1.0.14.6.</span> <span class="toc-text">从socket读取数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据到一个socket"><span class="toc-number">1.0.14.7.</span> <span class="toc-text">写数据到一个socket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭handler"><span class="toc-number">1.0.14.8.</span> <span class="toc-text">关闭handler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理异常"><span class="toc-number">1.0.14.9.</span> <span class="toc-text">处理异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#event-bus写handler"><span class="toc-number">1.0.14.10.</span> <span class="toc-text">event bus写handler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地和远程地址"><span class="toc-number">1.0.14.11.</span> <span class="toc-text">本地和远程地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从classpath发送文件或资源"><span class="toc-number">1.0.14.12.</span> <span class="toc-text">从classpath发送文件或资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#流socket"><span class="toc-number">1.0.14.13.</span> <span class="toc-text">流socket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#升级连接到SSL-TLS"><span class="toc-number">1.0.14.14.</span> <span class="toc-text">升级连接到SSL/TLS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭一个TCP服务器"><span class="toc-number">1.0.14.15.</span> <span class="toc-text">关闭一个TCP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在verticles自动清除"><span class="toc-number">1.0.14.16.</span> <span class="toc-text">在verticles自动清除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展和分享TCP服务器"><span class="toc-number">1.0.14.17.</span> <span class="toc-text">扩展和分享TCP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个TCP客户端"><span class="toc-number">1.0.14.18.</span> <span class="toc-text">创建一个TCP客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置TCP客户端"><span class="toc-number">1.0.14.19.</span> <span class="toc-text">配置TCP客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建立连接"><span class="toc-number">1.0.14.20.</span> <span class="toc-text">建立连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尝试配置连接"><span class="toc-number">1.0.14.21.</span> <span class="toc-text">尝试配置连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录网络活动"><span class="toc-number">1.0.14.22.</span> <span class="toc-text">记录网络活动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置服务器和客户端使用SSL-TLS"><span class="toc-number">1.0.14.23.</span> <span class="toc-text">配置服务器和客户端使用SSL/TLS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端使用代理"><span class="toc-number">1.0.14.24.</span> <span class="toc-text">客户端使用代理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写HTTP服务器和客户端"><span class="toc-number">1.0.15.</span> <span class="toc-text">编写HTTP服务器和客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建HTTP服务器"><span class="toc-number">1.0.15.1.</span> <span class="toc-text">创建HTTP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置HTTP服务器"><span class="toc-number">1.0.15.2.</span> <span class="toc-text">配置HTTP服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置HTTP-2服务器"><span class="toc-number">1.0.15.3.</span> <span class="toc-text">配置HTTP/2服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录服务器网络活动"><span class="toc-number">1.0.15.4.</span> <span class="toc-text">记录服务器网络活动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#请求到了后获取到通知"><span class="toc-number">1.0.15.5.</span> <span class="toc-text">请求到了后获取到通知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理请求"><span class="toc-number">1.0.15.6.</span> <span class="toc-text">处理请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回responses"><span class="toc-number">1.0.15.7.</span> <span class="toc-text">返回responses</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP压缩"><span class="toc-number">1.0.15.8.</span> <span class="toc-text">HTTP压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建HTTP客户端"><span class="toc-number">1.0.15.9.</span> <span class="toc-text">创建HTTP客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录客户端网络活动"><span class="toc-number">1.0.15.10.</span> <span class="toc-text">记录客户端网络活动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发出请求"><span class="toc-number">1.0.15.11.</span> <span class="toc-text">发出请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理http-response"><span class="toc-number">1.0.15.12.</span> <span class="toc-text">处理http response</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#允许客户端压缩"><span class="toc-number">1.0.15.13.</span> <span class="toc-text">允许客户端压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-1-x池和keep-alive"><span class="toc-number">1.0.15.14.</span> <span class="toc-text">HTTP/1.x池和keep alive</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-1-1-pipe-lining"><span class="toc-number">1.0.15.15.</span> <span class="toc-text">HTTP/1.1 pipe-lining</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-2-multiplexing"><span class="toc-number">1.0.15.16.</span> <span class="toc-text">HTTP/2 multiplexing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP连接"><span class="toc-number">1.0.15.17.</span> <span class="toc-text">HTTP连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTPClient用法"><span class="toc-number">1.0.15.18.</span> <span class="toc-text">HTTPClient用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器分享"><span class="toc-number">1.0.15.19.</span> <span class="toc-text">服务器分享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过Vert-x使用HTTPS"><span class="toc-number">1.0.15.20.</span> <span class="toc-text">通过Vert.x使用HTTPS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#websockets"><span class="toc-number">1.0.15.21.</span> <span class="toc-text">websockets</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为HTTP-HTTPS连接使用代理"><span class="toc-number">1.0.15.22.</span> <span class="toc-text">为HTTP/HTTPS连接使用代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在verticles里自动清除-1"><span class="toc-number">1.0.15.23.</span> <span class="toc-text">在verticles里自动清除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在Vert-x里使用Shared-Data"><span class="toc-number">1.0.16.</span> <span class="toc-text">在Vert.x里使用Shared Data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Local-shared-maps"><span class="toc-number">1.0.16.1.</span> <span class="toc-text">Local shared maps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cluster-wide-asynchronous-maps"><span class="toc-number">1.0.16.2.</span> <span class="toc-text">Cluster-wide asynchronous maps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cluster-wide-locks"><span class="toc-number">1.0.16.3.</span> <span class="toc-text">Cluster-wide locks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cluster-wide-counters"><span class="toc-number">1.0.16.4.</span> <span class="toc-text">Cluster-wide counters</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过Vert-x使用文件系统"><span class="toc-number">1.0.17.</span> <span class="toc-text">通过Vert.x使用文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异步文件"><span class="toc-number">1.0.17.1.</span> <span class="toc-text">异步文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据报socket（UDP）"><span class="toc-number">1.0.18.</span> <span class="toc-text">数据报socket（UDP）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个DatagramSocket"><span class="toc-number">1.0.18.1.</span> <span class="toc-text">创建一个DatagramSocket</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发送一个Datagram-packets"><span class="toc-number">1.0.18.2.</span> <span class="toc-text">发送一个Datagram packets</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接收一个Datagram-packets"><span class="toc-number">1.0.18.3.</span> <span class="toc-text">接收一个Datagram packets</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多播"><span class="toc-number">1.0.18.4.</span> <span class="toc-text">多播</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS客户端"><span class="toc-number">1.0.19.</span> <span class="toc-text">DNS客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lookup"><span class="toc-number">1.0.19.1.</span> <span class="toc-text">lookup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lookup4"><span class="toc-number">1.0.19.2.</span> <span class="toc-text">lookup4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lookup6"><span class="toc-number">1.0.19.3.</span> <span class="toc-text">lookup6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveA"><span class="toc-number">1.0.19.4.</span> <span class="toc-text">resolveA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveAAAA"><span class="toc-number">1.0.19.5.</span> <span class="toc-text">resolveAAAA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveCNAME"><span class="toc-number">1.0.19.6.</span> <span class="toc-text">resolveCNAME</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveMX"><span class="toc-number">1.0.19.7.</span> <span class="toc-text">resolveMX</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveTXT"><span class="toc-number">1.0.19.8.</span> <span class="toc-text">resolveTXT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveNS"><span class="toc-number">1.0.19.9.</span> <span class="toc-text">resolveNS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolveSRV"><span class="toc-number">1.0.19.10.</span> <span class="toc-text">resolveSRV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resolvePTR"><span class="toc-number">1.0.19.11.</span> <span class="toc-text">resolvePTR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reverseLookup"><span class="toc-number">1.0.19.12.</span> <span class="toc-text">reverseLookup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Error-handling"><span class="toc-number">1.0.19.13.</span> <span class="toc-text">Error handling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流"><span class="toc-number">1.0.20.</span> <span class="toc-text">流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ReadStream"><span class="toc-number">1.0.20.1.</span> <span class="toc-text">ReadStream</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WriteStream"><span class="toc-number">1.0.20.2.</span> <span class="toc-text">WriteStream</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pump"><span class="toc-number">1.0.20.3.</span> <span class="toc-text">Pump</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#记录解析"><span class="toc-number">1.0.21.</span> <span class="toc-text">记录解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程安全"><span class="toc-number">1.0.22.</span> <span class="toc-text">线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Metrics-SPI"><span class="toc-number">1.0.23.</span> <span class="toc-text">Metrics SPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSGi"><span class="toc-number">1.0.24.</span> <span class="toc-text">OSGi</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vertx命令行"><span class="toc-number">1.0.25.</span> <span class="toc-text">vertx命令行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#运行verticles"><span class="toc-number">1.0.25.1.</span> <span class="toc-text">运行verticles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将一个Vert-x应用打包为一个jar包执行"><span class="toc-number">1.0.25.2.</span> <span class="toc-text">将一个Vert.x应用打包为一个jar包执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#显示Vert-x版本"><span class="toc-number">1.0.25.3.</span> <span class="toc-text">显示Vert.x版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他命令"><span class="toc-number">1.0.25.4.</span> <span class="toc-text">其他命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Live-Redeploy"><span class="toc-number">1.0.25.5.</span> <span class="toc-text">Live Redeploy</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群管理"><span class="toc-number">1.0.26.</span> <span class="toc-text">集群管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志"><span class="toc-number">1.0.27.</span> <span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置JUL日志"><span class="toc-number">1.0.27.1.</span> <span class="toc-text">配置JUL日志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用另一个日志框架"><span class="toc-number">1.0.27.2.</span> <span class="toc-text">使用另一个日志框架</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录你的应用"><span class="toc-number">1.0.27.3.</span> <span class="toc-text">记录你的应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主机名解决方案"><span class="toc-number">1.0.28.</span> <span class="toc-text">主机名解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高可用和fail-over"><span class="toc-number">1.0.29.</span> <span class="toc-text">高可用和fail-over</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自动failover"><span class="toc-number">1.0.29.1.</span> <span class="toc-text">自动failover</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HA组"><span class="toc-number">1.0.29.2.</span> <span class="toc-text">HA组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#处理网络部分-Quora"><span class="toc-number">1.0.29.3.</span> <span class="toc-text">处理网络部分-Quora</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全记录"><span class="toc-number">1.0.30.</span> <span class="toc-text">安全记录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#web应用"><span class="toc-number">1.0.30.1.</span> <span class="toc-text">web应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集群event-bus交通"><span class="toc-number">1.0.30.2.</span> <span class="toc-text">集群event bus交通</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标准安全的最佳实践"><span class="toc-number">1.0.30.3.</span> <span class="toc-text">标准安全的最佳实践</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vert-x命令行接口API"><span class="toc-number">1.0.31.</span> <span class="toc-text">Vert.x命令行接口API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义舞台"><span class="toc-number">1.0.31.1.</span> <span class="toc-text">定义舞台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析舞台"><span class="toc-number">1.0.31.2.</span> <span class="toc-text">解析舞台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询-审计舞台"><span class="toc-number">1.0.31.3.</span> <span class="toc-text">查询/审计舞台</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类型选项和参数"><span class="toc-number">1.0.31.4.</span> <span class="toc-text">类型选项和参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用通知"><span class="toc-number">1.0.31.5.</span> <span class="toc-text">使用通知</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vert-x启动器"><span class="toc-number">1.0.32.</span> <span class="toc-text">Vert.x启动器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#拓展vert-x启动器"><span class="toc-number">1.0.32.1.</span> <span class="toc-text">拓展vert.x启动器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在jar里使用启动器"><span class="toc-number">1.0.32.2.</span> <span class="toc-text">在jar里使用启动器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动子类"><span class="toc-number">1.0.32.3.</span> <span class="toc-text">启动子类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动器退出代码"><span class="toc-number">1.0.32.4.</span> <span class="toc-text">启动器退出代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置Vert-x缓存"><span class="toc-number">1.0.33.</span> <span class="toc-text">配置Vert.x缓存</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Vertx-core翻译　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 易世伟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
