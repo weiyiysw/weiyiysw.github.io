@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiyiysw.com/"/>
-  <updated>2016-12-18T13:24:58.000Z</updated>
+  <updated>2016-12-18T13:41:31.000Z</updated>
   <id>http://weiyiysw.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://weiyiysw.com/2016/12/18/setup-hexo/"/>
     <id>http://weiyiysw.com/2016/12/18/setup-hexo/</id>
     <published>2016-12-18T12:37:39.000Z</published>
-    <updated>2016-12-18T13:24:58.000Z</updated>
+    <updated>2016-12-18T13:41:31.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="什么是Hexo"><a href="#什么是Hexo" class="headerlink" title="什么是Hexo"></a>什么是Hexo</h1><p>Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><p>安装Hexo相当简单。在安装前，你必须检查电脑中是否已经安装了下列应用程序：</p>
@@ -77,14 +77,21 @@ $ npm install
     type: git
     repository: https://github.com/weiyiysw/weiyiysw.github.io.git
     branch: master
-</code></pre><p>保存此配置文件，然后在终端下执行如下命令：</p>
+    message: [自定义提交信息]
+</code></pre><p>保存此配置文件。</p>
+<p>然后安装插件：</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>最后，在终端下执行如下命令：</p>
 <pre><code>hexo clean (清楚缓存文件和生成的静态文件)
 hexo generate (缩写 hexo g，生成静态文件)
 hexo deploy (缩写 hexo d，部署网站)
 </code></pre><p>待<code>hexo d</code>执行结束，即部署成功。这时候，您就可以访问自己的博客了。以我的为例，例如：<a href="https://weiyiysw.github.io" target="_blank" rel="external">https://weiyiysw.github.io</a>。</p>
 <p>您只需把替换成您自己的用户名访问，即可。</p>
 <pre><code>https://yourusername.github.io
-</code></pre>]]></content>
+</code></pre><blockquote>
+<p>注意：您还可以自己通过购买属于自己的域名，然后将域名绑定到这。即可通过自己的域名访问。具体，请网上搜索教程。</p>
+</blockquote>
+]]></content>
     
     <summary type="html">
     

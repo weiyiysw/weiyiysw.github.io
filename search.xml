@@ -61,14 +61,21 @@ $ npm install
     type: git
     repository: https://github.com/weiyiysw/weiyiysw.github.io.git
     branch: master
-</code></pre><p>保存此配置文件，然后在终端下执行如下命令：</p>
+    message: [自定义提交信息]
+</code></pre><p>保存此配置文件。</p>
+<p>然后安装插件：</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>最后，在终端下执行如下命令：</p>
 <pre><code>hexo clean (清楚缓存文件和生成的静态文件)
 hexo generate (缩写 hexo g，生成静态文件)
 hexo deploy (缩写 hexo d，部署网站)
 </code></pre><p>待<code>hexo d</code>执行结束，即部署成功。这时候，您就可以访问自己的博客了。以我的为例，例如：<a href="https://weiyiysw.github.io" target="_blank" rel="external">https://weiyiysw.github.io</a>。</p>
 <p>您只需把替换成您自己的用户名访问，即可。</p>
 <pre><code>https://yourusername.github.io
-</code></pre>]]></content>
+</code></pre><blockquote>
+<p>注意：您还可以自己通过购买属于自己的域名，然后将域名绑定到这。即可通过自己的域名访问。具体，请网上搜索教程。</p>
+</blockquote>
+]]></content>
     </entry>
     
     <entry>

@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://weiyiysw.com/2016/12/18/setup-hexo/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
 <meta property="og:description" content="这是记录Hexo建立的过程以及部署到github Pages">
-<meta property="og:updated_time" content="2016-12-18T13:24:58.000Z">
+<meta property="og:updated_time" content="2016-12-18T13:41:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="setup-hexo">
 <meta name="twitter:description" content="这是记录Hexo建立的过程以及部署到github Pages">
@@ -362,14 +362,21 @@ $ npm install
     type: git
     repository: https://github.com/weiyiysw/weiyiysw.github.io.git
     branch: master
-</code></pre><p>保存此配置文件，然后在终端下执行如下命令：</p>
+    message: [自定义提交信息]
+</code></pre><p>保存此配置文件。</p>
+<p>然后安装插件：</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>最后，在终端下执行如下命令：</p>
 <pre><code>hexo clean (清楚缓存文件和生成的静态文件)
 hexo generate (缩写 hexo g，生成静态文件)
 hexo deploy (缩写 hexo d，部署网站)
 </code></pre><p>待<code>hexo d</code>执行结束，即部署成功。这时候，您就可以访问自己的博客了。以我的为例，例如：<a href="https://weiyiysw.github.io" target="_blank" rel="external">https://weiyiysw.github.io</a>。</p>
 <p>您只需把替换成您自己的用户名访问，即可。</p>
 <pre><code>https://yourusername.github.io
-</code></pre>
+</code></pre><blockquote>
+<p>注意：您还可以自己通过购买属于自己的域名，然后将域名绑定到这。即可通过自己的域名访问。具体，请网上搜索教程。</p>
+</blockquote>
+
       
     </div>
     
@@ -380,7 +387,7 @@ hexo deploy (缩写 hexo d，部署网站)
         <p><span>本文标题:</span><a href="/2016/12/18/setup-hexo/">setup-hexo</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
         <p><span>发布时间:</span>2016-12-18, 20:37:39</p>
-        <p><span>最后更新:</span>2016-12-18, 21:24:58</p>
+        <p><span>最后更新:</span>2016-12-18, 21:41:31</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/12/18/setup-hexo/" title="setup-hexo">http://weiyiysw.com/2016/12/18/setup-hexo/</a>
             <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/18/setup-hexo/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
