@@ -14,16 +14,17 @@
 <meta name="author" content="易世伟" />
 
 
-    
-    
 
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIYIYSW">
-<meta property="og:url" content="http://weiyiysw.com/index.html">
+<meta name="description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下动态库及版本号控制">
+<meta property="og:url" content="http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
+<meta property="og:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta property="og:updated_time" content="2016-12-19T03:27:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WEIYIYSW">
+<meta name="twitter:title" content="linux下动态库及版本号控制">
+<meta name="twitter:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -51,13 +52,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>WEIYIYSW</title>
+<title>linux下动态库及版本号控制 | WEIYIYSW</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,8 +65,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -264,9 +263,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/12/19/linux下动态库及版本号控制/" class="article-date">
@@ -284,179 +281,130 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a>
+    <h1 class="article-title" itemprop="name">
+      linux下动态库及版本号控制
     </h1>
   
 
       </header>
       
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
+      <div class="article-info article-info-post">
+        
 
-      
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/">version</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/2016/12/19/linux下动态库及版本号控制/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-setup-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/18/setup-hexo/" class="article-date">
-      <time datetime="2016-12-18T12:37:39.000Z" itemprop="datePublished">2016-12-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/18/setup-hexo/">setup-hexo</a>
-    </h1>
-  
-
-      </header>
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
       
           
-              这是记录Hexo建立的过程以及部署到github Pages
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-    </div>
+        <h1 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h1><p>我们都知道在Linux系统下，动态库的命名遵循了特定的规则</p>
+<pre><code>lib{name}.so
+</code></pre><p>如上所示，其中{name}可以替换为你自己声明的动态库名称。</p>
+<p>可能大部分的人都了解就到这里，并没有关注动态库文件后面的版本控制。如果你已经关注了，那么后面的就可以不用看啦。</p>
+<h1 id="Linux下动态库的命名规范"><a href="#Linux下动态库的命名规范" class="headerlink" title="Linux下动态库的命名规范"></a>Linux下动态库的命名规范</h1><p>Linux下引入了一套命名机制，但是这个机制仅是一个约定，并不强迫大家都按照这种方法。</p>
+<h2 id="Real-Name"><a href="#Real-Name" class="headerlink" title="Real Name"></a>Real Name</h2><p>共享库本身的文件名，共享库的命名必须是<code>libname.so.x.y.z</code>，这里xyz代表的是此库文件的版本号。</p>
+<ul>
+<li>前缀： lib</li>
+<li>后缀： so</li>
+<li>name：自定义的库文件名</li>
+<li>x: Major Version Number，主版本号，不兼容。重大升级，不同主版本之间的库是不兼容的。</li>
+<li>y: Minor Version Number, 次版本号，向下兼容。增量升级，增加一些新的接口但保留原有接口。高次版本的库向后兼容低次版本的库。</li>
+<li>z: Release Version Number，发布版本号，互相兼容。诸如库的一些错误修改、性能改进等，不会添加新接口，也不会更改接口。主版本和次版本完全相同的情况下，不同发行版本之间完全兼容。</li>
+</ul>
+<h2 id="SO-NAME"><a href="#SO-NAME" class="headerlink" title="SO-NAME"></a>SO-NAME</h2><p>在Linux系统中，每个共享库都有一个对应的SO-NAME（共享库文件名去掉次版本号和发布版本号）。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>综合上述两点，当我们遵循了Linux的这种机制并生成了自己的动态库文件后。咱们可以对库文件设置软连接，就可以避免真实库文件版本数字一直在变动，而不得不调整调用的代码。</p>
+<p>例如：有一个 libHelloWorld.so.x.y.z</p>
+<pre><code>ln -s libHelloWorld.so.x.y.z libHelloWorld.so.x
+</code></pre><p>在代码中，查找库文件此软连接的名字，在主版本未改动的情况下，动态库版本变动只需调整软连接即可。</p>
 
-
       
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/18/setup-hexo/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
     </div>
     
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vertx-core" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/10/vertx-core/" class="article-date">
-      <time datetime="2016-12-10T13:55:52.000Z" itemprop="datePublished">2016-12-10</time>
-</a>
-
-
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
+        <p><span>发布时间:</span>2016-12-19, 10:58:38</p>
+        <p><span>最后更新:</span>2016-12-19, 11:27:38</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/19/linux下动态库及版本号控制/" title="linux下动态库及版本号控制">http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+
+
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/10/vertx-core/">Vertx-core翻译</a>
-    </h1>
-  
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/18/setup-hexo/">
+                    setup-hexo
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              翻译初衷是为了自己更好的学习和理解Vert.x，网上也有不少的已经翻译完成的，各位可以去搜索完成的版本查阅，英语好的可以直接看英文文档。计划先完成Vert.x core与Vert.x web的翻译，待初稿完成后，会校对自己的翻译。若各位等待，看我的翻译，我谨在此表示感谢。同时，我也预先声明，本人限于水平，翻译难免会有错漏之处，请各位看官见谅。其次，翻译基本上都是抽出自己的业余时间完成，难免会比较慢，请再次见谅。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/vertx/">vertx</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/10/vertx-core/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态库"><span class="toc-number">1.</span> <span class="toc-text">动态库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下动态库的命名规范"><span class="toc-number">2.</span> <span class="toc-text">Linux下动态库的命名规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Real-Name"><span class="toc-number">2.1.</span> <span class="toc-text">Real Name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SO-NAME"><span class="toc-number">2.2.</span> <span class="toc-text">SO-NAME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">2.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"linux下动态库及版本号控制　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -464,9 +412,33 @@
 
 
 
+    
 
-  
-  
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/18/setup-hexo/" title="下一篇: setup-hexo">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title><![CDATA[linux下动态库及版本号控制]]></title>
+      <url>http://weiyiysw.com/2016/12/19/linux%E4%B8%8B%E5%8A%A8%E6%80%81%E5%BA%93%E5%8F%8A%E7%89%88%E6%9C%AC%E5%8F%B7%E6%8E%A7%E5%88%B6/</url>
+      <content type="html"><![CDATA[<h1 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h1><p>我们都知道在Linux系统下，动态库的命名遵循了特定的规则</p>
+<pre><code>lib{name}.so
+</code></pre><p>如上所示，其中{name}可以替换为你自己声明的动态库名称。</p>
+<p>可能大部分的人都了解就到这里，并没有关注动态库文件后面的版本控制。如果你已经关注了，那么后面的就可以不用看啦。</p>
+<h1 id="Linux下动态库的命名规范"><a href="#Linux下动态库的命名规范" class="headerlink" title="Linux下动态库的命名规范"></a>Linux下动态库的命名规范</h1><p>Linux下引入了一套命名机制，但是这个机制仅是一个约定，并不强迫大家都按照这种方法。</p>
+<h2 id="Real-Name"><a href="#Real-Name" class="headerlink" title="Real Name"></a>Real Name</h2><p>共享库本身的文件名，共享库的命名必须是<code>libname.so.x.y.z</code>，这里xyz代表的是此库文件的版本号。</p>
+<ul>
+<li>前缀： lib</li>
+<li>后缀： so</li>
+<li>name：自定义的库文件名</li>
+<li>x: Major Version Number，主版本号，不兼容。重大升级，不同主版本之间的库是不兼容的。</li>
+<li>y: Minor Version Number, 次版本号，向下兼容。增量升级，增加一些新的接口但保留原有接口。高次版本的库向后兼容低次版本的库。</li>
+<li>z: Release Version Number，发布版本号，互相兼容。诸如库的一些错误修改、性能改进等，不会添加新接口，也不会更改接口。主版本和次版本完全相同的情况下，不同发行版本之间完全兼容。</li>
+</ul>
+<h2 id="SO-NAME"><a href="#SO-NAME" class="headerlink" title="SO-NAME"></a>SO-NAME</h2><p>在Linux系统中，每个共享库都有一个对应的SO-NAME（共享库文件名去掉次版本号和发布版本号）。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>综合上述两点，当我们遵循了Linux的这种机制并生成了自己的动态库文件后。咱们可以对库文件设置软连接，就可以避免真实库文件版本数字一直在变动，而不得不调整调用的代码。</p>
+<p>例如：有一个 libHelloWorld.so.x.y.z</p>
+<pre><code>ln -s libHelloWorld.so.x.y.z libHelloWorld.so.x
+</code></pre><p>在代码中，查找库文件此软连接的名字，在主版本未改动的情况下，动态库版本变动只需调整软连接即可。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[setup-hexo]]></title>
       <url>http://weiyiysw.com/2016/12/18/setup-hexo/</url>
       <content type="html"><![CDATA[<h1 id="什么是Hexo"><a href="#什么是Hexo" class="headerlink" title="什么是Hexo"></a>什么是Hexo</h1><p>Hexo是一个快速、简洁且高效的博客框架。Hexo使用Markdown解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
