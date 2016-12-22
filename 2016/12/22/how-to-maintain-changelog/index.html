@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta name="description" content="预先声明这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下如何维护更新日志，大家可以查看原文获取更多内容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux下动态库及版本号控制">
-<meta property="og:url" content="http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/index.html">
+<meta property="og:title" content="how-to-maintain-changelog">
+<meta property="og:url" content="http://weiyiysw.com/2016/12/22/how-to-maintain-changelog/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
-<meta property="og:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
-<meta property="og:updated_time" content="2016-12-19T03:27:38.000Z">
+<meta property="og:description" content="预先声明这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下如何维护更新日志，大家可以查看原文获取更多内容。">
+<meta property="og:updated_time" content="2016-12-22T06:47:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux下动态库及版本号控制">
-<meta name="twitter:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta name="twitter:title" content="how-to-maintain-changelog">
+<meta name="twitter:description" content="预先声明这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下如何维护更新日志，大家可以查看原文获取更多内容。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>linux下动态库及版本号控制 | WEIYIYSW</title>
+<title>how-to-maintain-changelog | WEIYIYSW</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -263,11 +263,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-how-to-maintain-changelog" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/19/linux下动态库及版本号控制/" class="article-date">
-      <time datetime="2016-12-19T02:58:38.000Z" itemprop="datePublished">2016-12-19</time>
+      <a href="/2016/12/22/how-to-maintain-changelog/" class="article-date">
+      <time datetime="2016-12-22T06:03:24.000Z" itemprop="datePublished">2016-12-22</time>
 </a>
 
 
@@ -282,7 +282,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      linux下动态库及版本号控制
+      how-to-maintain-changelog
     </h1>
   
 
@@ -293,7 +293,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/">version</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,25 +303,58 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h1><p>我们都知道在Linux系统下，动态库的命名遵循了特定的规则</p>
-<pre><code>lib{name}.so
-</code></pre><p>如上所示，其中{name}可以替换为你自己声明的动态库名称。</p>
-<p>可能大部分的人都了解就到这里，并没有关注动态库文件后面的版本控制。如果你已经关注了，那么后面的就可以不用看啦。</p>
-<h1 id="Linux下动态库的命名规范"><a href="#Linux下动态库的命名规范" class="headerlink" title="Linux下动态库的命名规范"></a>Linux下动态库的命名规范</h1><p>Linux下引入了一套命名机制，但是这个机制仅是一个约定，并不强迫大家都按照这种方法。</p>
-<h2 id="Real-Name"><a href="#Real-Name" class="headerlink" title="Real Name"></a>Real Name</h2><p>共享库本身的文件名，共享库的命名必须是<code>libname.so.x.y.z</code>，这里xyz代表的是此库文件的版本号。</p>
+        <h1 id="预先声明"><a href="#预先声明" class="headerlink" title="预先声明"></a>预先声明</h1><p>这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下<a href="http://keepachangelog.com/zh-CN/0.3.0/" target="_blank" rel="external">如何维护更新日志</a>，大家可以查看原文获取更多内容。</p>
+<a id="more"></a>
+<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><h2 id="更新日志是什么？"><a href="#更新日志是什么？" class="headerlink" title="更新日志是什么？"></a>更新日志是什么？</h2><p>更新日志（Change Log）是一个由人工编辑，以时间为倒叙的列表。 这个列表记录所有版本的重大变动。</p>
+<h2 id="为何要提供更新日志？"><a href="#为何要提供更新日志？" class="headerlink" title="为何要提供更新日志？"></a>为何要提供更新日志？</h2><p>为了让用户和开发人员更好的知道每一个版本有哪些区别。</p>
+<h2 id="为何我要在乎呢？"><a href="#为何我要在乎呢？" class="headerlink" title="为何我要在乎呢？"></a>为何我要在乎呢？</h2><p>因为归根结底软件是为人提供的。既然你不关心人，哪么为何写软件呢？ 多少你还是要关心你的受众。</p>
+<p>本文档原作者和另外两个人的一个<a href="https://changelog.com/podcast/127" target="_blank" rel="external">博客</a>向大家介绍了， 为何代码的管理者和开发者应该在乎更新日志。如果你有一小时时间和很好的英文听力本领， 不放听听。</p>
+<h1 id="定义好的更新日志"><a href="#定义好的更新日志" class="headerlink" title="定义好的更新日志"></a>定义好的更新日志</h1><p>一个好的更新日志，一定满足：</p>
 <ul>
-<li>前缀： lib</li>
-<li>后缀： so</li>
-<li>name：自定义的库文件名</li>
-<li>x: Major Version Number，主版本号，不兼容。重大升级，不同主版本之间的库是不兼容的。</li>
-<li>y: Minor Version Number, 次版本号，向下兼容。增量升级，增加一些新的接口但保留原有接口。高次版本的库向后兼容低次版本的库。</li>
-<li>z: Release Version Number，发布版本号，互相兼容。诸如库的一些错误修改、性能改进等，不会添加新接口，也不会更改接口。主版本和次版本完全相同的情况下，不同发行版本之间完全兼容。</li>
+<li>给人而不是机器写的。记住，说人话。</li>
+<li>快速跳转到任意段。采用markdown格式。</li>
+<li>一个版本对应一个章节。</li>
+<li>最新版本在上，最老版本在下面。</li>
+<li>所有日期次哎哟个<strong>YYYY-MM-DD</strong>规范。</li>
+<li>这个是国际通用，任何语言 都能理解的，并且还被<a href="http://xkcd.com/1179/" target="_blank" rel="external">xkcd</a>推荐呢！</li>
+<li>标出来是否遵守<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">语义化版本格式</a></li>
+<li>每一个软件的版本必须：<ul>
+<li>表明日期（要用上面说过的规范）</li>
+<li>标明分类（采用英文）。规范如下：<ul>
+<li><code>Added</code> 添加新功能</li>
+<li><code>Changed</code> 功能变更</li>
+<li><code>Deprecated</code> 不建议使用，未来会删掉</li>
+<li><code>Removed</code> 之前不建议的功能，这次真的删掉了</li>
+<li><code>Fixed</code> 改的bug</li>
+<li><code>Security</code> 改的有关安全相关的bug</li>
 </ul>
-<h2 id="SO-NAME"><a href="#SO-NAME" class="headerlink" title="SO-NAME"></a>SO-NAME</h2><p>在Linux系统中，每个共享库都有一个对应的SO-NAME（共享库文件名去掉次版本号和发布版本号）。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>综合上述两点，当我们遵循了Linux的这种机制并生成了自己的动态库文件后。咱们可以对库文件设置软连接，就可以避免真实库文件版本数字一直在变动，而不得不调整调用的代码。</p>
-<p>例如：有一个 libHelloWorld.so.x.y.z</p>
-<pre><code>ln -s libHelloWorld.so.x.y.z libHelloWorld.so.x
-</code></pre><p>在代码中，查找库文件此软连接的名字，在主版本未改动的情况下，动态库版本变动只需调整软连接即可。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="怎么尽可能减少耗费的精力"><a href="#怎么尽可能减少耗费的精力" class="headerlink" title="怎么尽可能减少耗费的精力"></a>怎么尽可能减少耗费的精力</h1><p>永远在文档最上方提供一个<code>Unreleased</code>未发布区域，来记录当前的变化。 这佯作有两大意义。 </p>
+<ul>
+<li>大家可以看到接下来会有什么变化</li>
+<li>在发布时，只需要把<code>Unreleased</code>改为当前的版本号，然后再添加一个新的<code>Unreleased</code>即可。</li>
+</ul>
+<h1 id="注意，以下做法不推荐"><a href="#注意，以下做法不推荐" class="headerlink" title="注意，以下做法不推荐"></a>注意，以下做法不推荐</h1><p>请一定要注意：</p>
+<ul>
+<li><strong>把git日志扔到更新日志里</strong>。看似有用，然并卵。</li>
+<li><strong>不写<code>deprecations</code>就删功能。</strong> 不带这样坑队友的。</li>
+<li><strong>采用各种不靠谱的格式，如 2016年12月22日。</strong> 日期这样写，也就中国人及懂中文的懂了。</li>
+</ul>
+<h1 id="更新日志文件名该叫什么？"><a href="#更新日志文件名该叫什么？" class="headerlink" title="更新日志文件名该叫什么？"></a>更新日志文件名该叫什么？</h1><blockquote>
+<p>注意：原文提供了一个案例，案例的连接在文末。</p>
+</blockquote>
+<p>更新日志的名字最好的规范是：<code>CHANGELOG.md</code>，一定要注意大小写。</p>
+<h1 id="撤下来的版本怎么办？"><a href="#撤下来的版本怎么办？" class="headerlink" title="撤下来的版本怎么办？"></a>撤下来的版本怎么办？</h1><p>因为各种安全/重大bug原因被撤下的版本被标记’YANKED’。这些版本一般不出现在更新日志里，但作者建议他们出现。 显示方式应该是：</p>
+<pre><code>## 0.0.5 - 2014-12-13 [YANKED]
+</code></pre><p><code>[YANKED]</code>采用大写更加显著，因为这个信息很重要。而采用方括号则容易被程序解析。</p>
+<h1 id="是否可以重写更新日志"><a href="#是否可以重写更新日志" class="headerlink" title="是否可以重写更新日志"></a>是否可以重写更新日志</h1><p>当然。哪怕已经上线了，也可以重新更新更新日志。有许多开源项目更新日志不够新，所以作者就会帮忙更新。</p>
+<p>另外，很有可能你忘记记录一个重大功能更新。所以这时候应该去重写更新日志。</p>
+<h1 id="如何贡献"><a href="#如何贡献" class="headerlink" title="如何贡献?"></a>如何贡献?</h1><p>本文档并不是真理。这只是原作者的个人建议，并且包括许多收集的例子。哪怕本开源库提供一个<a href="https://github.com/olivierlacan/keep-a-changelog/blob/master/CHANGELOG.md" target="_blank" rel="external">更新日志案例</a>，我刻意没有提供一个 过于苛刻的规则列表（不像<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">语义化版本格式</a>）。</p>
+<p>这是因为我希望通过社区达到统一观点，我认为中间讨论的过程与结果一样重要。</p>
+<p>所以<a href="https://github.com/olivierlacan/keep-a-changelog" target="_blank" rel="external">欢迎贡献</a>。</p>
 
       
     </div>
@@ -330,13 +363,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></p>
+        <p><span>本文标题:</span><a href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
-        <p><span>发布时间:</span>2016-12-19, 10:58:38</p>
-        <p><span>最后更新:</span>2016-12-19, 11:27:38</p>
+        <p><span>发布时间:</span>2016-12-22, 14:03:24</p>
+        <p><span>最后更新:</span>2016-12-22, 14:47:59</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/12/19/linux下动态库及版本号控制/" title="linux下动态库及版本号控制">http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/22/how-to-maintain-changelog/" title="how-to-maintain-changelog">http://weiyiysw.com/2016/12/22/how-to-maintain-changelog/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/22/how-to-maintain-changelog/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -348,16 +381,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/12/22/how-to-maintain-changelog/">
-                    how-to-maintain-changelog
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/12/18/setup-hexo/">
-                    setup-hexo
+                <a href="/2016/12/19/linux下动态库及版本号控制/">
+                    linux下动态库及版本号控制
                 </a>
             </div>
         
@@ -369,7 +396,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态库"><span class="toc-number">1.</span> <span class="toc-text">动态库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下动态库的命名规范"><span class="toc-number">2.</span> <span class="toc-text">Linux下动态库的命名规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Real-Name"><span class="toc-number">2.1.</span> <span class="toc-text">Real Name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SO-NAME"><span class="toc-number">2.2.</span> <span class="toc-text">SO-NAME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">2.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#预先声明"><span class="toc-number">1.</span> <span class="toc-text">预先声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简述"><span class="toc-number">2.</span> <span class="toc-text">简述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#更新日志是什么？"><span class="toc-number">2.1.</span> <span class="toc-text">更新日志是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何要提供更新日志？"><span class="toc-number">2.2.</span> <span class="toc-text">为何要提供更新日志？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为何我要在乎呢？"><span class="toc-number">2.3.</span> <span class="toc-text">为何我要在乎呢？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定义好的更新日志"><span class="toc-number">3.</span> <span class="toc-text">定义好的更新日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么尽可能减少耗费的精力"><span class="toc-number">4.</span> <span class="toc-text">怎么尽可能减少耗费的精力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意，以下做法不推荐"><span class="toc-number">5.</span> <span class="toc-text">注意，以下做法不推荐</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新日志文件名该叫什么？"><span class="toc-number">6.</span> <span class="toc-text">更新日志文件名该叫什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#撤下来的版本怎么办？"><span class="toc-number">7.</span> <span class="toc-text">撤下来的版本怎么办？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#是否可以重写更新日志"><span class="toc-number">8.</span> <span class="toc-text">是否可以重写更新日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何贡献"><span class="toc-number">9.</span> <span class="toc-text">如何贡献?</span></a></li></ol>
         
     </div>
     <style>
@@ -405,7 +432,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"linux下动态库及版本号控制　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"how-to-maintain-changelog　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -425,15 +452,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/12/22/how-to-maintain-changelog/" title="上一篇: how-to-maintain-changelog">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/12/18/setup-hexo/" title="下一篇: setup-hexo">
+            <a href="/2016/12/19/linux下动态库及版本号控制/" title="下一篇: linux下动态库及版本号控制">
                 <i class="fa fa-angle-right"></i>
             </a>
         
