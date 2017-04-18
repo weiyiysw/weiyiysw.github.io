@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://weiyiysw.com/2016/12/10/vertx-core/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
 <meta property="og:description" content="翻译初衷是为了自己更好的学习和理解Vert.x，网上也有不少的已经翻译完成的，各位可以去搜索完成的版本查阅，英语好的可以直接看英文文档。计划先完成Vert.x core与Vert.x web的翻译，待初稿完成后，会校对自己的翻译。若各位等待，看我的翻译，我谨在此表示感谢。同时，我也预先声明，本人限于水平，翻译难免会有错漏之处，请各位看官见谅。其次，翻译基本上都是抽出自己的业余时间完成，难免会比较慢">
-<meta property="og:updated_time" content="2016-12-21T10:06:53.000Z">
+<meta property="og:updated_time" content="2017-01-05T09:09:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vertx-core翻译">
 <meta name="twitter:description" content="翻译初衷是为了自己更好的学习和理解Vert.x，网上也有不少的已经翻译完成的，各位可以去搜索完成的版本查阅，英语好的可以直接看英文文档。计划先完成Vert.x core与Vert.x web的翻译，待初稿完成后，会校对自己的翻译。若各位等待，看我的翻译，我谨在此表示感谢。同时，我也预先声明，本人限于水平，翻译难免会有错漏之处，请各位看官见谅。其次，翻译基本上都是抽出自己的业余时间完成，难免会比较慢">
@@ -1513,6 +1513,8 @@ String contentLength = response.headers().get(&quot;content-length&quot;);
 <p>你可以使用<code>cookies</code>从响应中获取到cookies的列表。</p>
 <p>或者，你可以在响应中自行解析<code>Set-cookie</code>的头。</p>
 <p><strong>100-继续处理</strong></p>
+<p>根据<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html" target="_blank" rel="external">HTTP1.1说明</a>，客户端可以设置<code>Expect: 100-Continue</code>头，并且在剩余请求体发送之前发送请求主体。</p>
+<p>服务器可以用一个内置的响应状态<code>Status: 100 (Continue)</code>响应来表示已经准备好了，客户端可以发送剩余的主体了。</p>
 <h4 id="处理http-response"><a href="#处理http-response" class="headerlink" title="处理http response"></a>处理http response</h4><h4 id="允许客户端压缩"><a href="#允许客户端压缩" class="headerlink" title="允许客户端压缩"></a>允许客户端压缩</h4><h4 id="HTTP-1-x池和keep-alive"><a href="#HTTP-1-x池和keep-alive" class="headerlink" title="HTTP/1.x池和keep alive"></a>HTTP/1.x池和keep alive</h4><h4 id="HTTP-1-1-pipe-lining"><a href="#HTTP-1-1-pipe-lining" class="headerlink" title="HTTP/1.1 pipe-lining"></a>HTTP/1.1 pipe-lining</h4><h4 id="HTTP-2-multiplexing"><a href="#HTTP-2-multiplexing" class="headerlink" title="HTTP/2 multiplexing"></a>HTTP/2 multiplexing</h4><h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><h4 id="HTTPClient用法"><a href="#HTTPClient用法" class="headerlink" title="HTTPClient用法"></a>HTTPClient用法</h4><h4 id="服务器分享"><a href="#服务器分享" class="headerlink" title="服务器分享"></a>服务器分享</h4><h4 id="通过Vert-x使用HTTPS"><a href="#通过Vert-x使用HTTPS" class="headerlink" title="通过Vert.x使用HTTPS"></a>通过Vert.x使用HTTPS</h4><h4 id="websockets"><a href="#websockets" class="headerlink" title="websockets"></a>websockets</h4><h4 id="为HTTP-HTTPS连接使用代理"><a href="#为HTTP-HTTPS连接使用代理" class="headerlink" title="为HTTP/HTTPS连接使用代理"></a>为HTTP/HTTPS连接使用代理</h4><h4 id="在verticles里自动清除-1"><a href="#在verticles里自动清除-1" class="headerlink" title="在verticles里自动清除"></a>在verticles里自动清除</h4><hr>
 <h3 id="在Vert-x里使用Shared-Data"><a href="#在Vert-x里使用Shared-Data" class="headerlink" title="在Vert.x里使用Shared Data"></a>在Vert.x里使用Shared Data</h3><hr>
 <h4 id="Local-shared-maps"><a href="#Local-shared-maps" class="headerlink" title="Local shared maps"></a>Local shared maps</h4><h4 id="Cluster-wide-asynchronous-maps"><a href="#Cluster-wide-asynchronous-maps" class="headerlink" title="Cluster-wide asynchronous maps"></a>Cluster-wide asynchronous maps</h4><h4 id="Cluster-wide-locks"><a href="#Cluster-wide-locks" class="headerlink" title="Cluster-wide locks"></a>Cluster-wide locks</h4><h4 id="Cluster-wide-counters"><a href="#Cluster-wide-counters" class="headerlink" title="Cluster-wide counters"></a>Cluster-wide counters</h4><hr>
@@ -1560,7 +1562,7 @@ String contentLength = response.headers().get(&quot;content-length&quot;);
         <p><span>本文标题:</span><a href="/2016/12/10/vertx-core/">Vertx-core翻译</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
         <p><span>发布时间:</span>2016-12-10, 21:55:52</p>
-        <p><span>最后更新:</span>2016-12-21, 18:06:53</p>
+        <p><span>最后更新:</span>2017-01-05, 17:09:42</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/12/10/vertx-core/" title="Vertx-core翻译">http://weiyiysw.com/2016/12/10/vertx-core/</a>
             <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2016/12/10/vertx-core/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1658,7 +1660,7 @@ String contentLength = response.headers().get(&quot;content-length&quot;);
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
 
 
 
@@ -1672,7 +1674,7 @@ String contentLength = response.headers().get(&quot;content-length&quot;);
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 易世伟
+                2016-2017 易世伟
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

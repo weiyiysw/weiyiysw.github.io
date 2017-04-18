@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title><![CDATA[Linux下查看CPU信息、机器型号]]></title>
+      <url>http://weiyiysw.com/2017/04/18/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8BCPU%E4%BF%A1%E6%81%AF%E3%80%81%E6%9C%BA%E5%99%A8%E5%9E%8B%E5%8F%B7/</url>
+      <content type="html"><![CDATA[<h1 id="记录常用的一些命令"><a href="#记录常用的一些命令" class="headerlink" title="记录常用的一些命令"></a>记录常用的一些命令</h1><pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+cat /proc/cpuinfo | grep physical | uniq -c
+
+# 说明当前CPU运行的模式，如32bit模式或64bit
+getconf LONG_BIT 
+
+# 查看内存信息
+cat /proc/meminfo
+
+# 查看当前操作系统内核信息
+uname -a
+
+# 查看当前操作系统发现版信息
+cat /etc/issue | grep Linux
+
+# 查看机器型号 
+dmidecode | grep &quot;Product Name&quot;  
+
+# 查看网卡信息 
+dmesg | grep -i eth
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[how-to-maintain-changelog]]></title>
       <url>http://weiyiysw.com/2016/12/22/how-to-maintain-changelog/</url>
       <content type="html"><![CDATA[<h1 id="预先声明"><a href="#预先声明" class="headerlink" title="预先声明"></a>预先声明</h1><p>这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下<a href="http://keepachangelog.com/zh-CN/0.3.0/" target="_blank" rel="external">如何维护更新日志</a>，大家可以查看原文获取更多内容。</p>
@@ -1370,6 +1397,8 @@ String contentLength = response.headers().get(&quot;content-length&quot;);
 <p>你可以使用<code>cookies</code>从响应中获取到cookies的列表。</p>
 <p>或者，你可以在响应中自行解析<code>Set-cookie</code>的头。</p>
 <p><strong>100-继续处理</strong></p>
+<p>根据<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html" target="_blank" rel="external">HTTP1.1说明</a>，客户端可以设置<code>Expect: 100-Continue</code>头，并且在剩余请求体发送之前发送请求主体。</p>
+<p>服务器可以用一个内置的响应状态<code>Status: 100 (Continue)</code>响应来表示已经准备好了，客户端可以发送剩余的主体了。</p>
 <h4 id="处理http-response"><a href="#处理http-response" class="headerlink" title="处理http response"></a>处理http response</h4><h4 id="允许客户端压缩"><a href="#允许客户端压缩" class="headerlink" title="允许客户端压缩"></a>允许客户端压缩</h4><h4 id="HTTP-1-x池和keep-alive"><a href="#HTTP-1-x池和keep-alive" class="headerlink" title="HTTP/1.x池和keep alive"></a>HTTP/1.x池和keep alive</h4><h4 id="HTTP-1-1-pipe-lining"><a href="#HTTP-1-1-pipe-lining" class="headerlink" title="HTTP/1.1 pipe-lining"></a>HTTP/1.1 pipe-lining</h4><h4 id="HTTP-2-multiplexing"><a href="#HTTP-2-multiplexing" class="headerlink" title="HTTP/2 multiplexing"></a>HTTP/2 multiplexing</h4><h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><h4 id="HTTPClient用法"><a href="#HTTPClient用法" class="headerlink" title="HTTPClient用法"></a>HTTPClient用法</h4><h4 id="服务器分享"><a href="#服务器分享" class="headerlink" title="服务器分享"></a>服务器分享</h4><h4 id="通过Vert-x使用HTTPS"><a href="#通过Vert-x使用HTTPS" class="headerlink" title="通过Vert.x使用HTTPS"></a>通过Vert.x使用HTTPS</h4><h4 id="websockets"><a href="#websockets" class="headerlink" title="websockets"></a>websockets</h4><h4 id="为HTTP-HTTPS连接使用代理"><a href="#为HTTP-HTTPS连接使用代理" class="headerlink" title="为HTTP/HTTPS连接使用代理"></a>为HTTP/HTTPS连接使用代理</h4><h4 id="在verticles里自动清除-1"><a href="#在verticles里自动清除-1" class="headerlink" title="在verticles里自动清除"></a>在verticles里自动清除</h4><hr>
 <h3 id="在Vert-x里使用Shared-Data"><a href="#在Vert-x里使用Shared-Data" class="headerlink" title="在Vert.x里使用Shared Data"></a>在Vert.x里使用Shared Data</h3><hr>
 <h4 id="Local-shared-maps"><a href="#Local-shared-maps" class="headerlink" title="Local shared maps"></a>Local shared maps</h4><h4 id="Cluster-wide-asynchronous-maps"><a href="#Cluster-wide-asynchronous-maps" class="headerlink" title="Cluster-wide asynchronous maps"></a>Cluster-wide asynchronous maps</h4><h4 id="Cluster-wide-locks"><a href="#Cluster-wide-locks" class="headerlink" title="Cluster-wide locks"></a>Cluster-wide locks</h4><h4 id="Cluster-wide-counters"><a href="#Cluster-wide-counters" class="headerlink" title="Cluster-wide counters"></a>Cluster-wide counters</h4><hr>

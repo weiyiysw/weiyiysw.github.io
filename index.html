@@ -266,6 +266,82 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Linux下查看CPU信息、机器型号" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/18/Linux下查看CPU信息、机器型号/" class="article-date">
+      <time datetime="2017-04-18T08:23:28.000Z" itemprop="datePublished">2017-04-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="记录常用的一些命令"><a href="#记录常用的一些命令" class="headerlink" title="记录常用的一些命令"></a>记录常用的一些命令</h1><pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+cat /proc/cpuinfo | grep physical | uniq -c
+
+# 说明当前CPU运行的模式，如32bit模式或64bit
+getconf LONG_BIT 
+
+# 查看内存信息
+cat /proc/meminfo
+
+# 查看当前操作系统内核信息
+uname -a
+
+# 查看当前操作系统发现版信息
+cat /etc/issue | grep Linux
+
+# 查看机器型号 
+dmidecode | grep &quot;Product Name&quot;  
+
+# 查看网卡信息 
+dmesg | grep -i eth
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-how-to-maintain-changelog" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -537,7 +613,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 易世伟
+                2016-2017 易世伟
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
