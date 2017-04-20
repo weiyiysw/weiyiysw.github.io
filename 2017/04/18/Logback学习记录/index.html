@@ -15,16 +15,31 @@
 
 
 
-<meta name="description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta name="description" content="Logback架构Logback分为了三个模块，logback-core、logback-classic、logback-access。
+logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。
+
+后面提到的Logback，指的是Logback-classic。
+
+Logger、Append">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux下动态库及版本号控制">
-<meta property="og:url" content="http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/index.html">
+<meta property="og:title" content="Logback学习记录">
+<meta property="og:url" content="http://weiyiysw.com/2017/04/18/Logback学习记录/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
-<meta property="og:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
-<meta property="og:updated_time" content="2016-12-27T03:34:54.000Z">
+<meta property="og:description" content="Logback架构Logback分为了三个模块，logback-core、logback-classic、logback-access。
+logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。
+
+后面提到的Logback，指的是Logback-classic。
+
+Logger、Append">
+<meta property="og:updated_time" content="2017-04-20T06:50:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux下动态库及版本号控制">
-<meta name="twitter:description" content="这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。">
+<meta name="twitter:title" content="Logback学习记录">
+<meta name="twitter:description" content="Logback架构Logback分为了三个模块，logback-core、logback-classic、logback-access。
+logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。
+
+后面提到的Logback，指的是Logback-classic。
+
+Logger、Append">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +71,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>linux下动态库及版本号控制 | WEIYIYSW</title>
+<title>Logback学习记录 | WEIYIYSW</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -263,11 +278,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Logback学习记录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/19/linux下动态库及版本号控制/" class="article-date">
-      <time datetime="2016-12-19T02:58:38.000Z" itemprop="datePublished">2016-12-19</time>
+      <a href="/2017/04/18/Logback学习记录/" class="article-date">
+      <time datetime="2017-04-18T09:25:52.000Z" itemprop="datePublished">2017-04-18</time>
 </a>
 
 
@@ -282,7 +297,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      linux下动态库及版本号控制
+      Logback学习记录
     </h1>
   
 
@@ -292,10 +307,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/">version</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -303,25 +314,45 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h1><p>我们都知道在Linux系统下，动态库的命名遵循了特定的规则</p>
-<pre><code>lib{name}.so
-</code></pre><p>如上所示，其中{name}可以替换为你自己声明的动态库名称。</p>
-<p>可能大部分的人都了解就到这里，并没有关注动态库文件后面的版本控制。如果你已经关注了，那么后面的就可以不用看啦。</p>
-<h1 id="Linux下动态库的命名规范"><a href="#Linux下动态库的命名规范" class="headerlink" title="Linux下动态库的命名规范"></a>Linux下动态库的命名规范</h1><p>Linux下引入了一套命名机制，但是这个机制仅是一个约定，并不强迫大家都按照这种方法。</p>
-<h2 id="Real-Name"><a href="#Real-Name" class="headerlink" title="Real Name"></a>Real Name</h2><p>共享库本身的文件名，共享库的命名必须是<code>libname.so.x.y.z</code>，这里xyz代表的是此库文件的版本号。</p>
-<ul>
-<li>前缀： lib</li>
-<li>后缀： so</li>
-<li>name：自定义的库文件名</li>
-<li>x: Major Version Number，主版本号，不兼容。重大升级，不同主版本之间的库是不兼容的。</li>
-<li>y: Minor Version Number, 次版本号，向下兼容。增量升级，增加一些新的接口但保留原有接口。高次版本的库向后兼容低次版本的库。</li>
-<li>z: Release Version Number，发布版本号，互相兼容。诸如库的一些错误修改、性能改进等，不会添加新接口，也不会更改接口。主版本和次版本完全相同的情况下，不同发行版本之间完全兼容。</li>
-</ul>
-<h2 id="SO-NAME"><a href="#SO-NAME" class="headerlink" title="SO-NAME"></a>SO-NAME</h2><p>在Linux系统中，每个共享库都有一个对应的SO-NAME（共享库文件名去掉次版本号和发布版本号）。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>综合上述两点，当我们遵循了Linux的这种机制并生成了自己的动态库文件后。咱们可以对库文件设置软连接，就可以避免真实库文件版本数字一直在变动，而不得不调整调用的代码。</p>
-<p>例如：有一个 libHelloWorld.so.x.y.z</p>
-<pre><code>ln -s libHelloWorld.so.x.y.z libHelloWorld.so.x
-</code></pre><p>在代码中，查找库文件此软连接的名字，在主版本未改动的情况下，动态库版本变动只需调整软连接即可。</p>
+        <h1 id="Logback架构"><a href="#Logback架构" class="headerlink" title="Logback架构"></a>Logback架构</h1><p>Logback分为了三个模块，logback-core、logback-classic、logback-access。</p>
+<p>logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。</p>
+<blockquote>
+<p>后面提到的Logback，指的是Logback-classic。</p>
+</blockquote>
+<h1 id="Logger、Appenders和Layouts"><a href="#Logger、Appenders和Layouts" class="headerlink" title="Logger、Appenders和Layouts"></a>Logger、Appenders和Layouts</h1><p>Logback建立在Logger、Appenders和Layouts三个主要类上。</p>
+<p>Logger类是logger-classic模块的一部分，Appender和Layout接口来自Logback-core。</p>
+<h2 id="Logger-context"><a href="#Logger-context" class="headerlink" title="Logger context"></a>Logger context</h2><p>任何比System.out.println更高级的logging API最重要的优点是能够在禁用特定的记录语句同时却不妨碍输出其他语句。</p>
+<p>Logger是一个命名了的实体，大小写敏感。</p>
+<p>命名规则：如果logger的名称带上一个点好后是另一个logger的名称前缀，那么，前者就被成为后者的祖先。如果logger与其后代的logger之间没有其他祖先，那么前者就被称为子logger的父logger。</p>
+<p>所有的logger都可以通过静态方法getLogger获取到。用同一名字调用LoggerFactory.getLogger方法得到的永远都是同一个logger对象的引用。</p>
+<p>如：<br>    logger x = LoggerFactory.getLogger(“weiyiysw”);<br>    logger y = LoggerFactory.getLogger(“weiyiysw”);</p>
+<p>x 和 y指向同一个logger对象。</p>
+<h2 id="输出有效级别的继承"><a href="#输出有效级别的继承" class="headerlink" title="输出有效级别的继承"></a>输出有效级别的继承</h2><p>Logger可以被分配级别。级别包括：TRACE、DEBUG、INFO、WARN、ERROR。</p>
+<p>如果logger没有分配级别，那么它将从有被分配的级别的最近的祖先那里继承级别。</p>
+<p>为确保每个logger最终都能继承一个级别，根logger总是有级别的，默认情况下，这个级别是DEBUG。</p>
+<h2 id="打印方法和基本选择规则"><a href="#打印方法和基本选择规则" class="headerlink" title="打印方法和基本选择规则"></a>打印方法和基本选择规则</h2><p>基本选择规则：记录请求级别为P，其logger的有效级别为Q，只有在P &gt;= Q时，该请求才会执行。</p>
+<p>级别排序 </p>
+<pre><code>TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR
+</code></pre><h2 id="Appender-和-Layout"><a href="#Appender-和-Layout" class="headerlink" title="Appender 和 Layout"></a>Appender 和 Layout</h2><p>在logback里，一个输出目的地就是一个appender。</p>
+<p>一个logger可以关联到多个appender。</p>
+<p>Appender的叠加性：Logger L的记录语句的输出会发送给L及其祖先的全部appender。然而，如果Logger L的某个祖先P，设置additivity为FALSE，那么L的输出会发送给L与P之间的（含P）的所有Appender，但不会发送给P的任何祖先Appender。</p>
+<p>additivity叠加性默认为TRUE。</p>
+<p>Layout负责根据用户的意愿，格式化输出记录。Appender负责将格式化后的输出发送到目的地。</p>
+<p>PatternLayout是标准logback发行包的一部分，允许用户按照类似于C语言的printf函数的转换模式设置输出格式。</p>
+<p>例如: <code>%-4relative [%thread] %-5level %logger{32} - %msg%n</code></p>
+<p>输出：<code>176 [main] DEBUG manual.architecture.HelloWorld2 - Hello world.</code></p>
+<p>第一个字段是自程序启动以来的逝去时间，单位是毫秒。</p>
+<p>第二个地段发出记录请求的线程。</p>
+<p>第三个字段是记录请求的级别。</p>
+<p>第四个字段是与记录请求关联的 logger 的名称。</p>
+<p>“-”之后是请求的消息文字。</p>
+<h2 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h2><p>对于某个Logger，下面的代码：</p>
+<pre><code>logger.debug(&quot;Entry number:&quot; + i + &quot;is &quot; + String.valueOf(entry[i]));
+</code></pre><p>在构造消息参数时有性能消耗，即把整数i和entry[i]都转换为字符串时、连接多个字符串时。不管消息是否被几率，都会造成上述消耗。</p>
+<h3 id="替代方法"><a href="#替代方法" class="headerlink" title="替代方法"></a>替代方法</h3><p>假设entry是一个object，你可以编写：</p>
+<pre><code>Object entry = new SomeObject();
+logger.debug(&quot;The entry is {}.&quot;, entry);
+</code></pre><p>在评估是否作记录后，仅当需要作记录时，logger才会格式化消息，用entry的字符串值替换为“{}”。即，当语句被禁用时，这种方法不会产生参数构造所带来的性能消耗。</p>
 
       
     </div>
@@ -330,13 +361,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></p>
+        <p><span>Title:</span><a href="/2017/04/18/Logback学习记录/">Logback学习记录</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">易世伟</a></p>
-        <p><span>Created:</span>2016-12-19, 10:58:38</p>
-        <p><span>Updated:</span>2016-12-27, 11:34:54</p>
+        <p><span>Created:</span>2017-04-18, 17:25:52</p>
+        <p><span>Updated:</span>2017-04-20, 14:50:11</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/12/19/linux下动态库及版本号控制/" title="linux下动态库及版本号控制">http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/</a>
-            <span class="copy-path" data-clipboard-text="From http://weiyiysw.com/2016/12/19/linux下动态库及版本号控制/　　By 易世伟" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/04/18/Logback学习记录/" title="Logback学习记录">http://weiyiysw.com/2017/04/18/Logback学习记录/</a>
+            <span class="copy-path" data-clipboard-text="From http://weiyiysw.com/2017/04/18/Logback学习记录/　　By 易世伟" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -348,16 +379,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/12/22/how-to-maintain-changelog/">
-                    how-to-maintain-changelog
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/12/18/setup-hexo/">
-                    setup-hexo
+                <a href="/2017/04/18/Linux下查看CPU信息、机器型号/">
+                    Linux下查看CPU信息、机器型号
                 </a>
             </div>
         
@@ -369,7 +394,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态库"><span class="toc-number">1.</span> <span class="toc-text">动态库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下动态库的命名规范"><span class="toc-number">2.</span> <span class="toc-text">Linux下动态库的命名规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Real-Name"><span class="toc-number">2.1.</span> <span class="toc-text">Real Name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SO-NAME"><span class="toc-number">2.2.</span> <span class="toc-text">SO-NAME</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">2.3.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logback架构"><span class="toc-number">1.</span> <span class="toc-text">Logback架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Logger、Appenders和Layouts"><span class="toc-number">2.</span> <span class="toc-text">Logger、Appenders和Layouts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logger-context"><span class="toc-number">2.1.</span> <span class="toc-text">Logger context</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出有效级别的继承"><span class="toc-number">2.2.</span> <span class="toc-text">输出有效级别的继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打印方法和基本选择规则"><span class="toc-number">2.3.</span> <span class="toc-text">打印方法和基本选择规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Appender-和-Layout"><span class="toc-number">2.4.</span> <span class="toc-text">Appender 和 Layout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数化"><span class="toc-number">2.5.</span> <span class="toc-text">参数化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#替代方法"><span class="toc-number">2.5.1.</span> <span class="toc-text">替代方法</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -405,7 +430,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"linux下动态库及版本号控制　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Logback学习记录　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -425,15 +450,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/12/22/how-to-maintain-changelog/" title="Pre: how-to-maintain-changelog">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/12/18/setup-hexo/" title="Next: setup-hexo">
+            <a href="/2017/04/18/Linux下查看CPU信息、机器型号/" title="Next: Linux下查看CPU信息、机器型号">
                 <i class="fa fa-angle-right"></i>
             </a>
         
