@@ -14,16 +14,26 @@
 <meta name="author" content="易世伟" />
 
 
-    
-    
 
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIYIYSW">
-<meta property="og:url" content="http://weiyiysw.com/index.html">
+<meta name="description" content="简介vert.x邮件客户端完全是异步的，支持少量的传统验证方法如DIGEST-MD5，也全面支持TLS和SSL。vert.x邮件客户端支持连接池保持连接打开，便于重用。
+示例demohttps://github.com/weiyiysw/my-vertx-examples
+标准的maven项目，请查看示例demo中的SendMailUtil.java文件即可。
+路径：src/main/java/c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vertx-sendEmail">
+<meta property="og:url" content="http://weiyiysw.com/2017/08/05/vertx-sendEmail/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
+<meta property="og:description" content="简介vert.x邮件客户端完全是异步的，支持少量的传统验证方法如DIGEST-MD5，也全面支持TLS和SSL。vert.x邮件客户端支持连接池保持连接打开，便于重用。
+示例demohttps://github.com/weiyiysw/my-vertx-examples
+标准的maven项目，请查看示例demo中的SendMailUtil.java文件即可。
+路径：src/main/java/c">
+<meta property="og:updated_time" content="2017-08-06T07:02:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WEIYIYSW">
+<meta name="twitter:title" content="vertx-sendEmail">
+<meta name="twitter:description" content="简介vert.x邮件客户端完全是异步的，支持少量的传统验证方法如DIGEST-MD5，也全面支持TLS和SSL。vert.x邮件客户端支持连接池保持连接打开，便于重用。
+示例demohttps://github.com/weiyiysw/my-vertx-examples
+标准的maven项目，请查看示例demo中的SendMailUtil.java文件即可。
+路径：src/main/java/c">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -51,13 +61,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>WEIYIYSW</title>
+<title>vertx-sendEmail | WEIYIYSW</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,8 +74,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -264,9 +272,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-vertx-sendEmail" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-vertx-sendEmail" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/08/05/vertx-sendEmail/" class="article-date">
@@ -284,12 +290,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/vertx-sendEmail/">vertx-sendEmail</a>
+    <h1 class="article-title" itemprop="name">
+      vertx-sendEmail
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -384,582 +401,85 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JNI-Basic-1-md" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/07/04/JNI-Basic-1-md/" class="article-date">
-      <time datetime="2017-07-04T01:22:00.000Z" itemprop="datePublished">2017-07-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/04/JNI-Basic-1-md/">JNI-Basic-1.md</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="0-开发环境准备"><a href="#0-开发环境准备" class="headerlink" title="0.开发环境准备"></a>0.开发环境准备</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
-<li>操作系统：debian 8</li>
-<li>Java Version：jdk 8</li>
-<li>gcc</li>
-<li>make</li>
-<li>vim</li>
-</ul>
-<h2 id="闲聊"><a href="#闲聊" class="headerlink" title="闲聊"></a>闲聊</h2><p>工作上中难免遇到一些需要调用C库的地方，有时候不得不写JNI来调用。查看别人的一些文章以及阅读The java native interface program’s guid and specification文档。在此简单做一些记录。</p>
-<h1 id="1-HelloWorld"><a href="#1-HelloWorld" class="headerlink" title="1.HelloWorld"></a>1.HelloWorld</h1><h2 id="命令行编译java"><a href="#命令行编译java" class="headerlink" title="命令行编译java"></a>命令行编译java</h2><ol>
-<li><p>在工作目录下，新建一个jni文件夹，并按照如下命令，新建Helloworld.java文件。</p>
-<pre><code>mkdir jni
-cd jni
-mkdir -p src/com/jni/helloworld
-vi src/com/jni/Helloworld.java
-</code></pre></li>
-<li><p>在HelloWorld.java文件中，声明一个native的方法。</p>
-<pre><code>public native static void sayHello();
-</code></pre></li>
-<li><p>编译Helloworld.java文件，如果当前目录没有bin文件夹，创建即可。</p>
-<pre><code>javac -d bin/ src/com/jni/Helloworld.java
-</code></pre></li>
-<li><p>生成头文件，如果没有headers文件夹，会基于当前目录创建一个headers文件夹，执行完后，打开headers文件夹，即可看到头文件</p>
-<pre><code>javah -classpath bin -d headers -jni com.jni.Helloworld
-</code></pre></li>
-</ol>
-<ul>
-<li>-classpath：装入类的根目录，即“com.jni.helloworld.HelloWorld.class”所在的根目录</li>
-<li>-d：选择要生成的头文件的目录</li>
-<li>-jni：包名＋类名</li>
-</ul>
-<h1 id="2-生成头文件分析"><a href="#2-生成头文件分析" class="headerlink" title="2. 生成头文件分析"></a>2. 生成头文件分析</h1><p>生成的头文件内容如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="comment">/* Header for class com_jni_helloworld_HelloWorld */</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _Included_com_jni_helloworld_HelloWorld</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _Included_com_jni_helloworld_HelloWorld</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * Class:     com_jni_helloworld_HelloWorld</div><div class="line"> * Method:    sayHello</div><div class="line"> * Signature: ()V</div><div class="line"> */</div><div class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_com_jni_helloworld_HelloWorld_sayHello</span> <span class="params">(JNIEnv *, jclass)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>参数简述</p>
-<ul>
-<li>JNIEnv *：指针</li>
-<li>jclass：当Java中的方法为static方法时，第二个参数是jclass；当Java中的方法不为static时，第二个参数为jobject。</li>
-</ul>
-<h1 id="3-编辑C代码"><a href="#3-编辑C代码" class="headerlink" title="3. 编辑C代码"></a>3. 编辑C代码</h1><p>打开任意你喜欢的编辑器，编写C代码：</p>
-<pre><code>#include &lt;jni.h&gt;
-#include &lt;stdio.h&gt;
-include “com_jni_HelloWorld.h”
-
-JNIEXPORT void JNICALL Java_com_jni_helloworld_HelloWorld_sayHello (JNIEnv *env, jclass jclazz)
-{
-    printf(&quot;Hello World from jni!&quot;);
-    return;
-}
-</code></pre><h1 id="4-生成动态链接库"><a href="#4-生成动态链接库" class="headerlink" title="4. 生成动态链接库"></a>4. 生成动态链接库</h1><p>这里，仅示例在Linux环境下生成动态链接库。</p>
-<pre><code>gcc -I $JAVA_HOME/include -I $JAVA_HOME/include/linux -fPIC -o lib*.so -shared *.c
-</code></pre><ul>
-<li>-fPIC：显示同时编译器生成位置无关的代码</li>
-</ul>
-<h1 id="5-调用动态链接库"><a href="#5-调用动态链接库" class="headerlink" title="5. 调用动态链接库"></a>5. 调用动态链接库</h1><p>将代码添加到Java的static代码块中。</p>
-<pre><code>static {
-    System.load(&quot;Absolute path&quot;);
-    // System.loadLibrary(&quot;java.library.path&quot;);
-}
-</code></pre><p>在Java代码中，通过System.load或System.loadLibrary来加载动态连接库，即前面生成的*.so文件。</p>
-<ul>
-<li>System.load：使用的是绝对路径</li>
-<li>System.loadLibrary：使用的是java.library.path，生成*.so可以不包含库文件的扩展名。<ul>
-<li>ex: libHelloWorld.so 在java.library.path下时，可以直接使用HelloWorld<br>可以使用</li>
-<li>System.out.println(System.getProperty(“java.library.path”));在控制台打印这个路径值</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><strong>建议</strong></p>
-<p>使用System.load(“Absolutely path”)。<br>使用System.loadLibrary(“libname”)，需要将lib放到系统lib库里。查看系统lib库路径System.out.println(System.getProperty(“java.library.path”));。<br>在开始编写C／CPP代码时，将头文件的函数声明复制过去，然后再添加上形参。</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Logback学习记录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/04/18/Logback学习记录/" class="article-date">
-      <time datetime="2017-04-18T09:25:52.000Z" itemprop="datePublished">2017-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/Logback学习记录/">Logback学习记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="Logback架构"><a href="#Logback架构" class="headerlink" title="Logback架构"></a>Logback架构</h1><p>Logback分为了三个模块，logback-core、logback-classic、logback-access。</p>
-<p>logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。</p>
-<blockquote>
-<p>后面提到的Logback，指的是Logback-classic。</p>
-</blockquote>
-<h1 id="Logger、Appenders和Layouts"><a href="#Logger、Appenders和Layouts" class="headerlink" title="Logger、Appenders和Layouts"></a>Logger、Appenders和Layouts</h1><p>Logback建立在Logger、Appenders和Layouts三个主要类上。</p>
-<p>Logger类是logger-classic模块的一部分，Appender和Layout接口来自Logback-core。</p>
-<h2 id="Logger-context"><a href="#Logger-context" class="headerlink" title="Logger context"></a>Logger context</h2><p>任何比System.out.println更高级的logging API最重要的优点是能够在禁用特定的记录语句同时却不妨碍输出其他语句。</p>
-<p>Logger是一个命名了的实体，大小写敏感。</p>
-<p>命名规则：如果logger的名称带上一个点好后是另一个logger的名称前缀，那么，前者就被成为后者的祖先。如果logger与其后代的logger之间没有其他祖先，那么前者就被称为子logger的父logger。</p>
-<p>所有的logger都可以通过静态方法getLogger获取到。用同一名字调用LoggerFactory.getLogger方法得到的永远都是同一个logger对象的引用。</p>
-<p>如：<br>    logger x = LoggerFactory.getLogger(“weiyiysw”);<br>    logger y = LoggerFactory.getLogger(“weiyiysw”);</p>
-<p>x 和 y指向同一个logger对象。</p>
-<h2 id="输出有效级别的继承"><a href="#输出有效级别的继承" class="headerlink" title="输出有效级别的继承"></a>输出有效级别的继承</h2><p>Logger可以被分配级别。级别包括：TRACE、DEBUG、INFO、WARN、ERROR。</p>
-<p>如果logger没有分配级别，那么它将从有被分配的级别的最近的祖先那里继承级别。</p>
-<p>为确保每个logger最终都能继承一个级别，根logger总是有级别的，默认情况下，这个级别是DEBUG。</p>
-<h2 id="打印方法和基本选择规则"><a href="#打印方法和基本选择规则" class="headerlink" title="打印方法和基本选择规则"></a>打印方法和基本选择规则</h2><p>基本选择规则：记录请求级别为P，其logger的有效级别为Q，只有在P &gt;= Q时，该请求才会执行。</p>
-<p>级别排序 </p>
-<pre><code>TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR
-</code></pre><h2 id="Appender-和-Layout"><a href="#Appender-和-Layout" class="headerlink" title="Appender 和 Layout"></a>Appender 和 Layout</h2><p>在logback里，一个输出目的地就是一个appender。</p>
-<p>一个logger可以关联到多个appender。</p>
-<p>Appender的叠加性：Logger L的记录语句的输出会发送给L及其祖先的全部appender。然而，如果Logger L的某个祖先P，设置additivity为FALSE，那么L的输出会发送给L与P之间的（含P）的所有Appender，但不会发送给P的任何祖先Appender。</p>
-<p>additivity叠加性默认为TRUE。</p>
-<p>Layout负责根据用户的意愿，格式化输出记录。Appender负责将格式化后的输出发送到目的地。</p>
-<p>PatternLayout是标准logback发行包的一部分，允许用户按照类似于C语言的printf函数的转换模式设置输出格式。</p>
-<p>例如: <code>%-4relative [%thread] %-5level %logger{32} - %msg%n</code></p>
-<p>输出：<code>176 [main] DEBUG manual.architecture.HelloWorld2 - Hello world.</code></p>
-<p>第一个字段是自程序启动以来的逝去时间，单位是毫秒。</p>
-<p>第二个地段发出记录请求的线程。</p>
-<p>第三个字段是记录请求的级别。</p>
-<p>第四个字段是与记录请求关联的 logger 的名称。</p>
-<p>“-”之后是请求的消息文字。</p>
-<h2 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h2><p>对于某个Logger，下面的代码：</p>
-<pre><code>logger.debug(&quot;Entry number:&quot; + i + &quot;is &quot; + String.valueOf(entry[i]));
-</code></pre><p>在构造消息参数时有性能消耗，即把整数i和entry[i]都转换为字符串时、连接多个字符串时。不管消息是否被几率，都会造成上述消耗。</p>
-<h3 id="替代方法"><a href="#替代方法" class="headerlink" title="替代方法"></a>替代方法</h3><p>假设entry是一个object，你可以编写：</p>
-<pre><code>Object entry = new SomeObject();
-logger.debug(&quot;The entry is {}.&quot;, entry);
-</code></pre><p>在评估是否作记录后，仅当需要作记录时，logger才会格式化消息，用entry的字符串值替换为“{}”。即，当语句被禁用时，这种方法不会产生参数构造所带来的性能消耗。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux下查看CPU信息、机器型号" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/04/18/Linux下查看CPU信息、机器型号/" class="article-date">
-      <time datetime="2017-04-18T08:23:28.000Z" itemprop="datePublished">2017-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="记录常用的一些命令"><a href="#记录常用的一些命令" class="headerlink" title="记录常用的一些命令"></a>记录常用的一些命令</h1><pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
-cat /proc/cpuinfo | grep physical | uniq -c
-
-# 说明当前CPU运行的模式，如32bit模式或64bit
-getconf LONG_BIT 
-
-# 查看内存信息
-cat /proc/meminfo
-
-# 查看当前操作系统内核信息
-uname -a
-
-# 查看当前操作系统发现版信息
-cat /etc/issue | grep Linux
-
-# 查看机器型号 
-dmidecode | grep &quot;Product Name&quot;  
-
-# 查看网卡信息 
-dmesg | grep -i eth
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-maintain-changelog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/22/how-to-maintain-changelog/" class="article-date">
-      <time datetime="2016-12-22T06:03:24.000Z" itemprop="datePublished">2016-12-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="预先声明"><a href="#预先声明" class="headerlink" title="预先声明"></a>预先声明</h1><p>这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下<a href="http://keepachangelog.com/zh-CN/0.3.0/">如何维护更新日志</a>，大家可以查看原文获取更多内容。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/22/how-to-maintain-changelog/#more">阅读全文 >></a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/05/vertx-sendEmail/">vertx-sendEmail</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
+        <p><span>发布时间:</span>2017-08-05, 15:20:18</p>
+        <p><span>最后更新:</span>2017-08-06, 15:02:49</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/05/vertx-sendEmail/" title="vertx-sendEmail">http://weiyiysw.com/2017/08/05/vertx-sendEmail/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2017/08/05/vertx-sendEmail/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/19/linux下动态库及版本号控制/" class="article-date">
-      <time datetime="2016-12-19T02:58:38.000Z" itemprop="datePublished">2016-12-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/">version</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/19/linux下动态库及版本号控制/#more">阅读全文 >></a>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
 
 
-
-
-
-
-
-
-  
-    <article id="post-setup-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/18/setup-hexo/" class="article-date">
-      <time datetime="2016-12-18T12:37:39.000Z" itemprop="datePublished">2016-12-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/18/setup-hexo/">setup-hexo</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              这是记录Hexo建立的过程以及部署到github Pages
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/18/setup-hexo/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vertx-core" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/10/vertx-core/" class="article-date">
-      <time datetime="2016-12-10T13:55:52.000Z" itemprop="datePublished">2016-12-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/10/vertx-core/">Vertx-core翻译</a>
-    </h1>
-  
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/07/04/JNI-Basic-1-md/">
+                    JNI-Basic-1.md
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              翻译初衷是为了自己更好的学习和理解Vert.x，网上也有不少的已经翻译完成的，各位可以去搜索完成的版本查阅，英语好的可以直接看英文文档。计划先完成Vert.x core与Vert.x web的翻译，待初稿完成后，会校对自己的翻译。若各位等待，看我的翻译，我谨在此表示感谢。同时，我也预先声明，本人限于水平，翻译难免会有错漏之处，请各位看官见谅。其次，翻译基本上都是抽出自己的业余时间完成，难免会比较慢，请再次见谅。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/vertx/">vertx</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/10/vertx-core/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#示例demo"><span class="toc-number">1.1.</span> <span class="toc-text">示例demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Maven中使用"><span class="toc-number">1.2.</span> <span class="toc-text">在Maven中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Gradle中使用"><span class="toc-number">1.3.</span> <span class="toc-text">在Gradle中使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-number">2.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个客户端"><span class="toc-number">2.1.</span> <span class="toc-text">创建一个客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发送邮件"><span class="toc-number">2.2.</span> <span class="toc-text">发送邮件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mail-client数据对象"><span class="toc-number">3.</span> <span class="toc-text">Mail-client数据对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MailMessage属性"><span class="toc-number">3.1.</span> <span class="toc-text">MailMessage属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MailAttachment属性"><span class="toc-number">3.2.</span> <span class="toc-text">MailAttachment属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MailConfig选项"><span class="toc-number">3.3.</span> <span class="toc-text">MailConfig选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MailResult对象"><span class="toc-number">3.4.</span> <span class="toc-text">MailResult对象</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"vertx-sendEmail　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -967,9 +487,33 @@ dmesg | grep -i eth
 
 
 
+    
 
-  
-  
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/07/04/JNI-Basic-1-md/" title="下一篇: JNI-Basic-1.md">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/vertx-sendEmail/">vertx-sendEmail</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/JNI-Basic-1-md/">JNI-Basic-1.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Logback学习记录/">Logback学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

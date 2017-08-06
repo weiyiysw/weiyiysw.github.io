@@ -4,6 +4,97 @@
   
     
     <entry>
+      <title><![CDATA[vertx-sendEmail]]></title>
+      <url>http://weiyiysw.com/2017/08/05/vertx-sendEmail/</url>
+      <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>vert.x邮件客户端完全是异步的，支持少量的传统验证方法如DIGEST-MD5，也全面支持TLS和SSL。vert.x邮件客户端支持连接池保持连接打开，便于重用。</p>
+<h2 id="示例demo"><a href="#示例demo" class="headerlink" title="示例demo"></a>示例demo</h2><p><a href="https://github.com/weiyiysw/my-vertx-examples" target="_blank" rel="external">https://github.com/weiyiysw/my-vertx-examples</a></p>
+<p>标准的maven项目，请查看示例demo中的SendMailUtil.java文件即可。</p>
+<p>路径：src/main/java/com/weiyiysw/utils/SendMailUtil.java</p>
+<h2 id="在Maven中使用"><a href="#在Maven中使用" class="headerlink" title="在Maven中使用"></a>在Maven中使用</h2><p>在<code>pom.xml</code>文件中添加以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.vertx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>vertx-mail-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="在Gradle中使用"><a href="#在Gradle中使用" class="headerlink" title="在Gradle中使用"></a>在Gradle中使用</h2><p>在<code>build.gradle</code>文件中添加</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'io.vertx:vertx-mail-client:3.4.2'</span></div></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="创建一个客户端"><a href="#创建一个客户端" class="headerlink" title="创建一个客户端"></a>创建一个客户端</h2><p>你可以邮件，通过创建一个客户端从本地的JVM打开SMTP连接。</p>
+<p>这个客户端使用一个配置对象，默认配置是创建一个空对象并会连接本地的25端口，在一个标准的Linux环境并且在本地服务器上运行了Postfix或类似的邮件服务使用默认配置是没问题的。下面是所有配置对象的可能属性。</p>
+<p>这个客户端可以使用SMTP连接池，避免每次都重新连接服务器、TLS重协商和登录（这个功能通过设置keepAlive=false可以被关闭掉）。一个客户端要么可以被共享要么不可以，如果是共享的，全部使用同一个标识的客户端将会使用相同的连接池。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">MailConfig config</span> = new MailConfig();</div><div class="line"><span class="attribute">MailClient mailClient</span> = MailClient.createShared(vertx, config, <span class="string">"exampleclient"</span>);</div></pre></td></tr></table></figure>
+<p>第一次调用<code>MailClient.createShared</code>将会明确的室友特定的配置创建连接池。</p>
+<p>随后的调用将会使用相同的连接池返回一个新的客户端实例，因此这个配置将不会被使用。</p>
+<p>如果你忽略池标识，将会创建一个默认地额连接池。注意客户端仅在一个vert.x实例中共享（所以两个不同的vert.x实例有相同的标识也将会有不同的池）。</p>
+<p>不共享的客户端可以用忽略标识相同的方式来创建。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">MailConfig config</span> = new MailConfig();</div><div class="line"><span class="attribute">MailClient mailClient</span> = MailClient.createNonShared(vertx, config);</div></pre></td></tr></table></figure>
+<p>一个更详细的例子使用了一个邮件服务器并需要通过TLS登录。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailConfig <span class="built_in">config</span> = new MailConfig()<span class="comment">;</span></div><div class="line"><span class="built_in">config</span>.setHostname(<span class="string">"mail.example.com"</span>)<span class="comment">;</span></div><div class="line"><span class="built_in">config</span>.setPort(<span class="number">587</span>)<span class="comment">;</span></div><div class="line"><span class="built_in">config</span>.setStarttls(StartTLSOptions.REQUIRED)<span class="comment">;</span></div><div class="line"><span class="built_in">config</span>.setUsername(<span class="string">"user"</span>)<span class="comment">;</span></div><div class="line"><span class="built_in">config</span>.setPassword(<span class="string">"password"</span>)<span class="comment">;</span></div><div class="line">MailClient mailClient = MailClient.createNonShared(vertx, <span class="built_in">config</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<h2 id="发送邮件"><a href="#发送邮件" class="headerlink" title="发送邮件"></a>发送邮件</h2><p>一旦创建好了客户端对象，你就可以使用它来发送邮件了。由于在vert.x中发送邮件是异步的，当邮件操作完成时将会调用一个结果处理程序。你可以并行开始很多发送邮件操作，连接池将会限制并发的数量，所以如果没有客户端对象可用，那么新的操作将会在队列里等待。</p>
+<p>邮件消息的构造是JSON的。邮件操作对象有这些属性：from、to、cc、bcc、subject、text、html等。根据设置的值，生成的MIME消息的格式会有所不同。接收地址的属性可以是单个地址也可以是多个地址。</p>
+<p>MIME编码支持us-ascii（7bit）头/消息 和 utf8（通常打印引用）头/消息 格式。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#58;&#102;&#105;&#x6c;&#101;&#110;&#x61;&#x6d;&#x65;&#x25;&#50;&#x30;&#49;&#46;&#x6a;&#112;&#x67;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x6f;&#114;&#x67;">&#102;&#105;&#x6c;&#101;&#110;&#x61;&#x6d;&#x65;&#x25;&#50;&#x30;&#49;&#46;&#x6a;&#112;&#x67;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x6f;&#114;&#x67;</a>”。</contentid></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
+<p>邮件发送就像这样：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mailClient.sendMail(message, <span class="literal">result</span> -&gt; &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="literal">result</span>.succeeded()) &#123;</div><div class="line">    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="literal">result</span>.<span class="literal">result</span>());</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="literal">result</span>.cause().printStackTrace();</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="Mail-client数据对象"><a href="#Mail-client数据对象" class="headerlink" title="Mail-client数据对象"></a>Mail-client数据对象</h1><h2 id="MailMessage属性"><a href="#MailMessage属性" class="headerlink" title="MailMessage属性"></a>MailMessage属性</h2><p>Email变量都是String类型，可以使用带有或不带有真是名字的共同的格式。</p>
+<ul>
+<li><code>username@example.com</code></li>
+<li><code>username@example.com (Firstname Lastname)</code></li>
+<li><code>Firstname Lastname &lt;username@example.com&gt;</code></li>
+</ul>
+<p>MailMessage对象有接下来的这些属性：</p>
+<ul>
+<li><code>from</code>：String类型，代表邮件的发件人。</li>
+<li><code>to</code>：String类型，代表邮件的收件人。</li>
+<li><code>cc</code>：String类型，代表邮件的抄送人</li>
+<li><code>bcc</code>：String类型，代表密送（b代表blind）。</li>
+<li><code>bounceAddress</code>：String类型，代表错误的地址，如果没有设置from将会被使用。</li>
+<li><code>text</code>：String类型，邮件的正文</li>
+<li><code>html</code>：String类型，邮件中的HTML</li>
+<li><code>attachment</code>：MailAttachment或者多个MailAttachment</li>
+<li><code>inlineAttachment</code>：MailAttachment或者多个MailAttachment的内联附件，通常是图片</li>
+<li><code>headers</code>：MultiMap表示除了MIME消息所需的标题之外还要添加的标题</li>
+<li><code>fixedHeaders</code>：boolean类型，如果为true，只有作为headers属性提供的标题才会在生成的消息中设置。</li>
+</ul>
+<p>后两个属性允许操作产生带有自定义标题的消息，例如：提供一个message-id给调用程序选择或设置可以被默认产生的不同的标题。除非你知道你在做什么，这可能会产生无效的消息。</p>
+<h2 id="MailAttachment属性"><a href="#MailAttachment属性" class="headerlink" title="MailAttachment属性"></a>MailAttachment属性</h2><p>MailAttachment对象有这些属性</p>
+<ul>
+<li><code>data</code>Buffer类型，包含了附件的二进制数据</li>
+<li><code>contentType</code>String类型，附件的Content-Type（如：text/plain or text/plain; charset=”UTF8”, default is application/octet-stream）</li>
+<li><code>description</code>String类型，附件的描述（这个值会放到附件的描述头里），可选的</li>
+<li><code>disposition</code>String类型，描述附件的disposition（这要么是“inline”，要么是“attachment”，默认是attachment）</li>
+<li><code>name</code>String类型，附件的文件名（这个值会放到附件的disposition和Content-Type头中），可选的</li>
+<li><code>contentId</code>String类型，描述了附件的Content-Id（这用于标识内联图像），可选的</li>
+<li><code>headers</code>MultiMap类型的附件头，除了默认的附件头，可选的</li>
+</ul>
+<h2 id="MailConfig选项"><a href="#MailConfig选项" class="headerlink" title="MailConfig选项"></a>MailConfig选项</h2><p>配置有这些属性：</p>
+<ul>
+<li><code>hostname</code>连接的SMTP服务器的主机名，默认是localhost</li>
+<li><code>post</code>SMTP服务器的端口，默认是25</li>
+<li><code>startTLS</code>StartTLSOptions要么是DISABLED、OPTIONAL或REQUIRED，默认是OPTIONAL</li>
+<li><code>login</code>LoginOption要么是DISABLED、NONE或REQUIRED，默认是NONE</li>
+<li><code>username</code>String类型，登录时的用户名（仅在LoginOption是REQUIRED时需要）</li>
+<li><code>password</code>String类型，登录时的用户密码（仅在LoginOption是REQUIRED时需要）</li>
+<li><code>ssl</code>boolean类型，连接邮件服务器时决定是否使用SSL，默认是false，设置为true时，需要使用465端口作SSL连接</li>
+<li><code>ehloHostname</code>String类型，用在EHLO上，创建message-id，如果没设置，会使用主机名，这将不是一个好的选择如果它不包含一个FQDN或主机名为localhost。默认是可选的。</li>
+<li><code>authMethods</code>字符串空间分开的允许的auth方法列表，这可以用于禁止某些auth方法或定义一个必需的auth方法</li>
+<li><code>keepAlive</code>boolean类型，如果连接池开启了，默认为true。</li>
+<li><code>maxPoolSize</code>连接池能够打开连接的最大数量，或者一次能够打开连接的最大数量，默认是10</li>
+<li><code>trustAll</code>boolean类型，是否从服务器接受所有证书（默认是false）</li>
+<li><code>keyStore</code>String类型，key store的文件名，可以用来信任服务器证书是否是自定义生成的。（默认可选）</li>
+<li><code>keyStorePassword</code>String类型，用于解密key store。（默认可选）</li>
+<li><code>allowRcptErrors</code>boolean类型，如果是true，一个接收人地址不用将会继续发送，邮件将会被发送直到一个地址接收了（默认是false）</li>
+<li><code>disableEsmtp</code>boolean类型，如果是true，ESMTP相关命令将不会被使用（设置为true，如果你的SMTP服务器甚至不能用EHLO命令返回一个合适的错误码）（默认是false）</li>
+</ul>
+<h2 id="MailResult对象"><a href="#MailResult对象" class="headerlink" title="MailResult对象"></a>MailResult对象</h2><p>MailResult对象有这些成员：</p>
+<ul>
+<li><code>messageID</code>：生成邮件的Message-ID</li>
+<li><code>recipients</code>：邮件需要发送的收件人列表（如果allowRcptError是true，这可能会少于想要的收件人）。</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[JNI-Basic-1.md]]></title>
       <url>http://weiyiysw.com/2017/07/04/JNI-Basic-1-md/</url>
       <content type="html"><![CDATA[<h1 id="0-开发环境准备"><a href="#0-开发环境准备" class="headerlink" title="0.开发环境准备"></a>0.开发环境准备</h1><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
