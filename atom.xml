@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiyiysw.com/"/>
-  <updated>2017-08-13T04:38:27.000Z</updated>
+  <updated>2017-08-13T04:51:37.000Z</updated>
   <id>http://weiyiysw.com/</id>
   
   <author>
@@ -20,42 +20,42 @@
     <link href="http://weiyiysw.com/2017/08/11/itunes-make-bell/"/>
     <id>http://weiyiysw.com/2017/08/11/itunes-make-bell/</id>
     <published>2017-08-11T02:12:24.000Z</published>
-    <updated>2017-08-13T04:38:27.000Z</updated>
+    <updated>2017-08-13T04:51:37.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="给iPhone定制铃声"><a href="#给iPhone定制铃声" class="headerlink" title="给iPhone定制铃声"></a>给iPhone定制铃声</h1><p>使用iPhone，想着给自己电话制作需要的铃声，现将步骤记录如下（附图的话，之后再补）：</p>
 <ol>
 <li>下载好需要制作铃声的歌曲</li>
 <li>打开iTunes，将下载好的歌曲添加到iTunes的歌曲中</li>
 <li><p>选择歌曲，右键打开显示简介，并切换到<strong>选项</strong></p>
-<p> <img src="./images/itunes-make-bell/1.png" alt=""></p>
+<p> <img src="/images/itunes-make-bell/1.png" alt=""></p>
 </li>
 <li><p>在<strong>开始</strong>和<strong>结束</strong>设定时间，不要超过40秒</p>
-<p> <img src="./images/itunes-make-bell/2.png" alt=""></p>
+<p> <img src="/images/itunes-make-bell/2.png" alt=""></p>
 </li>
 <li><p>设置完成后点击<strong>确定</strong>（MAC下为 <strong>好</strong>）按钮即可。</p>
 </li>
 <li><p>Mac下，选择打开<strong>文件</strong>菜单，找到<strong>转换</strong>，选择<strong>创建ACC版本</strong></p>
-<p> <img src="./images/itunes-make-bell/3.png" alt=""></p>
+<p> <img src="/images/itunes-make-bell/3.png" alt=""></p>
 </li>
 <li><p>这时就可以看到，生成了一个同名的但是时间更短的文件。</p>
-<p> <img src="./images/itunes-make-bell/4.png" alt=""></p>
+<p> <img src="/images/itunes-make-bell/4.png" alt=""></p>
 </li>
 <li><p>点击生成的这个文件，在<strong>Finder中显示</strong>（windows下应为在Windows资源器中显示）</p>
 </li>
 <li><p>将文件拓展名M4A修改为M4R</p>
-<p> <img src="./images/itunes-make-bell/5.png" alt=""></p>
+<p> <img src="/images/itunes-make-bell/5.png" alt=""></p>
 </li>
 <li><p>回到iTunes，右键选择从资源库删除这个文件，但不删除实际的文件</p>
-<p><img src="./images/itunes-make-bell/6.png" alt=""></p>
+<p><img src="/images/itunes-make-bell/6.png" alt=""></p>
 </li>
 <li><p>双击铃声文件，用iTunes打开，这个文件就默认在铃声里了</p>
-<p><img src="./images/itunes-make-bell/7.png" alt=""></p>
+<p><img src="/images/itunes-make-bell/7.png" alt=""></p>
 </li>
 <li><p>连接上iPhone，打开iPhone的界面。</p>
-<p><img src="./images/itunes-make-bell/8.png" alt=""></p>
+<p><img src="/images/itunes-make-bell/8.png" alt=""></p>
 </li>
 <li><p>点击同步或者选择铃声同步即可。注意每一次同步都会把以前同步过的铃声清楚。</p>
-<p><img src="./images/itunes-make-bell/9.png" alt=""></p>
+<p><img src="/images/itunes-make-bell/9.png" alt=""></p>
 </li>
 </ol>
 ]]></content>
@@ -103,7 +103,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#102;&#x69;&#x6c;&#x65;&#110;&#97;&#x6d;&#x65;&#x25;&#x32;&#48;&#49;&#x2e;&#106;&#112;&#103;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x6f;&#114;&#x67;">&#102;&#x69;&#x6c;&#x65;&#110;&#97;&#x6d;&#x65;&#x25;&#x32;&#48;&#49;&#x2e;&#106;&#112;&#103;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x6f;&#114;&#x67;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#102;&#105;&#x6c;&#101;&#110;&#x61;&#109;&#101;&#37;&#50;&#48;&#49;&#x2e;&#106;&#112;&#x67;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#111;&#114;&#x67;">&#102;&#105;&#x6c;&#101;&#110;&#x61;&#109;&#101;&#37;&#50;&#48;&#49;&#x2e;&#106;&#112;&#x67;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#111;&#114;&#x67;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
