@@ -15,12 +15,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIYIYSW">
-<meta property="og:url" content="http://weiyiysw.com/tags/hexo/index.html">
+<meta name="description" content="Vertx Java开发者预览指南
+作者：jponge日期：2017.06.09翻译日期：2017.08.23翻译：weiyiysw
+
+上个秋天，我没能参加最后的Eclipse Vert.x社区面对面会议，但有一个议题目的是为特定类型的开发者提供手册。这也是我的任务，在我加入这个团队并开始工作后。我很乐意在今天分享给大家。
+企业应用开发者使用Eclipse Vert.x异步编程的优雅指南这篇手册命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vertx-Java开发者预览指南">
+<meta property="og:url" content="http://weiyiysw.com/2017/08/23/Vertx-Java开发者预览手册/index.html">
 <meta property="og:site_name" content="WEIYIYSW">
+<meta property="og:description" content="Vertx Java开发者预览指南
+作者：jponge日期：2017.06.09翻译日期：2017.08.23翻译：weiyiysw
+
+上个秋天，我没能参加最后的Eclipse Vert.x社区面对面会议，但有一个议题目的是为特定类型的开发者提供手册。这也是我的任务，在我加入这个团队并开始工作后。我很乐意在今天分享给大家。
+企业应用开发者使用Eclipse Vert.x异步编程的优雅指南这篇手册命">
+<meta property="og:updated_time" content="2017-08-24T02:30:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WEIYIYSW">
+<meta name="twitter:title" content="Vertx-Java开发者预览指南">
+<meta name="twitter:description" content="Vertx Java开发者预览指南
+作者：jponge日期：2017.06.09翻译日期：2017.08.23翻译：weiyiysw
+
+上个秋天，我没能参加最后的Eclipse Vert.x社区面对面会议，但有一个议题目的是为特定类型的开发者提供手册。这也是我的任务，在我加入这个团队并开始工作后。我很乐意在今天分享给大家。
+企业应用开发者使用Eclipse Vert.x异步编程的优雅指南这篇手册命">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: hexo | WEIYIYSW</title>
+<title>Vertx-Java开发者预览指南 | WEIYIYSW</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,9 +78,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -259,60 +275,187 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Vertx-Java开发者预览手册" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/12/18/setup-hexo/" class="archive-article-date">
-      <time datetime="2016-12-18T12:37:39.000Z" itemprop="datePublished">12-18</time>
+    <div class="article-meta">
+      <a href="/2017/08/23/Vertx-Java开发者预览手册/" class="article-date">
+      <time datetime="2017-08-23T01:26:46.000Z" itemprop="datePublished">2017-08-23</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/18/setup-hexo/">setup-hexo</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vertx-Java开发者预览指南
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-    </div>
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Vertx-Java开发者预览指南"><a href="#Vertx-Java开发者预览指南" class="headerlink" title="Vertx Java开发者预览指南"></a>Vertx Java开发者预览指南</h1><blockquote>
+<p>作者：<a href="http://github.com/jponge" target="_blank" rel="external">jponge</a><br>日期：2017.06.09<br>翻译日期：2017.08.23<br>翻译：weiyiysw</p>
+</blockquote>
+<p>上个秋天，我没能参加最后的Eclipse Vert.x社区面对面会议，但有一个议题目的是为特定类型的开发者提供手册。这也是我的任务，在我加入这个团队并开始工作后。我很乐意在今天分享给大家。</p>
+<h1 id="企业应用开发者使用Eclipse-Vert-x异步编程的优雅指南"><a href="#企业应用开发者使用Eclipse-Vert-x异步编程的优雅指南" class="headerlink" title="企业应用开发者使用Eclipse Vert.x异步编程的优雅指南"></a>企业应用开发者使用Eclipse Vert.x异步编程的优雅指南</h1><p>这篇手册命名为<strong>“企业应用开发者使用Eclipse Vert.x异步编程的优雅指南”</strong>，它介绍了Vert.x的异步编程，主要面向熟悉主流的同步web开发框架和库的开发者（如：Java EE, Spring）。</p>
+<p>引用介绍：</p>
+<p>我们将从使用了关系型数据库和服务端渲染页面的WIKI后台web应用开始；我们将通过多个步骤逐步的开发应用直到它变成一个现代的单一页面应用并具有实时的web特性。通过这个方式，你将会学习到：</p>
+<ol>
+<li>通过模板设计一个服务端渲染页面的web应用，并使用关系型数据库存储数据。</li>
+<li>干净的隔离每个技术组件作为可重用的事件处理单元，被称为verticle。</li>
+<li>提取vert.x服务，使设计的verticles在同一个JVM进程内或群集中的分布式节点之间无缝通信。</li>
+<li>测试异步操作代码。</li>
+<li>与提供HTTP/JSON的web API的第三方服务集成。</li>
+<li>提供HTTP/JSON的web API。</li>
+<li>使用HTTPS实现安全访问控制，用于Web浏览器会话的用户身份验证和用于第三方客户端应用程序的JWT令牌。</li>
+<li>重构一些代码以使用反应式编程与流行的RxJava库及其Vert.x集成。</li>
+<li>使用AngularJS完成单一页面应用的客户端侧编程。</li>
+<li>在集成sockjs之上使用统一的vert.x event bus实现实时编程。</li>
+</ol>
+<p>该指南采取渐进的方法，从“快速和肮脏”的解决方案开始，然后正确地重构，暴露了核心的Vert.x概念，添加功能，并从回调转移到RxJava。</p>
+<h1 id="我们需要你的反馈"><a href="#我们需要你的反馈" class="headerlink" title="我们需要你的反馈"></a>我们需要你的反馈</h1><p>代码在<a href="https://github.com/vert-x3/vertx-guide-for-java-devs" target="_blank" rel="external">https://github.com/vert-x3/vertx-guide-for-java-devs</a>上是可用的。你可以在Github的该仓库的issues提供反馈甚至提供提交请求。</p>
+<p>你可以从GitHub上检出代码（AsciiDoc从仓库接口上渲染的很好）或你可以查看我暂时分享预渲染HTML和PDF版本，并从我的Dropbox中保持最新状态：<a href="https://www.dropbox.com/sh/ni9znfkzlkl3q12/AABn-OCi1CZfgbTzOU0jYQpJa?dl=0" target="_blank" rel="external">https://www.dropbox.com/sh/ni9znfkzlkl3q12/AABn-OCi1CZfgbTzOU0jYQpJa?dl=0</a></p>
+<p>非常感谢Thomas Segismont和Julien Viet，他们贡献了一些部分内容，还有私下校对的人们。</p>
+<p>照常，我们欢迎您提供反馈！</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/23/Vertx-Java开发者预览手册/">Vertx-Java开发者预览指南</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
+        <p><span>发布时间:</span>2017-08-23, 09:26:46</p>
+        <p><span>最后更新:</span>2017-08-24, 10:30:19</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/23/Vertx-Java开发者预览手册/" title="Vertx-Java开发者预览指南">http://weiyiysw.com/2017/08/23/Vertx-Java开发者预览手册/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2017/08/23/Vertx-Java开发者预览手册/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/08/19/design-pattern/">
+                    design-pattern
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vertx-Java开发者预览指南"><span class="toc-number">1.</span> <span class="toc-text">Vertx Java开发者预览指南</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#企业应用开发者使用Eclipse-Vert-x异步编程的优雅指南"><span class="toc-number">2.</span> <span class="toc-text">企业应用开发者使用Eclipse Vert.x异步编程的优雅指南</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我们需要你的反馈"><span class="toc-number">3.</span> <span class="toc-text">我们需要你的反馈</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Vertx-Java开发者预览指南　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/08/19/design-pattern/" title="下一篇: design-pattern">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/23/Vertx-Java开发者预览手册/">Vertx-Java开发者预览指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/19/design-pattern/">design-pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/itunes-make-bell/">itunes-make-bell</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/vertx-sendEmail/">vertx-sendEmail</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/JNI-Basic-1-md/">JNI-Basic-1.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Logback学习记录/">Logback学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

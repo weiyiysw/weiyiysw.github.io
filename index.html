@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
                     </div>
                 </section>
                 
@@ -265,6 +265,89 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Vertx-Java开发者预览手册" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/23/Vertx-Java开发者预览手册/" class="article-date">
+      <time datetime="2017-08-23T01:26:46.000Z" itemprop="datePublished">2017-08-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/23/Vertx-Java开发者预览手册/">Vertx-Java开发者预览指南</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Vertx-Java开发者预览指南"><a href="#Vertx-Java开发者预览指南" class="headerlink" title="Vertx Java开发者预览指南"></a>Vertx Java开发者预览指南</h1><blockquote>
+<p>作者：<a href="http://github.com/jponge" target="_blank" rel="external">jponge</a><br>日期：2017.06.09<br>翻译日期：2017.08.23<br>翻译：weiyiysw</p>
+</blockquote>
+<p>上个秋天，我没能参加最后的Eclipse Vert.x社区面对面会议，但有一个议题目的是为特定类型的开发者提供手册。这也是我的任务，在我加入这个团队并开始工作后。我很乐意在今天分享给大家。</p>
+<h1 id="企业应用开发者使用Eclipse-Vert-x异步编程的优雅指南"><a href="#企业应用开发者使用Eclipse-Vert-x异步编程的优雅指南" class="headerlink" title="企业应用开发者使用Eclipse Vert.x异步编程的优雅指南"></a>企业应用开发者使用Eclipse Vert.x异步编程的优雅指南</h1><p>这篇手册命名为<strong>“企业应用开发者使用Eclipse Vert.x异步编程的优雅指南”</strong>，它介绍了Vert.x的异步编程，主要面向熟悉主流的同步web开发框架和库的开发者（如：Java EE, Spring）。</p>
+<p>引用介绍：</p>
+<p>我们将从使用了关系型数据库和服务端渲染页面的WIKI后台web应用开始；我们将通过多个步骤逐步的开发应用直到它变成一个现代的单一页面应用并具有实时的web特性。通过这个方式，你将会学习到：</p>
+<ol>
+<li>通过模板设计一个服务端渲染页面的web应用，并使用关系型数据库存储数据。</li>
+<li>干净的隔离每个技术组件作为可重用的事件处理单元，被称为verticle。</li>
+<li>提取vert.x服务，使设计的verticles在同一个JVM进程内或群集中的分布式节点之间无缝通信。</li>
+<li>测试异步操作代码。</li>
+<li>与提供HTTP/JSON的web API的第三方服务集成。</li>
+<li>提供HTTP/JSON的web API。</li>
+<li>使用HTTPS实现安全访问控制，用于Web浏览器会话的用户身份验证和用于第三方客户端应用程序的JWT令牌。</li>
+<li>重构一些代码以使用反应式编程与流行的RxJava库及其Vert.x集成。</li>
+<li>使用AngularJS完成单一页面应用的客户端侧编程。</li>
+<li>在集成sockjs之上使用统一的vert.x event bus实现实时编程。</li>
+</ol>
+<p>该指南采取渐进的方法，从“快速和肮脏”的解决方案开始，然后正确地重构，暴露了核心的Vert.x概念，添加功能，并从回调转移到RxJava。</p>
+<h1 id="我们需要你的反馈"><a href="#我们需要你的反馈" class="headerlink" title="我们需要你的反馈"></a>我们需要你的反馈</h1><p>代码在<a href="https://github.com/vert-x3/vertx-guide-for-java-devs" target="_blank" rel="external">https://github.com/vert-x3/vertx-guide-for-java-devs</a>上是可用的。你可以在Github的该仓库的issues提供反馈甚至提供提交请求。</p>
+<p>你可以从GitHub上检出代码（AsciiDoc从仓库接口上渲染的很好）或你可以查看我暂时分享预渲染HTML和PDF版本，并从我的Dropbox中保持最新状态：<a href="https://www.dropbox.com/sh/ni9znfkzlkl3q12/AABn-OCi1CZfgbTzOU0jYQpJa?dl=0" target="_blank" rel="external">https://www.dropbox.com/sh/ni9znfkzlkl3q12/AABn-OCi1CZfgbTzOU0jYQpJa?dl=0</a></p>
+<p>非常感谢Thomas Segismont和Julien Viet，他们贡献了一些部分内容，还有私下校对的人们。</p>
+<p>照常，我们欢迎您提供反馈！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-design-pattern" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -493,7 +576,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x66;&#105;&#108;&#101;&#x6e;&#97;&#x6d;&#101;&#37;&#50;&#48;&#x31;&#x2e;&#106;&#x70;&#x67;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#111;&#114;&#x67;">&#x66;&#105;&#108;&#101;&#x6e;&#97;&#x6d;&#101;&#37;&#50;&#48;&#x31;&#x2e;&#106;&#x70;&#x67;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#111;&#114;&#x67;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x66;&#x69;&#108;&#101;&#110;&#97;&#109;&#x65;&#37;&#50;&#x30;&#49;&#46;&#x6a;&#112;&#x67;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#111;&#114;&#x67;">&#x66;&#x69;&#108;&#101;&#110;&#97;&#109;&#x65;&#37;&#50;&#x30;&#49;&#46;&#x6a;&#112;&#x67;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#111;&#114;&#x67;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
@@ -1074,74 +1157,10 @@ dmesg | grep -i eth
 
 
   
-    <article id="post-vertx-core" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/12/10/vertx-core/" class="article-date">
-      <time datetime="2016-12-10T13:55:52.000Z" itemprop="datePublished">2016-12-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/10/vertx-core/">Vertx-core翻译</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              翻译初衷是为了自己更好的学习和理解Vert.x，网上也有不少的已经翻译完成的，各位可以去搜索完成的版本查阅，英语好的可以直接看英文文档。计划先完成Vert.x core与Vert.x web的翻译，待初稿完成后，会校对自己的翻译。若各位等待，看我的翻译，我谨在此表示感谢。同时，我也预先声明，本人限于水平，翻译难免会有错漏之处，请各位看官见谅。其次，翻译基本上都是抽出自己的业余时间完成，难免会比较慢，请再次见谅。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/vertx/">vertx</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertx-core/">vertx-core</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/10/vertx-core/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
