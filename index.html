@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
                     </div>
                 </section>
                 
@@ -265,6 +265,110 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-learn-vue-0" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/02/learn-vue-0/" class="article-date">
+      <time datetime="2017-10-02T05:45:01.000Z" itemprop="datePublished">2017-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/02/learn-vue-0/">learn-vue-0</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="工欲善其事，必先利其器"><a href="#工欲善其事，必先利其器" class="headerlink" title="工欲善其事，必先利其器"></a>工欲善其事，必先利其器</h1><p>在开始学习一门技术之前，我们最先要做的就是搭建好一个开发环境。这系列文章是有关于学习<code>vue.js</code>的，关于什么是<code>vue.js</code>，读者可以自行百度。接下来，开始搭建开发环境。</p>
+<h1 id="搭建基础环境"><a href="#搭建基础环境" class="headerlink" title="搭建基础环境"></a>搭建基础环境</h1><h2 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="1. 安装Node.js"></a>1. 安装Node.js</h2><p>关于Node.js的安装这里不多叙述，大家在<a href="https://nodejs.org/en/download/" target="_blank" rel="external">官网</a>下载对应系统的安装包即可。</p>
+<blockquote>
+<p>注意：目前新版的Node.js都已经包含了npm，无需额外安装。</p>
+</blockquote>
+<h2 id="2-使用cnpm"><a href="#2-使用cnpm" class="headerlink" title="2. 使用cnpm"></a>2. 使用cnpm</h2><p>在命令行下执行以下命令：</p>
+<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre><p>成功之后就可以使用<code>cnpm</code>代替<code>npm</code>。</p>
+<blockquote>
+<p>因为在国内使用npm经常会很慢，因此选择使用cnpm。这是淘宝的镜像源，速度会快很多。<br><a href="http://npm.taobao.org/" target="_blank" rel="external">cnpm镜像网址</a></p>
+</blockquote>
+<h2 id="3-package-json"><a href="#3-package-json" class="headerlink" title="3. package.json"></a>3. package.json</h2><p>这是一个JSON配置文件，管理你项目开发的依赖。如果你是一个Java开发者，那么你肯定用过maven或gradle管理项目的依赖。这个package.json文件也是如此。</p>
+<p>package.json必须包含两个字段：“name”、“version”.。还有很多其他的字段，大家可以自行查阅相关文档。</p>
+<p>在项目中，规定此项目的依赖包，在文件中可以定义为两种类型：“dependencies”、“devDependencies”。前者是在生成环境中需要依赖的包，后者仅在开发和测试环境需要的包。</p>
+<p>大家可以通过手动在package.json文件中添加，但更佳的方式是使用npm install的–save和–save-dev命令。前者将依赖写入到“dependencies”中，后者写入到“devDependencies”。</p>
+<p>这样，其他人使用你的项目，只需要执行命令npm install即可。</p>
+<h2 id="4-webpack"><a href="#4-webpack" class="headerlink" title="4. webpack"></a>4. webpack</h2><p>webpack是现代JavaScript开发的模块打包工具。<a href="https://doc.webpack-china.org/concepts/" target="_blank" rel="external">webpack中文网站</a>大家更详细的信息可以访问这个网址学习webpack。</p>
+<p>这里简要记录webpack的四个核心概念：</p>
+<ul>
+<li>入口（Entry）：告诉webpack应该从哪个文件开始</li>
+<li>出口（Output）：将所有资源获取到之后，告诉webpack在哪里打包应用。</li>
+<li>Loader：webpack自身只理解JavaScript，并且webpack将每个文件（.css,.html,.scss,.jpg,etc）都作为模块处理，Loader就是将这些转换为模块。</li>
+<li>插件（Plugins）：由于 loader 仅在每个文件的基础上执行转换，而 插件(plugins) 更常用于（但不限于）在打包模块的 “compilation” 和 “chunk” 生命周期执行操作和自定义功能。</li>
+</ul>
+<h1 id="第一个Vue应用"><a href="#第一个Vue应用" class="headerlink" title="第一个Vue应用"></a>第一个Vue应用</h1><p>Vue.js官网不推荐新手从vue-cli入手第一个应用，因为vue-cli是一个Vue的脚手架，直接上手新手可能会对Vue的基本语法不熟悉。然而，这里将会直接从脚手架开始，逐步的介绍一些Vue.js的语法。我直接查看官网的文档，只是对Vue.js的语法有个初步的了解，没有更深入的理解。我觉得从脚手架开始，是一个宏观上的学习方式，到具体某一个细节时，会对Vue.js有更加深入的理解。<br></p>
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><p>选好一套UI框架，并依此进行开发，能够让开发的应用更加美观。本篇文章中选择了element-ui——由饿了么团队开发维护的。</p>
+<h2 id="第一个应用"><a href="#第一个应用" class="headerlink" title="第一个应用"></a>第一个应用</h2><p>打开GitHub找到vue-cli项目，这是<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="external">vue-cli链接</a>。</p>
+<p>以下步骤在此项目下，均能找到。下面，复述记录一遍。</p>
+<p>首先，全局安装<code>vue-cli</code>。</p>
+<pre><code>npm install -g vue-cli
+</code></pre><p>然后，使用<code>vue init &lt;template-name&gt; &lt;project-name&gt;</code>即可生成项目。例如：执行<code>vue init webpack first-vue</code>，按照提示输入确认即可。</p>
+<p><img src="/images/learn-vue/0/learn-vue-0-1.jpg" alt="图片1"></p>
+<p>目前提供的template有以下几个：</p>
+<ul>
+<li>webpack</li>
+<li>webpack-simple</li>
+<li>browserify</li>
+<li>browserify-simple</li>
+<li>pwa</li>
+<li>simple</li>
+</ul>
+<p>生成了项目之后，执行<code>npm install</code>安装依赖。由于国内网速问题，建议使用<code>cnpm install</code>安装依赖，速度将会很快。安装完成后，执行<code>npm run dev</code>，即可成功启动项目，并会自动打开浏览器访问<code>http://localhost:8080</code>。</p>
+<p><img src="/images/learn-vue/0/learn-vue-0-2.jpg" alt="图片2"></p>
+<p>至此，第一个应用已经成功执行。</p>
+<h2 id="尾语"><a href="#尾语" class="headerlink" title="尾语"></a>尾语</h2><p>这是第一篇，简要介绍了一些基本环境，以及使用<code>vue-cli</code>创建第一个Vue应用。下一篇，将要分析<code>first-vue</code>应用的项目结构，并学习Vue的一些语法。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-development/">vue, development</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-zsh下执行Java命令的解决方法" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -644,7 +748,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#102;&#105;&#108;&#101;&#x6e;&#x61;&#109;&#101;&#37;&#x32;&#48;&#x31;&#46;&#x6a;&#x70;&#103;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#46;&#111;&#114;&#103;">&#102;&#105;&#108;&#101;&#x6e;&#x61;&#109;&#101;&#37;&#x32;&#48;&#x31;&#46;&#x6a;&#x70;&#103;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#46;&#111;&#114;&#103;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#102;&#105;&#108;&#101;&#x6e;&#x61;&#x6d;&#x65;&#37;&#50;&#x30;&#x31;&#46;&#106;&#112;&#103;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#111;&#114;&#103;">&#102;&#105;&#108;&#101;&#x6e;&#x61;&#x6d;&#x65;&#37;&#50;&#x30;&#x31;&#46;&#106;&#112;&#103;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#111;&#114;&#103;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
@@ -1075,70 +1179,6 @@ dmesg | grep -i eth
       
         <p class="article-more-link">
           <a href="/2016/12/22/how-to-maintain-changelog/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux下动态库及版本号控制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/19/linux下动态库及版本号控制/" class="article-date">
-      <time datetime="2016-12-19T02:58:38.000Z" itemprop="datePublished">2016-12-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              这篇简要介绍了Linux系统下动态库的命名规范，也是因为个人最初在项目中使用时，并未遵循此规范，导致部署复杂、困难。当然现在docker很火，但是这个由于项目原因，就并没有使用docker。
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/">version</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/19/linux下动态库及版本号控制/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
