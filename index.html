@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
                     </div>
                 </section>
                 
@@ -265,6 +265,121 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-learn-vue-1-分析项目结构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/05/learn-vue-1-分析项目结构/" class="article-date">
+      <time datetime="2017-10-05T04:19:23.000Z" itemprop="datePublished">2017-10-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/05/learn-vue-1-分析项目结构/">learn-vue-1-分析项目结构</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><p>first-vue项目下文件结构如下（未列出隐藏文件）：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README<span class="selector-class">.md</span></div><div class="line">├── build</div><div class="line">├── config</div><div class="line">├── index<span class="selector-class">.html</span></div><div class="line">├── node_modules</div><div class="line">├── package<span class="selector-class">.json</span></div><div class="line">├── src</div><div class="line">└── static</div></pre></td></tr></table></figure>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ul>
+<li>README.md：markdown文档，通常为项目的说明文档</li>
+<li>index.html：应用的根页面</li>
+<li>package.json：管理项目依赖</li>
+</ul>
+<h2 id="文件夹"><a href="#文件夹" class="headerlink" title="文件夹"></a>文件夹</h2><ul>
+<li>build：构建的配置文件</li>
+<li>config：配置文件</li>
+<li>node_modules：本项目依赖下载完成后存储仓库</li>
+<li>src：源码目录</li>
+<li>static：静态页面文件夹，存储其他静态页面</li>
+</ul>
+<p>src目录下文件结构如下（未列出隐藏文件）：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">src</div><div class="line">├── App<span class="selector-class">.vue</span></div><div class="line">├── assets</div><div class="line">│   └── logo<span class="selector-class">.png</span></div><div class="line">├── components</div><div class="line">│   └── Hello<span class="selector-class">.vue</span></div><div class="line">├── main<span class="selector-class">.js</span></div><div class="line">└── router</div><div class="line">    └── index.js</div></pre></td></tr></table></figure>
+<h2 id="文件-1"><a href="#文件-1" class="headerlink" title="文件"></a>文件</h2><ul>
+<li>App.vue：应用根组件</li>
+<li>main.js：Vue应用入口</li>
+</ul>
+<h2 id="文件夹-1"><a href="#文件夹-1" class="headerlink" title="文件夹"></a>文件夹</h2><ul>
+<li>assets：资源文件夹</li>
+<li>components：vue组件</li>
+<li>router：vue路由</li>
+</ul>
+<h1 id="一些语法"><a href="#一些语法" class="headerlink" title="一些语法"></a>一些语法</h1><h2 id="main-js里语法分析"><a href="#main-js里语法分析" class="headerlink" title="main.js里语法分析"></a>main.js里语法分析</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">new</span> <span class="selector-tag">Vue</span>(&#123;</div><div class="line">  <span class="attribute">el</span>: <span class="string">'#app'</span>,</div><div class="line">  router,</div><div class="line">  <span class="attribute">template</span>: <span class="string">'&lt;App/&gt;'</span>,</div><div class="line">  <span class="attribute">components</span>: &#123; App &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>语法意义：创建一个Vue实例。</p>
+<p>和面向对象语言（如：Java）新建一个对象类似。我们可以看到，new语法后跟了一个大括号，里面有四个语句。</p>
+<ul>
+<li>el：类型是HTMLElement，即Vue实例使用的根DOM元素。（详见vue的API文档）</li>
+<li>router：是路由，查看详细的main.js文件夹可以看到，这是由import语句导入的，稍后分析。</li>
+<li>template：一个字符串模板作为 Vue 实例的标识使用。模板将会 替换 挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。（详见vue的API文档）</li>
+<li>components：组件，将Vue实例使用的组件放到这里。</li>
+</ul>
+<p>阅读分析生成的第一个Vue实例代码时，结合Vue官网对Vue的介绍以及Vue的API，更容易理解。</p>
+<h2 id="单文件组件——App-vue"><a href="#单文件组件——App-vue" class="headerlink" title="单文件组件——App.vue"></a>单文件组件——App.vue</h2><p>我们在main.js里的template可以看到值为<code>&lt;App/&gt;</code>。第一次看到时，可能会疑惑，这是什么呢？从main.js的import语句，我们可以看到<code>import App from &#39;./App&#39;</code>。我们查看目录，可以看到目录下有个App.vue文件。</p>
+<p>这里，我们需要学习到Vue一个重要的知识点——单文件组件。文件扩展名为<code>.vue</code>是Vue的单文件组件。以下内容是Vue官网对于单文件组件的介绍：</p>
+<blockquote>
+<p>在很多 Vue 项目中，我们使用 Vue.component 来定义全局组件，紧接着用 new Vue({ el: ‘#container ‘}) 在每个页面内指定一个容器元素。<br>这种方式在很多中小规模的项目中运作的很好，在这些项目里 JavaScript 只被用来加强特定的视图。但当在更复杂的项目中，或者你的前端完全由 JavaScript 驱动的时候，下面这些缺点将变得非常明显：<br>全局定义 (Global definitions) 强制要求每个 component 中的命名不得重复<br>字符串模板 (String templates) 缺乏语法高亮，在 HTML 有多行的时候，需要用到丑陋的 \<br>不支持 CSS (No CSS support) 意味着当 HTML 和 JavaScript 组件化时，CSS 明显被遗漏<br>没有构建步骤 (No build step) 限制只能使用 HTML 和 ES5 JavaScript, 而不能使用预处理器，如 Pug (formerly Jade) 和 Babel<br>文件扩展名为 .vue 的 single-file components(单文件组件) 为以上所有问题提供了解决方法，并且还可以使用 Webpack 或 Browserify 等构建工具。</p>
+</blockquote>
+<h3 id="单文件组件格式"><a href="#单文件组件格式" class="headerlink" title="单文件组件格式"></a>单文件组件格式</h3><p>下面是单文件组件的格式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其中template可以直接写HTML代码。但是注意，template里必须从一个根元素开始。</p>
+<p>Script就是写脚本的地方。Vue使用了ES6（即ES2015）语法。</p>
+<p>Style是写一些CSS，scoped代表这些样式只在此组件内生效。</p>
+<h3 id="router-view"><a href="#router-view" class="headerlink" title="router-view"></a>router-view</h3><p>在App.vue的template里你将会看到router-view。这是个什么呢？</p>
+<p>还记得在上一篇文章中，我们打开localhost访问应用，看到页面上有一张图以及一些文字及链接。从App.vue内容上分析，可以知道router-view被页面上的文字及连接替代了。</p>
+<p>我们打开vue-router的官网文档，找到其API文档部分，可以看到有router-view的介绍。以下是摘自API文档中的介绍：</p>
+<blockquote>
+<p><router-view> 组件是一个 functional 组件，渲染路径匹配到的视图组件。<router-view> 渲染的组件还可以内嵌自己的 <router-view>，根据嵌套路径，渲染嵌套组件。</router-view></router-view></router-view></p>
+</blockquote>
+<h2 id="组件——Hello-vue"><a href="#组件——Hello-vue" class="headerlink" title="组件——Hello.vue"></a>组件——Hello.vue</h2><p>前一小节提到组件router-view被页面上的文字及连接替代了，那么这些页面的文字及连接到底在哪呢？我们直接在App.vue里查看，可能会觉得毫无头绪。这里，我先告诉这些文字及连接在components/Hello.vue组件里。</p>
+<p>打开Hello.vue文件，我们可以看到<code></code>。这是“Mustache”语法 (双大括号)，最常用的数据绑定。</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>这里我们将解答一个疑问，App.vue里的<router-view>组件是如何找到Hello.vue并替换。我们打开router文件夹下的index.js文件，里面新建了一个路由对象。</router-view></p>
+<p>在路由对象里，有一个routes属性，定义了路径为“/”，则转到组件Hello。也就是说，当页面上访问<a href="http://localhost:8080/时，访问到了主页面App.vue内容，由于路径是“/”，所以router-view组件将由Hello组件替换。" target="_blank" rel="external">http://localhost:8080/时，访问到了主页面App.vue内容，由于路径是“/”，所以router-view组件将由Hello组件替换。</a></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>至此，分析first-vue项目结束。语言组织的有点啰嗦，见谅。下一篇，将开始替换Hello.vue组件，并对整个页面进行布局，同时会使用上element-ui库。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-learn-vue-0" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -748,7 +863,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#102;&#105;&#108;&#x65;&#110;&#97;&#109;&#x65;&#37;&#x32;&#x30;&#x31;&#x2e;&#106;&#x70;&#x67;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#111;&#x72;&#x67;">&#102;&#105;&#108;&#x65;&#110;&#97;&#109;&#x65;&#37;&#x32;&#x30;&#x31;&#x2e;&#106;&#x70;&#x67;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#111;&#x72;&#x67;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#102;&#105;&#x6c;&#101;&#x6e;&#97;&#109;&#101;&#x25;&#x32;&#48;&#x31;&#x2e;&#x6a;&#112;&#103;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x6f;&#114;&#x67;">&#102;&#105;&#x6c;&#101;&#x6e;&#97;&#109;&#101;&#x25;&#x32;&#48;&#x31;&#x2e;&#x6a;&#112;&#103;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x6f;&#114;&#x67;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
@@ -1116,70 +1231,6 @@ dmesg | grep -i eth
       
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-maintain-changelog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/22/how-to-maintain-changelog/" class="article-date">
-      <time datetime="2016-12-22T06:03:24.000Z" itemprop="datePublished">2016-12-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="预先声明"><a href="#预先声明" class="headerlink" title="预先声明"></a>预先声明</h1><p>这篇文章并非原创，而是我转载记录使用。这篇文章原地址如下<a href="http://keepachangelog.com/zh-CN/0.3.0/">如何维护更新日志</a>，大家可以查看原文获取更多内容。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/22/how-to-maintain-changelog/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
