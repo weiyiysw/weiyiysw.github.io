@@ -31,7 +31,7 @@ package.">
 README.md：markdown文档，通常为项目的说明文档
 index.html：应用的根页面
 package.">
-<meta property="og:updated_time" content="2017-10-06T07:50:33.000Z">
+<meta property="og:updated_time" content="2017-10-06T08:01:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="learn-vue-1-分析项目结构">
 <meta name="twitter:description" content="项目结构first-vue项目下文件结构如下（未列出隐藏文件）：
@@ -356,7 +356,7 @@ package.">
 <h2 id="单文件组件——App-vue"><a href="#单文件组件——App-vue" class="headerlink" title="单文件组件——App.vue"></a>单文件组件——App.vue</h2><p>我们在main.js里的template可以看到值为<code>&lt;App/&gt;</code>。第一次看到时，可能会疑惑，这是什么呢？从main.js的import语句，我们可以看到<code>import App from &#39;./App&#39;</code>。我们查看目录，可以看到目录下有个App.vue文件。</p>
 <p>这里，我们需要学习到Vue一个重要的知识点——单文件组件。文件扩展名为<code>.vue</code>是Vue的单文件组件。以下内容是Vue官网对于单文件组件的介绍：</p>
 <blockquote>
-<p>在很多 Vue 项目中，我们使用 Vue.component 来定义全局组件，紧接着用 new Vue({ el: ‘#container ‘}) 在每个页面内指定一个容器元素。<br>这种方式在很多中小规模的项目中运作的很好，在这些项目里 JavaScript 只被用来加强特定的视图。但当在更复杂的项目中，或者你的前端完全由 JavaScript 驱动的时候，下面这些缺点将变得非常明显：<br>全局定义 (Global definitions) 强制要求每个 component 中的命名不得重复<br>字符串模板 (String templates) 缺乏语法高亮，在 HTML 有多行的时候，需要用到丑陋的 \<br>不支持 CSS (No CSS support) 意味着当 HTML 和 JavaScript 组件化时，CSS 明显被遗漏<br>没有构建步骤 (No build step) 限制只能使用 HTML 和 ES5 JavaScript, 而不能使用预处理器，如 Pug (formerly Jade) 和 Babel<br>文件扩展名为 .vue 的 single-file components(单文件组件) 为以上所有问题提供了解决方法，并且还可以使用 Webpack 或 Browserify 等构建工具。</p>
+<p>在很多 Vue 项目中，我们使用 Vue.component 来定义全局组件，紧接着用 new Vue({ el: ‘#container ‘}) 在每个页面内指定一个容器元素。<br>这种方式在很多中小规模的项目中运作的很好，在这些项目里 JavaScript 只被用来加强特定的视图。但当在更复杂的项目中，或者你的前端完全由 JavaScript 驱动的时候，下面这些缺点将变得非常明显：<br>全局定义 (Global definitions) 强制要求每个 component 中的命名不得重复<br>字符串模板 (String templates) 缺乏语法高亮，在 HTML 有多行的时候，需要用到丑陋的<br>不支持 CSS (No CSS support) 意味着当 HTML 和 JavaScript 组件化时，CSS 明显被遗漏<br>没有构建步骤 (No build step) 限制只能使用 HTML 和 ES5 JavaScript, 而不能使用预处理器，如 Pug (formerly Jade) 和 Babel<br>文件扩展名为 .vue 的 single-file components(单文件组件) 为以上所有问题提供了解决方法，并且还可以使用 Webpack 或 Browserify 等构建工具。</p>
 </blockquote>
 <h3 id="单文件组件格式"><a href="#单文件组件格式" class="headerlink" title="单文件组件格式"></a>单文件组件格式</h3><p>下面是单文件组件的格式。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -372,7 +372,7 @@ package.">
 <h2 id="组件——Hello-vue"><a href="#组件——Hello-vue" class="headerlink" title="组件——Hello.vue"></a>组件——Hello.vue</h2><p>前一小节提到组件router-view被页面上的文字及连接替代了，那么这些页面的文字及连接到底在哪呢？我们直接在App.vue里查看，可能会觉得毫无头绪。这里，我先告诉这些文字及连接在components/Hello.vue组件里。</p>
 <p>打开Hello.vue文件，我们可以看到<code></code>。这是“Mustache”语法 (双大括号)，最常用的数据绑定。</p>
 <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>这里我们将解答一个疑问，App.vue里的<router-view>组件是如何找到Hello.vue并替换。我们打开router文件夹下的index.js文件，里面新建了一个路由对象。</router-view></p>
-<p>在路由对象里，有一个routes属性，定义了路径为“/”，则转到组件Hello。也就是说，当页面上访问<a href="http://localhost:8080/时，访问到了主页面App.vue内容，由于路径是“/”，所以router-view组件将由Hello组件替换。" target="_blank" rel="external">http://localhost:8080/时，访问到了主页面App.vue内容，由于路径是“/”，所以router-view组件将由Hello组件替换。</a></p>
+<p>在路由对象里，有一个routes属性，定义了路径为“/”，则转到组件Hello。也就是说，当页面上访问<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a>时，访问到了主页面App.vue内容，由于路径是“/”，所以router-view组件将由Hello组件替换。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>至此，分析first-vue项目结束。语言组织的有点啰嗦，见谅。下一篇，将开始替换Hello.vue组件，并对整个页面进行布局，同时会使用上element-ui库。</p>
 
       
@@ -385,7 +385,7 @@ package.">
         <p><span>本文标题:</span><a href="/2017/10/05/learn-vue-1-分析项目结构/">learn-vue-1-分析项目结构</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
         <p><span>发布时间:</span>2017-10-05, 12:19:23</p>
-        <p><span>最后更新:</span>2017-10-06, 15:50:33</p>
+        <p><span>最后更新:</span>2017-10-06, 16:01:54</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/05/learn-vue-1-分析项目结构/" title="learn-vue-1-分析项目结构">http://weiyiysw.com/2017/10/05/learn-vue-1-分析项目结构/</a>
             <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2017/10/05/learn-vue-1-分析项目结构/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
