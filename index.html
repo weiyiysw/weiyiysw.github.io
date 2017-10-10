@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-element-ui/">vue, element-ui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
                     </div>
                 </section>
                 
@@ -265,6 +265,121 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-learn-vue-2-页面布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/09/learn-vue-2-页面布局/" class="article-date">
+      <time datetime="2017-10-09T05:59:20.000Z" itemprop="datePublished">2017-10-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/09/learn-vue-2-页面布局/">learn-vue-2-页面布局</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>注意：本项目代码只是演示作用。文章的目标群体是前端小白，比如我。<br><a href="https://github.com/weiyiysw/my-vue-sample/tree/master/first-vue" target="_blank" rel="external">示例代码</a></p>
+</blockquote>
+<h1 id="从布局开始"><a href="#从布局开始" class="headerlink" title="从布局开始"></a>从布局开始</h1><p>在UI库上，选择使用element-ui。这是<a href="http://element.eleme.io/2.0/#/zh-CN/component/installation" target="_blank" rel="external">element-ui</a>的链接，这里默认调转到安装上。可直接访问官网，安装命令摘录如下：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> i element-ui@next -S</div></pre></td></tr></table></figure>
+<blockquote>
+<p>国庆前后，element-ui推出了2.0 alpha版，所以，这里直接使用了2.0了，2.0里更新了Container的布局方式，在布局上，简洁很多。</p>
+</blockquote>
+<h2 id="引入element-ui"><a href="#引入element-ui" class="headerlink" title="引入element-ui"></a>引入element-ui</h2><p>首先，在first-vue项目里的main.js里引入element-ui：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></div><div class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></div></pre></td></tr></table></figure>
+<p>注意，引入时，同时把element-ui的样式也引入了。</p>
+<p>引入之后，我们通过Vue.use语法来使用它，这样在项目里就可以直接使用element-ui了。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Vue.<span class="keyword">use</span>(ElementUI)</div></pre></td></tr></table></figure>
+<p>如果看了官网的学习文档，就会知道，Vue.use是Vue的全局方法，通过这样的方式来加载插件。也就是说，element-ui我们把其作为插件的形式来使用。</p>
+<blockquote>
+<p>想要具体学习Vue插件，<a href="https://cn.vuejs.org/v2/guide/plugins.html" target="_blank" rel="external">请点我</a></p>
+</blockquote>
+<h2 id="使用element-ui"><a href="#使用element-ui" class="headerlink" title="使用element-ui"></a>使用element-ui</h2><p>打开element-ui官网，并定位到<a href="http://element.eleme.io/2.0/#/zh-CN/component/container" target="_blank" rel="external">Container组件</a>。根据上面的示例，开始使用element-ui。</p>
+<p>在components文件夹下，新建<code>ContainerLayout.vue</code>文件，并在其内添加如下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">el-container</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-aside</span> <span class="attr">width</span>=<span class="string">"200px"</span>&gt;</span>Aside<span class="tag">&lt;/<span class="name">el-aside</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-container</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-header</span>&gt;</span>Header<span class="tag">&lt;/<span class="name">el-header</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-main</span>&gt;</span>Main<span class="tag">&lt;/<span class="name">el-main</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-footer</span>&gt;</span>Footer<span class="tag">&lt;/<span class="name">el-footer</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-container</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">el-container</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'ContainerLayout'</span></div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.el-header</span>, <span class="selector-class">.el-footer</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#B3C0D1</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">60px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-class">.el-aside</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#D3DCE6</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">200px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-class">.el-main</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#E9EEF3</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">160px</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-tag">body</span> &gt; <span class="selector-class">.el-container</span> &#123;</div><div class="line">   <span class="attribute">margin-bottom</span>: <span class="number">40px</span>;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="selector-class">.el-container</span><span class="selector-pseudo">:nth-child(5)</span> <span class="selector-class">.el-aside</span>,</div><div class="line"> <span class="selector-class">.el-container</span><span class="selector-pseudo">:nth-child(6)</span> <span class="selector-class">.el-aside</span> &#123;</div><div class="line">   <span class="attribute">line-height</span>: <span class="number">260px</span>;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="selector-class">.el-container</span><span class="selector-pseudo">:nth-child(7)</span> <span class="selector-class">.el-aside</span> &#123;</div><div class="line">   <span class="attribute">line-height</span>: <span class="number">320px</span>;</div><div class="line"> &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>其中，template部分和style部分目前是直接从官网container部分拷贝。<br>script里的内容也很简单，定义了组件名称。</p>
+</blockquote>
+<p>至此，我们就已经开始使用element-ui，为了让项目能够运行，请继续看接下来的文档。</p>
+<h2 id="修改路由"><a href="#修改路由" class="headerlink" title="修改路由"></a>修改路由</h2><p>项目默认的路由是路由到Hello.vue组件，现在我们修改默认路由，让其路由到我们新添加的ContainerLayout组件。</p>
+<p>进入到router文件夹，修改index.js：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attribute">path</span>: <span class="string">'/'</span>,</div><div class="line">  name: <span class="string">'ContainerLayout'</span>,</div><div class="line">  component: ContainerLayout</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将默认路由替换成ContainerLayout，同时也应该在之前导入它。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> ContainerLayout <span class="keyword">from</span> <span class="string">'@/components/ContainerLayout'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，因为我们没有再使用Hello组件，记得在添加导入语句时，注释掉导入的Hello组件。</p>
+</blockquote>
+<h2 id="修改App-vue"><a href="#修改App-vue" class="headerlink" title="修改App.vue"></a>修改App.vue</h2><p>这里其实，也可以不修改。但是，不修改的情况下，布局之上还会存在Vue的那种logo图。</p>
+<p>修改的方式也很简单，只需要将导入的logo图注释掉即可。</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>在终端，进入到该项目的根目录，执行<code>npm run dev</code>命令，即可启动。效果图如下：</p>
+<p><img src="/images/learn-vue/2/container-layout.jpg" alt="运行图片"></p>
+<p>可能你会有疑问，为什么布局没有铺满整个页面？如果你是前端大牛，相信肯定知道原因，后续文字是可以忽略了。当然大牛是不用看我这种刚入门的踩坑小白的文章学习的✧(≖ ◡ ≖✿)嘿嘿。</p>
+<h2 id="让布局铺满屏幕"><a href="#让布局铺满屏幕" class="headerlink" title="让布局铺满屏幕"></a>让布局铺满屏幕</h2><p>首先，我们可以看到，Header到浏览器顶端有一个空白的小长条。如果去掉这个小长条呢？</p>
+<p>仔细查看App.vue里style部分代码，会发现有这样一句<code>margin-top: 60px;</code>，原来，在App.vue里就定义了距离浏览器顶端60像素。这样，解决就简单了，我们可以直接去掉这一句，或者改为0px就可以了。</p>
+<p>去掉以后，查看界面，会发现，怎么还有一个小小的细长条呢？</p>
+<p>打开浏览器开发者工具，查看body样式，会发现默认的body样式，有<code>margin:8px</code>。如果嫌弃这个空白，直接在index.html文件里，如下修改即可：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">body</span> style=<span class="string">"margin: 2px;"</span>&gt;</div><div class="line">...</div><div class="line">&lt;/<span class="keyword">body</span>&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>… 代表省略中间的代码<br>我这里留了2px的空白</p>
+</blockquote>
+<p>完成这些后，成功让布局从顶部开始了。这时，仍能发现浏览器下面有一大段空白。要让布局铺满，需要了解CSS里vh的概念。</p>
+<ul>
+<li>vh：相对于视窗的高度；视窗的高度是100vh</li>
+<li>vw：相对于视窗的宽度；视窗的宽度是100vw</li>
+</ul>
+<p>因为，我在body里设置了上下左右2像素的留白。因此，我这要让布局铺满整个视窗，需要减去4px。</p>
+<p>在ContainerLayout.vue组件里，样式el-aside里，添加如下代码：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">height</span>: calc(<span class="number">100vh</span> - <span class="number">4px</span>);</div></pre></td></tr></table></figure>
+<p>这是控制左侧高度的样式。保存后，你就会发现布局占满了整个视窗，当然我这上下左右都有2px的留白。</p>
+<p>最终效果图如下：</p>
+<p><img src="/images/learn-vue/2/container-layout-1.jpg" alt="最终效果图"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-element-ui/">vue, element-ui</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-learn-vue-1-分析项目结构" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -863,7 +978,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#102;&#x69;&#108;&#101;&#x6e;&#97;&#109;&#101;&#37;&#50;&#48;&#x31;&#46;&#x6a;&#112;&#103;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#x6f;&#x72;&#103;">&#102;&#x69;&#108;&#101;&#x6e;&#97;&#109;&#101;&#37;&#50;&#48;&#x31;&#46;&#x6a;&#112;&#103;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#x6f;&#x72;&#103;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x66;&#x69;&#108;&#101;&#110;&#x61;&#x6d;&#x65;&#37;&#x32;&#x30;&#49;&#x2e;&#x6a;&#x70;&#103;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#111;&#114;&#x67;">&#x66;&#x69;&#108;&#101;&#110;&#x61;&#x6d;&#x65;&#37;&#x32;&#x30;&#49;&#x2e;&#x6a;&#x70;&#103;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#111;&#114;&#x67;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
@@ -1147,82 +1262,6 @@ JNIEXPORT void JNICALL Java_com_jni_helloworld_HelloWorld_sayHello (JNIEnv *env,
 logger.debug(&quot;The entry is {}.&quot;, entry);
 </code></pre><p>在评估是否作记录后，仅当需要作记录时，logger才会格式化消息，用entry的字符串值替换为“{}”。即，当语句被禁用时，这种方法不会产生参数构造所带来的性能消耗。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Linux下查看CPU信息、机器型号" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/04/18/Linux下查看CPU信息、机器型号/" class="article-date">
-      <time datetime="2017-04-18T08:23:28.000Z" itemprop="datePublished">2017-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="记录常用的一些命令"><a href="#记录常用的一些命令" class="headerlink" title="记录常用的一些命令"></a>记录常用的一些命令</h1><pre><code>cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
-cat /proc/cpuinfo | grep physical | uniq -c
-
-# 说明当前CPU运行的模式，如32bit模式或64bit
-getconf LONG_BIT 
-
-# 查看内存信息
-cat /proc/meminfo
-
-# 查看当前操作系统内核信息
-uname -a
-
-# 查看当前操作系统发现版信息
-cat /etc/issue | grep Linux
-
-# 查看机器型号 
-dmidecode | grep &quot;Product Name&quot;  
-
-# 查看网卡信息 
-dmesg | grep -i eth
-</code></pre>
       
     </div>
     
