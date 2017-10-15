@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-element-ui/">vue, element-ui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-element-ui/">vue, element-ui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-第三方js库/">vue, 第三方js库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li></ul>
                     </div>
                 </section>
                 
@@ -265,6 +265,100 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Logback学习记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/18/Logback学习记录/" class="article-date">
+      <time datetime="2017-04-18T09:25:52.000Z" itemprop="datePublished">2017-04-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/18/Logback学习记录/">Logback学习记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Logback架构"><a href="#Logback架构" class="headerlink" title="Logback架构"></a>Logback架构</h1><p>Logback分为了三个模块，logback-core、logback-classic、logback-access。</p>
+<p>logback-core模块是其他两个模块的基础。classic模块拓展了core模块。access模块集成Servlet容器为HTTP-access提供日志功能。</p>
+<blockquote>
+<p>后面提到的Logback，指的是Logback-classic。</p>
+</blockquote>
+<h1 id="Logger、Appenders和Layouts"><a href="#Logger、Appenders和Layouts" class="headerlink" title="Logger、Appenders和Layouts"></a>Logger、Appenders和Layouts</h1><p>Logback建立在Logger、Appenders和Layouts三个主要类上。</p>
+<p>Logger类是logger-classic模块的一部分，Appender和Layout接口来自Logback-core。</p>
+<h2 id="Logger-context"><a href="#Logger-context" class="headerlink" title="Logger context"></a>Logger context</h2><p>任何比System.out.println更高级的logging API最重要的优点是能够在禁用特定的记录语句同时却不妨碍输出其他语句。</p>
+<p>Logger是一个命名了的实体，大小写敏感。</p>
+<p>命名规则：如果logger的名称带上一个点好后是另一个logger的名称前缀，那么，前者就被成为后者的祖先。如果logger与其后代的logger之间没有其他祖先，那么前者就被称为子logger的父logger。</p>
+<p>所有的logger都可以通过静态方法getLogger获取到。用同一名字调用LoggerFactory.getLogger方法得到的永远都是同一个logger对象的引用。</p>
+<p>如：<br>    logger x = LoggerFactory.getLogger(“weiyiysw”);<br>    logger y = LoggerFactory.getLogger(“weiyiysw”);</p>
+<p>x 和 y指向同一个logger对象。</p>
+<h2 id="输出有效级别的继承"><a href="#输出有效级别的继承" class="headerlink" title="输出有效级别的继承"></a>输出有效级别的继承</h2><p>Logger可以被分配级别。级别包括：TRACE、DEBUG、INFO、WARN、ERROR。</p>
+<p>如果logger没有分配级别，那么它将从有被分配的级别的最近的祖先那里继承级别。</p>
+<p>为确保每个logger最终都能继承一个级别，根logger总是有级别的，默认情况下，这个级别是DEBUG。</p>
+<h2 id="打印方法和基本选择规则"><a href="#打印方法和基本选择规则" class="headerlink" title="打印方法和基本选择规则"></a>打印方法和基本选择规则</h2><p>基本选择规则：记录请求级别为P，其logger的有效级别为Q，只有在P &gt;= Q时，该请求才会执行。</p>
+<p>级别排序 </p>
+<pre><code>TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR
+</code></pre><h2 id="Appender-和-Layout"><a href="#Appender-和-Layout" class="headerlink" title="Appender 和 Layout"></a>Appender 和 Layout</h2><p>在logback里，一个输出目的地就是一个appender。</p>
+<p>一个logger可以关联到多个appender。</p>
+<p>Appender的叠加性：Logger L的记录语句的输出会发送给L及其祖先的全部appender。然而，如果Logger L的某个祖先P，设置additivity为FALSE，那么L的输出会发送给L与P之间的（含P）的所有Appender，但不会发送给P的任何祖先Appender。</p>
+<p>additivity叠加性默认为TRUE。</p>
+<p>Layout负责根据用户的意愿，格式化输出记录。Appender负责将格式化后的输出发送到目的地。</p>
+<p>PatternLayout是标准logback发行包的一部分，允许用户按照类似于C语言的printf函数的转换模式设置输出格式。</p>
+<p>例如: <code>%-4relative [%thread] %-5level %logger{32} - %msg%n</code></p>
+<p>输出：<code>176 [main] DEBUG manual.architecture.HelloWorld2 - Hello world.</code></p>
+<p>第一个字段是自程序启动以来的逝去时间，单位是毫秒。</p>
+<p>第二个地段发出记录请求的线程。</p>
+<p>第三个字段是记录请求的级别。</p>
+<p>第四个字段是与记录请求关联的 logger 的名称。</p>
+<p>“-”之后是请求的消息文字。</p>
+<h2 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h2><p>对于某个Logger，下面的代码：</p>
+<pre><code>logger.debug(&quot;Entry number:&quot; + i + &quot;is &quot; + String.valueOf(entry[i]));
+</code></pre><p>在构造消息参数时有性能消耗，即把整数i和entry[i]都转换为字符串时、连接多个字符串时。不管消息是否被几率，都会造成上述消耗。</p>
+<h3 id="替代方法"><a href="#替代方法" class="headerlink" title="替代方法"></a>替代方法</h3><p>假设entry是一个object，你可以编写：</p>
+<pre><code>Object entry = new SomeObject();
+logger.debug(&quot;The entry is {}.&quot;, entry);
+</code></pre><p>在评估是否作记录后，仅当需要作记录时，logger才会格式化消息，用entry的字符串值替换为“{}”。即，当语句被禁用时，这种方法不会产生参数构造所带来的性能消耗。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Linux下查看CPU信息、机器型号" class="article article-type-post" itemscope itemprop="blogPost">
   

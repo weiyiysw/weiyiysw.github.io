@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiyiysw.com/"/>
-  <updated>2017-10-10T12:45:30.000Z</updated>
+  <updated>2017-10-15T08:41:27.000Z</updated>
   <id>http://weiyiysw.com/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>learn-vue-3-vue引入第三方js方式</title>
+    <link href="http://weiyiysw.com/2017/10/15/learn-vue-3-vue%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9js%E6%96%B9%E5%BC%8F/"/>
+    <id>http://weiyiysw.com/2017/10/15/learn-vue-3-vue引入第三方js方式/</id>
+    <published>2017-10-15T06:50:41.000Z</published>
+    <updated>2017-10-15T08:41:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>上一篇文章，写了如何使用element-ui完成布局。首先，我们通过import语句将element-ui完整的引入。然后使用全局方法<code>Vue.use()</code>使用插件。<code>Vue.use</code>方法会自动阻止多次注册相同的插件，同一个插件只会注册一次。</p>
+<p>前端的世界里，我们能找到各种功能的js文件。这些js文件在自己需要完成的功能上都做的很好。典型的一些插件如:</p>
+<ul>
+<li>js.cookie.js：封装cookie操作的js</li>
+<li>axios：vue推荐使用的AJAX框架[Promise based HTTP client for the browser and node.js]</li>
+<li>…</li>
+</ul>
+<p>开发项目时，我们要避免重复造轮子，那么如何将这些js文件集成到我们的项目里使用呢？</p>
+<h1 id="方式一：插件"><a href="#方式一：插件" class="headerlink" title="方式一：插件"></a>方式一：插件</h1><p>我们先从最熟悉的方式插件方式开始，也就是上一篇中提到的element-ui的引入方式。</p>
+<p>这里我们需要注意的是，element-ui是其作为Vue的插件开发的。所以，我们能够在<code>import</code>后，直接使用<code>Vue.use</code>的方式引入。</p>
+<p>而对于其他的js库，如axios，如果要以插件的方式引入，那么我们需要做一次小小转换——将axios制作成Vue的插件。</p>
+<p>这是<a href="https://cn.vuejs.org/v2/guide/plugins.html" target="_blank" rel="external">Vue开发插件</a>的官网文档，大家在可以点进去先学习一下。</p>
+<h2 id="封装axios为插件"><a href="#封装axios为插件" class="headerlink" title="封装axios为插件"></a>封装axios为插件</h2><p>首先，我们需要创建一个js文件，要引入axios，那这里以axios为例。我们在项目里创建一个文件，并命名为axios.js。</p>
+<p>查看官网的开发插件的文档，我们可以知道，Vue.js插件有一个公开方法<code>install</code>。这个方法的第一个参数是<code>Vue</code>构造器，第二个参数是一个可选的参数。</p>
+<p>我们可以通过以下的方式将库添加到Vue的原型对象上：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">install</span>: <span class="function"><span class="keyword">function</span>(<span class="params">Vue</span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$axios'</span>, &#123; <span class="attr">value</span>: axios&#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来，我们在main.js中可以像element-ui一样的方式引入到整个项目中。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axiosPlugin <span class="keyword">from</span> <span class="string">'./axios.js'</span></div><div class="line"></div><div class="line">Vue.use(axiosPlugin)</div></pre></td></tr></table></figure>
+<p>引入之后，我们只需要在项目里通过<code>this.$axios</code>就可以使用了。</p>
+<h2 id="插件参数设置"><a href="#插件参数设置" class="headerlink" title="插件参数设置"></a>插件参数设置</h2><p>前面我们提到<code>intall</code>方法，有第二个可选的参数。简单说，你们可能并不想使用<code>$axios</code>这个名字调用。那么就可以利用第二个参数来修改它。</p>
+<p>我们创建的axios.js文件修改如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> defaut &#123;</div><div class="line">  <span class="attr">install</span>: <span class="function"><span class="keyword">function</span> (<span class="params">Vue, name = <span class="string">'$axios'</span></span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.defineProperty(Vue.prototype, name, &#123; <span class="attr">value</span>: axios &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在main.js引用的时候如下：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axiosPlugin <span class="keyword">from</span> <span class="string">'./axios.js'</span></div><div class="line"></div><div class="line">Vue.use(axiosPlugin, <span class="string">'$myAxios'</span>)</div></pre></td></tr></table></figure>
+<p>这样，你就可以使用<code>this.$myAxios</code>调用了。</p>
+<h1 id="方式二：将库变成Vue的原型对象属性"><a href="#方式二：将库变成Vue的原型对象属性" class="headerlink" title="方式二：将库变成Vue的原型对象属性"></a>方式二：将库变成Vue的原型对象属性</h1><p>方法二比方法一要简单一些。在main.js中，只需要按照下面代码引入即可（还是以axios为例）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$axios'</span>, <span class="string">'axios'</span>)</div></pre></td></tr></table></figure>
+<p>因为所有的组件都会继承Vue原型对象上的方法，因此，这些方法在任何组件里都可以通过<code>this.$axios</code>访问到。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h3><p>我们可以使用下面的方式来定义属性：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Vue<span class="selector-class">.prototype</span>.<span class="variable">$axios</span> = axios</div></pre></td></tr></table></figure>
+<p>这样做也能够达到目的。但是<code>Object.defineProperty</code>允许我们用属性描述器来定义我们的属性。我们可以定义属性是否可写、可枚举或可配置。通常，我们并不需要这么复杂的方式来赋值属性。但这里使用<code>Object.defineProperty</code>有个好处：用属性描述器定义的属性默认是只读的。这可以防止一些经验不高的开发者犯些低级错误：</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this.$axios = 'assign some random thing to the<span class="built_in"> instance </span>method'</div><div class="line">this.$axios.get('/') // TypeError: this.$axios.get is<span class="built_in"> not </span>a function</div></pre></td></tr></table></figure>
+<p>使用<code>Object.defineProperty</code>能够保护引入的库不被重新赋值。如果尝试重写，程序会抛出“TypeError: Cannot assign to read only property”的错误。</p>
+<h3 id=""><a href="#" class="headerlink" title="$"></a>$</h3><p><code>$</code>符号，我们用<code>$</code>开头的属性存放引入的库。这种做法不是强制的，只是为了提醒这些属性是公有的。你可以在任何地方使用。反之，某些属性只能在Vue内部使用。</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>我们可以使用<code>this.$libraryname</code>来访问引入的库。但是，我们需要保证this指针指向的是Vue实例。通常，在回调函数中直接使用this，this并不指向Vue实例。</p>
+<p>当然，可以使用箭头函数来解决回调this指向不对的问题。也可以在回调函数前，定义<code>let self = this</code>，在回调函数中使用<code>self</code>也可以解决这个问题。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这篇文章中，我们学习了在Vue中引入其他js库的方式。这样，我们就可以使用丰富的js库来完成我们的项目了。下一篇，将要写Vue里的通信方式，学习组件之间是如何通信的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;回顾&quot;&gt;&lt;a href=&quot;#回顾&quot; class=&quot;headerlink&quot; title=&quot;回顾&quot;&gt;&lt;/a&gt;回顾&lt;/h1&gt;&lt;p&gt;上一篇文章，写了如何使用element-ui完成布局。首先，我们通过import语句将element-ui完整的引入。然后使用全局方法&lt;co
+    
+    </summary>
+    
+    
+      <category term="vue, 第三方js库" scheme="http://weiyiysw.com/tags/vue-%E7%AC%AC%E4%B8%89%E6%96%B9js%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>learn-vue-2-页面布局</title>
@@ -436,7 +492,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MailMessage message = new MailMessage()<span class="comment">;</span></div><div class="line">message.setFrom(<span class="string">"user@example.com (Example User)"</span>)<span class="comment">;</span></div><div class="line">message.setTo(<span class="string">"recipient@example.org"</span>)<span class="comment">;</span></div><div class="line">message.setCc(<span class="string">"Another User &lt;another@example.net&gt;"</span>)<span class="comment">;</span></div><div class="line">message.setText(<span class="string">"this is the plain message text"</span>)<span class="comment">;</span></div><div class="line">message.setHtml(<span class="string">"this is html text &lt;a href=\"http://vertx.io\"&gt;vertx.io&lt;/a&gt;"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>附件可以通过MailAttachment对象创建，这个对象将数据存储在Buffer中，并支持base64附件。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"text/plain"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"attachment file"</span>))<span class="comment">;</span></div><div class="line"></div><div class="line">message.setAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x66;&#x69;&#x6c;&#101;&#110;&#97;&#109;&#x65;&#37;&#x32;&#48;&#x31;&#x2e;&#106;&#x70;&#103;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#111;&#x72;&#103;">&#x66;&#x69;&#x6c;&#101;&#110;&#97;&#109;&#x65;&#37;&#x32;&#48;&#x31;&#x2e;&#106;&#x70;&#103;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#111;&#x72;&#103;</a>”。</contentid></p>
+<p>当使用一个内联附件（通常是图像），可以引用html消息中的图像来显示包含在邮件中的图像html。图形可以在HTML里被<code>&lt;img src=&quot;cid:contentid@domain&quot;&gt;</code>引用。相应的图像具有Disposition：inline和Content-ID标题为“<contentid @="" domain="">”。请注意，RFC 2392要求Content-ID值的结构类似于具有尖括号的Message-ID以及使用URL兼容编码的本地和域部分。 这些都不是强制执行的，大多数邮件客户端都支持没有尖括号或没有域名的ID，最佳做法是使用严格的格式。Content-ID值的有效示例是“<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#102;&#x69;&#x6c;&#101;&#x6e;&#x61;&#109;&#101;&#x25;&#x32;&#48;&#x31;&#46;&#106;&#x70;&#103;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#111;&#x72;&#x67;">&#102;&#x69;&#x6c;&#101;&#x6e;&#x61;&#109;&#101;&#x25;&#x32;&#48;&#x31;&#46;&#106;&#x70;&#103;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#111;&#x72;&#x67;</a>”。</contentid></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MailAttachment attachment = new MailAttachment()<span class="comment">;</span></div><div class="line">attachment.setContentType(<span class="string">"image/jpeg"</span>)<span class="comment">;</span></div><div class="line">attachment.setData(Buffer.buffer(<span class="string">"image data"</span>))<span class="comment">;</span></div><div class="line">attachment.setDisposition(<span class="string">"inline"</span>)<span class="comment">;</span></div><div class="line">attachment.setContentId(<span class="string">"&lt;image1@example.com&gt;"</span>)<span class="comment">;</span></div><div class="line"></div><div class="line">message.setInlineAttachment(attachment)<span class="comment">;</span></div></pre></td></tr></table></figure>
 <p>当发送邮件的时候，你可以提供一个<code>AsyncResult&lt;MailResult&gt;</code>处理程序，当发送操作完成或失败时会被调用。</p>
 <p>邮件发送就像这样：</p>
