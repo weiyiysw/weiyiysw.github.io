@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="易世伟" />
+
+
+
+<meta name="description" content="0. 闲言碎语这是我学习Vue记录的第五篇文章。整篇文章记录的知识点比较杂乱。学习是一个积累的过程，并且我们每时每刻都在忘记。将学习到的通过笔记记录下来，长时间过去后再度翻阅，也更容易拾起。
+1. 路由跳转在first-vue项目里，在路由的选择上，我选择了vue-router，选择了element-ui作为ui库。
+使用element-ui提供的菜单组件，写了一个放在左侧的DemoMenu.vu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learn-vue-5-知识点记录">
+<meta property="og:url" content="http://weiyiysw.com/2017/10/24/learn-vue-5-知识点记录/index.html">
+<meta property="og:site_name" content="WEIYIYSW">
+<meta property="og:description" content="0. 闲言碎语这是我学习Vue记录的第五篇文章。整篇文章记录的知识点比较杂乱。学习是一个积累的过程，并且我们每时每刻都在忘记。将学习到的通过笔记记录下来，长时间过去后再度翻阅，也更容易拾起。
+1. 路由跳转在first-vue项目里，在路由的选择上，我选择了vue-router，选择了element-ui作为ui库。
+使用element-ui提供的菜单组件，写了一个放在左侧的DemoMenu.vu">
+<meta property="og:updated_time" content="2017-10-24T12:47:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="learn-vue-5-知识点记录">
+<meta name="twitter:description" content="0. 闲言碎语这是我学习Vue记录的第五篇文章。整篇文章记录的知识点比较杂乱。学习是一个积累的过程，并且我们每时每刻都在忘记。将学习到的通过笔记记录下来，长时间过去后再度翻阅，也更容易拾起。
+1. 路由跳转在first-vue项目里，在路由的选择上，我选择了vue-router，选择了element-ui作为ui库。
+使用element-ui提供的菜单组件，写了一个放在左侧的DemoMenu.vu">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="WEIYIYSW" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/ta.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>learn-vue-5-知识点记录 | WEIYIYSW</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/ta.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">易世伟</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">天不老，情难绝。心似双丝网，中有千千结。</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:weiyiysw37@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/weiyiysw" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CHANGELOG/">CHANGELOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PM-suggest/">PM suggest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern/">design pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itunes-bell/">itunes, bell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shared-lib/">shared lib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-email-translate/">vertx, email, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-translate/">vertx, translate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertx-core/">vertx-core</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-development/">vue, development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-element-ui/">vue, element-ui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-eventbus-vuex/">vue, eventbus, vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-vue-cli/">vue, vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-第三方js库/">vue, 第三方js库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh-java-command-line/">zsh, java command line</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由跳转-面包屑-可编辑table-集成highlight-js-集成js-beautify/">路由跳转,面包屑,可编辑table,集成highlight.js,集成js-beautify</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">true</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">易世伟</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/ta.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">易世伟</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">天不老，情难绝。心似双丝网，中有千千结。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:weiyiysw37@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/weiyiysw" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-learn-vue-5-知识点记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/24/learn-vue-5-知识点记录/" class="article-date">
+      <time datetime="2017-10-24T11:07:31.000Z" itemprop="datePublished">2017-10-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      learn-vue-5-知识点记录
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由跳转-面包屑-可编辑table-集成highlight-js-集成js-beautify/">路由跳转,面包屑,可编辑table,集成highlight.js,集成js-beautify</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="0-闲言碎语"><a href="#0-闲言碎语" class="headerlink" title="0. 闲言碎语"></a>0. 闲言碎语</h1><p>这是我学习Vue记录的第五篇文章。整篇文章记录的知识点比较杂乱。学习是一个积累的过程，并且我们每时每刻都在忘记。将学习到的通过笔记记录下来，长时间过去后再度翻阅，也更容易拾起。</p>
+<h1 id="1-路由跳转"><a href="#1-路由跳转" class="headerlink" title="1. 路由跳转"></a>1. 路由跳转</h1><p>在first-vue项目里，在路由的选择上，我选择了vue-router，选择了element-ui作为ui库。</p>
+<p>使用element-ui提供的菜单组件，写了一个放在左侧的<code>DemoMenu.vue</code>的组件。组件代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">el-menu</span> <span class="attr">:router</span>=<span class="string">"true"</span> <span class="attr">class</span>=<span class="string">"navmenu"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/testDialog"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>对话框<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/editTable"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>可编辑列表<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/communication"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>组件通信<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/highlightCode"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>高亮代码测试<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">"/beautifyCode"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span>格式化代码测试<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：这里只摘录了template里的代码</p>
+</blockquote>
+<p>在路由的index.js中，添加代码如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">routes</span>: [</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'Hello'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'欢迎页'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: Hello</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/communication'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'Communication'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'组件通信'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: Communication</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/testDialog'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'TestDialog'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'对话框测试'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: TestDialog</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/editTable'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'EditTable'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'可编辑列表'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: EditTable</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/highlightCode'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'HighlightCode'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'高亮代码测试'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: HighlightCode</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attribute">path</span>: <span class="string">'/beautifyCode'</span>,</div><div class="line">    <span class="attribute">name</span>: <span class="string">'BeautifyCode'</span>,</div><div class="line">    <span class="attribute">meta</span>: &#123;</div><div class="line">      <span class="attribute">name</span>: <span class="string">'格式化代码测试'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attribute">component</span>: BeautifyCode</div><div class="line">  &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：这里只摘录了部分代码，具体代码参考first-vue项目。</p>
+</blockquote>
+<p>注意，在菜单组件里，index是填入路由组件里的路径，点击菜单时就可以路由到对应的组件模块。</p>
+<h1 id="2-面包屑"><a href="#2-面包屑" class="headerlink" title="2. 面包屑"></a>2. 面包屑</h1><p>在完成了上面的菜单对应的路由功能之后，我们可以开始考虑添加面包屑了。面包屑在多级菜单中很有用，能够让我们清楚的知道当前处于系统的什么地方，也可以快速跳转上一级菜单。为了实现面包屑功能，我们需要学习vue-router的<a href="路由信息对象">路由信息对象</a>的知识点。</p>
+<p>使用element-ui提供的<a href="面包屑组件">面包屑组件</a>，关于组件的基本用法，可以点击链接进去学习下。</p>
+<p>接下来，我们直接先看下是实现代码：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;el-breadcrumb separator-<span class="built_in">class</span>=<span class="string">"el-icon-arrow-right"</span>&gt;</div><div class="line">  &lt;el-breadcrumb-<span class="built_in">item</span> :<span class="keyword">to</span>=<span class="string">"&#123; path: '/' &#125;"</span>&gt;首页&lt;/el-breadcrumb-<span class="built_in">item</span>&gt;</div><div class="line">  &lt;el-breadcrumb-<span class="built_in">item</span></div><div class="line">    v-<span class="keyword">for</span>=<span class="string">"item in $route.matched"</span></div><div class="line">    v-<span class="keyword">if</span>=<span class="string">"item.path != '/'"</span></div><div class="line">    :<span class="keyword">to</span>=<span class="string">"item.path"</span></div><div class="line">    :key=<span class="string">"item.path"</span>&gt;&#123;&#123;<span class="built_in">item</span>.meta.<span class="built_in">name</span>&#125;&#125;&lt;/el-breadcrumb-<span class="built_in">item</span>&gt;</div><div class="line">&lt;/el-breadcrumb&gt;</div></pre></td></tr></table></figure>
+<p>上面这段代码中，我首先固定了一个首页项，这个看个人选择了，这个是无所谓的。关键的代码在第二个菜单项。</p>
+<p>使用了<code>v-for</code>语法，思想是遍历路由匹配到的路径数组，将每个路径转换成一个面包屑项。</p>
+<p>这里的<code>$route.matched</code>就是前面提到的路由信息对象，即路由index.js组件里的对应项的值转变为一个对象。例如：</p>
+<ul>
+<li><p><code>item.meta.name</code>绑定的是路由index.js里的<code>meta</code>里的name。</p>
+</li>
+<li><p><code>item.path</code>绑定的是路由index.js里的path。</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：在使用v-for时，显示的指定遍历的key。关于key，请参考<a href="https://cn.vuejs.org/v2/guide/list.html#key" target="_blank" rel="external">这里</a>。</p>
+</blockquote>
+<h1 id="3-可编辑table"><a href="#3-可编辑table" class="headerlink" title="3. 可编辑table"></a>3. 可编辑table</h1><p>目前使用的element-ui是2.0的beta版，暂时还没提供可编辑的table使用。如果我们要使用可编辑的table，只好自己实现了。</p>
+<p>基本的思路是，在每列上，提供一个input输入和一个span展示。默认显示span面板，input输入框不显示。当点击编辑触发动作后，显示input输入框，不显示span。至于显示一个组件不显示另一个组件，可以使用<code>v-if</code>和<code>v-else</code>。下面直接上代码：</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">prop</span>=<span class="string">"user"</span> <span class="attr">label</span>=<span class="string">"用户名"</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">"scope"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-if</span>=<span class="string">"scope.row.isEdit"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">v-model</span>=<span class="string">"scope.row.user"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-else</span>&gt;</span><span class="template-variable">&#123;&#123;scope.row.user&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">prop</span>=<span class="string">"age"</span> <span class="attr">label</span>=<span class="string">"年龄"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">"scope"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-if</span>=<span class="string">"scope.row.isEdit"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">v-model</span>=<span class="string">"scope.row.age"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-else</span>&gt;</span><span class="template-variable">&#123;&#123;scope.row.age&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">label</span>=<span class="string">"操作"</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">"scope"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"!scope.row.isEdit"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">icon</span>=<span class="string">"el-icon-edit"</span> <span class="attr">type</span>=<span class="string">"primary"</span> @<span class="attr">click</span>=<span class="string">"handleEdit(scope.$index, scope.row)"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">icon</span>=<span class="string">"el-icon-delete"</span> <span class="attr">type</span>=<span class="string">"danger"</span> @<span class="attr">click</span>=<span class="string">"handleDelete(scope.$index, scope.row)"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-else</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">size</span>=<span class="string">"small"</span> @<span class="attr">click</span>=<span class="string">"save(scope.$index, scope.row)"</span>&gt;</span>保存<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">size</span>=<span class="string">"small"</span> @<span class="attr">click</span>=<span class="string">"cancel(scope.$index, scope.row)"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-table</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里仅有3列内容，用户、年龄和操作。这里实现的是控制行编辑，通过数据的<code>isEdit</code>属性控制。</p>
+<h1 id="4-集成highlight-js"><a href="#4-集成highlight-js" class="headerlink" title="4. 集成highlight.js"></a>4. 集成highlight.js</h1><p><a href="">highlight.js</a>可以用来高亮显示页面上的代码块。在GitHub上有一个<a href="https://github.com/metachris/vue-highlightjs" target="_blank" rel="external">vue-highlightjs</a>的项目，将<code>highlight.js</code>封装成Vue的插件。我们安装这个包：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> -S vue-highlightjs</div></pre></td></tr></table></figure>
+<p>然后，在项目的<code>main.js</code>里引入：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> VueHighlightJS <span class="keyword">from</span> <span class="string">'vue-highlightjs'</span></div><div class="line"></div><div class="line">Vue.use(VueHighlightJS)</div></pre></td></tr></table></figure>
+<p>在template里使用：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- If your source-code lives in a variable called 'sourcecode' --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">v-highlightjs</span>=<span class="string">"sourcecode"</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">"javascript"</span>&gt;</span><span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- If you want to highlight hardcoded source-code --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">v-highlightjs</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">"javascript"</span>&gt;</span>const s = new Date().toString()<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上，均可在vue-highlightjs的GitHub页面上查看到。但是，当按照这样的方式实现后，可能会发现并没有将我们的代码块高亮。这是因为，使用<code>highlight.js</code>没有自动添加相应的CSS样式。我们需要在<code>main.js</code>里显示的引入想使用的样式。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'vue-highlightjs/node_modules/highlight.js/styles/solarized-light.css'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>highlight.js</code>的样styles文件夹下有很多很多的样式，你可以选择使用你喜欢的样式。我这里选择了<code>solarized-light</code>。</p>
+</blockquote>
+<h1 id="5-集成js-beautify"><a href="#5-集成js-beautify" class="headerlink" title="5. 集成js-beautify"></a>5. 集成js-beautify</h1><p>首先，安装<code>js-beautify</code>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> -S js-beautify</div></pre></td></tr></table></figure>
+<p>然后，在<code>main.js</code>引入，并将其注册为全局属性：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> jsBeautify from 'js-beautify'</div><div class="line"></div><div class="line"><span class="type">Vue</span>.proto<span class="keyword">type</span>.$jsBeautify = jsBeautify</div></pre></td></tr></table></figure>
+<p>使用方法：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> fdata = this.$jsBeautify(<span class="built_in">data</span>, &#123; indent_size: <span class="number">2</span>&#125;)</div><div class="line">console.<span class="keyword">log</span>(fdata)</div></pre></td></tr></table></figure>
+<p><code>js-beautify</code>默认是格式化js，还可以用于格式化html、css。这里第一句的data是要格式化的数据，后一个参数代表的是缩进。</p>
+<p>如果格式化的数据是html或css</p>
+<p>需要将<code>this.$jsBeautify</code>写成<code>this.$jsBeautify.html</code>或<code>this.$jsBeautify.css</code>。</p>
+<blockquote>
+<p>如果，你选择全局安装<code>js-beautify</code>，那么将会得到一个可执行的脚本。</p>
+</blockquote>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm -g <span class="keyword">install </span><span class="keyword">js-beautify</span></div><div class="line">$ <span class="keyword">js-beautify </span>foo.<span class="keyword">js</span></div></pre></td></tr></table></figure>
+<p>会格式化foo.js，然后默认是直接在终端上输出。输出位置是可以配置的，具体参考<a href="https://github.com/beautify-web/js-beautify" target="_blank" rel="external">js-beautify</a>。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/10/24/learn-vue-5-知识点记录/">learn-vue-5-知识点记录</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">易世伟</a></p>
+        <p><span>发布时间:</span>2017-10-24, 19:07:31</p>
+        <p><span>最后更新:</span>2017-10-24, 20:47:32</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/24/learn-vue-5-知识点记录/" title="learn-vue-5-知识点记录">http://weiyiysw.com/2017/10/24/learn-vue-5-知识点记录/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://weiyiysw.com/2017/10/24/learn-vue-5-知识点记录/　　作者: 易世伟" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/10/16/learn-vue-4-组件数据传递/">
+                    learn-vue-4-组件数据传递
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-闲言碎语"><span class="toc-number">1.</span> <span class="toc-text">0. 闲言碎语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-路由跳转"><span class="toc-number">2.</span> <span class="toc-text">1. 路由跳转</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-面包屑"><span class="toc-number">3.</span> <span class="toc-text">2. 面包屑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-可编辑table"><span class="toc-number">4.</span> <span class="toc-text">3. 可编辑table</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-集成highlight-js"><span class="toc-number">5.</span> <span class="toc-text">4. 集成highlight.js</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-集成js-beautify"><span class="toc-number">6.</span> <span class="toc-text">5. 集成js-beautify</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"learn-vue-5-知识点记录　| WEIYIYSW　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/10/16/learn-vue-4-组件数据传递/" title="下一篇: learn-vue-4-组件数据传递">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/24/learn-vue-5-知识点记录/">learn-vue-5-知识点记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/learn-vue-4-组件数据传递/">learn-vue-4-组件数据传递</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/learn-vue-3-vue引入第三方js方式/">learn-vue-3-vue引入第三方js方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/09/learn-vue-2-页面布局/">learn-vue-2-页面布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/05/learn-vue-1-分析项目结构/">learn-vue-1-分析项目结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/02/learn-vue-0/">learn-vue-0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/30/zsh下执行Java命令的解决方法/">zsh下执行Java命令的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/23/Vertx-Java开发者预览手册/">Vertx-Java开发者预览指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/19/design-pattern/">design-pattern</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/itunes-make-bell/">itunes-make-bell</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/vertx-sendEmail/">vertx-sendEmail</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/JNI-Basic-1-md/">JNI-Basic-1.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Logback学习记录/">Logback学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/18/Linux下查看CPU信息、机器型号/">Linux下查看CPU信息、机器型号</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/22/how-to-maintain-changelog/">how-to-maintain-changelog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/19/linux下动态库及版本号控制/">linux下动态库及版本号控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/18/setup-hexo/">setup-hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/10/vertx-core/">Vertx-core翻译</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 易世伟
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
